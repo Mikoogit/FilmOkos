@@ -1,0 +1,151 @@
+Dokumentáció
+• A dokumentálás a szoftverkészítés folyamatát
+végigkísérő tevékenység.
+• Lényegében az összes munkafázishoz
+kapcsolódik a dokumentáció. 
+
+• Termék dokumentáció:
+ > Leírja a szoftverterméket, ami éppen fejlesztésre
+ kerül
+• Folyamat dokumentáció:
+ > A folyamat dokumentáció leírja a folyamatot (pl. mi
+ mennyi ideig fog tartani, projekt terv, meeting
+ jegyzetek)
+
+
+Rendszer dokumentáció
+• A termék dokumentáció része
+• Egy áttekintést ad a szoftverre
+• Ez tartalmazza:
+ > Követelményspecifikációt
+ > Rendszertervet
+ > Forráskód dokumentációt
+ > Tesztelési dokumentációt
+ > Karbantartási dokumentációt
+
+
+Blackbox vs Whitebox
+• A programra tekinthetünk úgy, mint egy
+feketedoboz vagy egy fehérdoboz
+• Blackbox:
+ > Nem látunk bele a programba a tesztelés folyamán,
+ azt tudjuk csak vizsgálni, hogy milyen inputra milyen
+ outputot kapunk
+• Whitebox:
+ > Belelátunk a programba és speciálisan úgy írjuk meg
+ a tesztet
+
+Kétféle dokumentációról beszélhetünk:
+
+-fejlesztési dokumentáció,
+
+-felhasználói dokumentáció.
+
+
+1.A Fejlesztési dokumentáció:
+
+A fejlesztési dokumentáció nagyobb mértékben szakmai információkat tartalmaz. 
+
+
+
+Alapvetően 5 fő alfejezete van:
+-a fejlesztőkörnyezet (hardver és szoftverek) ismertetése, és a választás indoklása
+-a kialakított adatszerkezet (pl. adatbázis, adatfájlok, főbb változók) részletes bemutatása
+-a program tipikus, egyedi, különleges, vagy érdekesebb algoritmusainak bemutatása
+-tesztelés leírása, tesztdokumentáció
+-fejlesztési lehetőségek ismertetése
+
+
+Elemei:
+-specifikáció, valamint minden olyan további szakmai dokumentum, amely szükséges a minőségi fejlesztéshez.
+
+-programterv, arculati terv,
+
+-forráskód,
+
+-tesztelési körülmények és eredmények,
+
+-hardver, telepítési  és konfigurálási követelmények.
+
+A fejlesztői dokumentáció a fejlesztés menetéről szól. Azért készül, hogy ha valaki szakmabeliként érdeklődik
+a program sajátosságai iránt,
+akkor beleláthasson a technikai részletekbe. Mivel szakmabeli olvassa, nem szükséges "szájbarágósnak" lenni,
+sőt kifejezetten az a cél, hogy szakmai nyelvezetet használjunk benne
+
+Ezenfelül ide tartoznak még:
+
+-telepítési útmutatók,
+
+-minimális rendszerkövetelmények,
+
+-a futtatáshoz szükséges szoftverkörnyezet követelményei,
+
+-minden részletre kiterjedő kézikönyv ún. (tutorial) a program használatához.
+
+
+
+2. A tesztdokumentáció
+A tesztdokumentáció nem arról szól, hogy hol nem működik jól a program
+- hiszen a program mindenhol jól működik, különben nincs kész! 
+- hanem arról, hogy hogyan viselkedik különböző környezetekben, illetve nem optimális használat esetén.
+
+A fejlesztési lehetőségek ismertetése arra biztosít lehetőséget, hogy elmondjuk, mi az,
+amilyen funkciókkal a program a későbbiekben tovább bővíthető, gazdagítható
+
+
+3. Felhasználói dokumentáció
+
+A felhasználói dokumentáció a felhasználónak szól. Annak a felhasználónak,
+aki azt sem tudja, hova csöppent, mit tart a kezében, mit kezdjen vele,
+és azt hogyan tegye. Éppen ezért ez a dokumentációrész nagyon részletes, nagyon "szájbarágós",
+és nagyon a nulláról indul.
+
+E fejezet 6 részre bontható:
+
+-A program céljának és lényegesebb funkcióinak összefoglalása
+-Szükséges hardvereszközök és szoftverek felsorolása
+-Telepítés és indítás lépéseinek ismertetése
+-A program részletes bemutatása
+-Helytelen használatból adódó hibajelzések magyarázata
+-Információkérés lehetőségeinek megadása
+
+
+A felhasználói dokumentáció áll:
+
+-Egy adott feladatból
+-Környezet, exe fájl honnan kell futtatni, milyen op rendszer pl(Windows XP)
+-Használati utasításból
+ -Kommentek
+ -Program eredményei, lehetséges kimenetelei
+ -Hibalehetőségek
+
+Fejlesztői dokumentáció áll:
+
+-Feladat
+ -Specifikációk
+-Környezet
+ -Fejlesztői környezet
+-Forráskód
+ -programfelépítése
+ -algoritmus
+-Tesztelés
+-Fejlesztési lehetőségek
+
+A szoftverfejlesztés valós fázisai:
+
+-SPECIFIKÁCIÓ KÉSZÍTÉS-KÖVETELMÉNYEK DEFINIÁLÁSA
+
+-TERVEZÉS
+
+-HIBAKERESÉS
+
+-IMPLEMENTÁLÁS
+
+-TESZTELÉS
+
+-ÜZEMBE HELYEZÉS, TELEPÍTÉS
+
+-ÜZEMELTETÉS, KARBANTARTÁS
+
+Készítette: Szabó Levente, Kollár Milán, Kohajda Benjámin
+
