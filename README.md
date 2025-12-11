@@ -20,12 +20,6 @@ TMDB API Key:
 
 # Useful resources:
 
-UI/UX crash course:
-
-https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
-FIgma tutorial:
-
-https://www.youtube.com/watch?v=jQ1sfKIl50E
-Realtime color visualizer:
-
-https://www.realtimecolors.com/
+UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
+FIgma tutorial: https://www.youtube.com/watch?v=jQ1sfKIl50E
+Realtime color visualizer: https://www.realtimecolors.com/
