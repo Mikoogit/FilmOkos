@@ -39,3 +39,10 @@ TMDB API Key:
 * Better Figma tutorial: https://youtu.be/1pW_sk-2y40?si=tVg4F4noVoIkk0y_
 * Realtime color visualizer: https://www.realtimecolors.com/
 * Bootstrap color themes: https://bootswatch.com/
+
+
+# Inspirations:
+
+* https://letterboxd.com/films/
+* https://backloggd.com/
+* https://anilist.co/
