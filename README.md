@@ -41,7 +41,7 @@ TMDB API Key:
 * Bootstrap color themes: https://bootswatch.com/
 
 
-# Inspirations:
+## Inspirations:
 
 * https://letterboxd.com/films/
 * https://backloggd.com/
