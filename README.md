@@ -16,3 +16,11 @@ TMDB API Key:
 
 87eee4638866715a67d09c89be17ca69
 
+Useful resources:
+
+UI/UX crash course:
+https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF_
+FIgma tutorial:
+https://www.youtube.com/watch?v=jQ1sfKIl50E
+Realtime color visualizer:
+https://www.realtimecolors.com/
