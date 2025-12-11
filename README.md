@@ -1,6 +1,6 @@
 # FilmOkos
 
-# Documentation
+## Documentation
 
 Google Docs:
 
@@ -9,7 +9,7 @@ https://docs.google.com/document/d/1wMuaT9_osRu4U6yuLZAoX95Zy3LzCpbaRniq1cE431s/
 https://docs.google.com/document/d/1iZRCvxXDcA3jbAFcsjV9mOkYu8RAQpmi/edit
 
 
-# API stuff
+## API stuff
 
 The two potential APIs:
 
@@ -26,7 +26,7 @@ TMDB API Key:
 87eee4638866715a67d09c89be17ca69
 
 
-# Useful resources:
+## Useful resources:
 
 UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
 
