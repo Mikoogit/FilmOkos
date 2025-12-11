@@ -10,7 +10,7 @@ https://docs.google.com/document/d/1iZRCvxXDcA3jbAFcsjV9mOkYu8RAQpmi/edit
 
 # API stuff
 
-The two potential apis:
+The two potential APIs:
 
 https://www.themoviedb.org/
 
