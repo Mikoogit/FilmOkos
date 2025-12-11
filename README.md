@@ -14,7 +14,6 @@ Google Docs:
 The two potential APIs:
 
 * https://www.themoviedb.org/
-
 * https://www.omdbapi.com/
 
 TMDB API ID: 
