@@ -1,6 +1,8 @@
 # FilmOkos
 
+
 ## Documentation
+
 
 Google Docs:
 
@@ -11,6 +13,7 @@ Google Docs:
 
 ## API stuff
 
+
 The two potential APIs:
 
 * https://www.themoviedb.org/
@@ -18,7 +21,9 @@ The two potential APIs:
 
 TMDB API ID:
 
-`eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2VlZTQ2Mzg4NjY3MTVhNjdkMDljODliZTE3Y2E2OSIsIm5iZiI6MTc2NTI2MzM4Ni41OTMsInN1YiI6IjY5MzdjODFhYWYwM2UzYzFiNTA2OWJhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wsWUYKEarn6CVh2IxY4qxaG2j9Jp-N8bd7WRYQdD7Kc`
+`eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2VlZTQ2Mzg4NjY3MTVhNjdkMDljODliZTE3Y2E2OSIs
+Im5iZiI6MTc2NTI2MzM4Ni41OTMsInN1YiI6IjY5MzdjODFhYWYwM2UzYzFiNTA2OWJhMCIsInNjb3
+BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wsWUYKEarn6CVh2IxY4qxaG2j9Jp-N8bd7WRYQdD7Kc`
 
 TMDB API Key:
 
@@ -26,6 +31,7 @@ TMDB API Key:
 
 
 ## Useful resources:
+
 
 * UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
 * FIgma tutorial: https://www.youtube.com/watch?v=jQ1sfKIl50E
