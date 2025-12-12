@@ -4,17 +4,11 @@
 ## Documentation
 
 
-Google Docs:
+Google Docs: https://docs.google.com/document/d/1iZRCvxXDcA3jbAFcsjV9mOkYu8RAQpmi/edit
 
-* https://docs.google.com/document/d/1iZRCvxXDcA3jbAFcsjV9mOkYu8RAQpmi/edit
+Wireframe: https://wireframe.cc/uLJeLB
 
-Wireframe:
-
-* https://wireframe.cc/uLJeLB
-
-Figma:
-
-* https://www.figma.com/site/8hfh1aMpdKuxHnYUt9fjNZ/Untitled?node-id=0-1&t=3iqLrM3aPVtIwQAa-1
+Figma: https://www.figma.com/site/8hfh1aMpdKuxHnYUt9fjNZ/Untitled?node-id=0-1&t=3iqLrM3aPVtIwQAa-1
 
 ## API Related
 
