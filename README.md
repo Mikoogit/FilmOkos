@@ -16,7 +16,7 @@ Figma:
 
 * https://www.figma.com/site/8hfh1aMpdKuxHnYUt9fjNZ/Untitled?node-id=0-1&t=3iqLrM3aPVtIwQAa-1
 
-## API stuff
+## API Related
 
 
 The two potential APIs:
@@ -33,7 +33,7 @@ TMDB API Key:
 `87eee4638866715a67d09c89be17ca69`
 
 
-## Useful resources:
+## Useful Resources:
 
 
 * UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
