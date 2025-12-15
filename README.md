@@ -45,6 +45,6 @@ TMDB API Key:
 
 ## Inspirations:
 
-* https://letterboxd.com/films/
+* https://letterboxd.com/
 * https://backloggd.com/
 * https://anilist.co/
