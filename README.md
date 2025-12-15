@@ -8,7 +8,7 @@ Google Docs: https://docs.google.com/document/d/1iZRCvxXDcA3jbAFcsjV9mOkYu8RAQpm
 
 Figma: https://www.figma.com/site/8hfh1aMpdKuxHnYUt9fjNZ/Untitled?node-id=0-1&t=3iqLrM3aPVtIwQAa-1
 
-Wireframe:
+## Wireframe:
 
 Main page:
 
