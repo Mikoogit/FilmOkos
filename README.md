@@ -16,7 +16,7 @@ All movies: https://wireframe.cc/uLHTqd
 
 Profile: https://wireframe.cc/rcgxOu
 
-* Seen: https://wireframe.cc/uLHTqd
+* Seen: https://wireframe.cc/98Bjhg
 * Watchlist:
 * Reviews: 
 
