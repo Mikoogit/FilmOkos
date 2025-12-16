@@ -16,9 +16,9 @@ All movies: https://wireframe.cc/uLHTqd
 
 Profile: https://wireframe.cc/rcgxOu
 
-* Seen: https://wireframe.cc/98Bjhg
-* watchlist:
-* reviews: 
+* Seen: https://wireframe.cc/uLHTqd
+* Watchlist:
+* Reviews: 
 
 ## API Related
 
