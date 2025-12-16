@@ -18,7 +18,7 @@ Profile: https://wireframe.cc/rcgxOu
 
 * Seen: https://wireframe.cc/98Bjhg
 * Watchlist: https://wireframe.cc/1EPfsL
-* Reviews: 
+* Reviews: https://wireframe.cc/qFDALM
 
 ## API Related
 
