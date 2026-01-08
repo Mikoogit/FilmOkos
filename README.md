@@ -54,4 +54,3 @@ TMDB API Key:
 * https://letterboxd.com/
 * https://backloggd.com/
 * https://anilist.co/
->>>>>>> origin/main
