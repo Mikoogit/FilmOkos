@@ -1,0 +1,7 @@
+.section-title {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
