@@ -1,16 +1,57 @@
-# React + Vite
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+=======
+# FilmOkos
 
-Currently, two official plugins are available:
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Documentation
 
-## React Compiler
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+Google Docs: https://docs.google.com/document/d/1iZRCvxXDcA3jbAFcsjV9mOkYu8RAQpmi/edit
 
-## Expanding the ESLint configuration
+Figma: https://www.figma.com/site/8hfh1aMpdKuxHnYUt9fjNZ/Untitled?node-id=0-1&t=3iqLrM3aPVtIwQAa-1
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Wireframe:
+
+Main page: https://wireframe.cc/uLJeLB
+
+All movies: https://wireframe.cc/uLHTqd
+
+Profile: https://wireframe.cc/rcgxOu
+
+* Seen: https://wireframe.cc/98Bjhg
+* Watchlist: https://wireframe.cc/1EPfsL
+* Reviews: https://wireframe.cc/qFDALM
+
+## API Related
+
+
+The two potential APIs:
+
+* https://www.themoviedb.org/
+* https://www.omdbapi.com/
+
+TMDB API ID:
+
+* `eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI4N2VlZTQ2Mzg4NjY3MTVhNjdkMDljODliZTE3Y2E2OSIsIm5iZiI6MTc2NTI2MzM4Ni41OTMsInN1YiI6IjY5MzdjODFhYWYwM2UzYzFiNTA2OWJhMCIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.wsWUYKEarn6CVh2IxY4qxaG2j9Jp-N8bd7WRYQdD7Kc`
+
+TMDB API Key:
+
+* `87eee4638866715a67d09c89be17ca69`
+
+
+## Useful Resources:
+
+
+* UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
+* Figma tutorial: https://www.youtube.com/watch?v=jQ1sfKIl50E
+* Better Figma tutorial: https://youtu.be/1pW_sk-2y40?si=tVg4F4noVoIkk0y
+* Realtime color visualizer: https://www.realtimecolors.com/
+* Bootstrap color themes: https://bootswatch.com/
+
+
+## Inspirations:
+
+* https://letterboxd.com/
+* https://backloggd.com/
+* https://anilist.co/
+>>>>>>> origin/main
