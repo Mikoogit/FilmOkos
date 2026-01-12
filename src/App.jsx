@@ -7,37 +7,37 @@ import Footer from './components/Footer.jsx';
 import Filmek from './pages/MoviesPage.jsx';
 import Profil  from "./pages/Profilepage.jsx";
 import Login from './pages/LoginPages.jsx';
-import Error from './pages/ErrorPage.jsx';
+import ErrorPage from './pages/ErrorPage.jsx';
 import MovieReview from './pages/MovieReviewPage.jsx';
-import ErrorPage from "./pages/ErrorPage.jsx";
+import MovieSeen from './pages/MoviesSeenPage.jsx';
+
 
 
 
 function App() {
-
   return (
     <>
-    <BrowserRouter>
-      <Navbar />
-      <Routes>
-        <Route path='/' element={<HomePage/>} />
-        <Route path='/filmek' element={<Filmek/>}/>
-        <Route path='/profil' element={<Profil/>}/>
-        <Route path='/bejelentkezes' element={<Login/>}/>
-        <Route path='/ertekelesek' element={<MovieReview/>}/>
-        <Route path='*' element={<Error/>}/>
+      <BrowserRouter>
+        <Navbar />
+        <Routes>
+          <Route path='/' element={<HomePage/>} />
+          <Route path='/filmek' element={<Filmek/>}/>
+          <Route path='/profil' element={<Profil/>}/>
+          <Route path='/bejelentkezes' element={<Login/>}/>
+          <Route path='/ertekelesek' element={<MovieReview/>}/>
+          <Route path='/megnezve' element={<MovieSeen/>}/>
 
-        <Route path="/" element={<HomePage />} />
-
-        {/* 404 */}
-        <Route path="*" element={<ErrorPage />} />
-      </Routes>
-    
-      <Footer />
-    </BrowserRouter>
+          {/* 404 */}
+          <Route path="*" element={<ErrorPage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
     </>
-  )
+  );
 }
-import Moviepage from './pages/MoviesPage.jsx';
 
-export default App
+
+
+
+
+export default App;

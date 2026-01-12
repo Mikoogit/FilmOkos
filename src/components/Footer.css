@@ -1,7 +1,7 @@
 .footer {
   background: #000;
   color: white;
-  margin-top: 60px;
+  margin-top: 40px;
 }
 
 /* Felső arany csík */
@@ -23,14 +23,15 @@
 
 /* Bal oldal – logó */
 .footer-logo {
-
-  height: 150px;
+  margin-top: 25px;
+  height: 50px;
   width: auto;
   object-fit: contain;
 }
 
 /* Jobb oldal – elérhetőségek */
 .footer-right {
+  margin-top: 25px;
   text-align: right;
 }
 

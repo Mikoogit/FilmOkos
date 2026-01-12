@@ -31,12 +31,7 @@
 
 
 /* ARANY VONALAK */
-.line {
-  width: 100%;
-  height: 3px;
-  background: #e6b800;
-  margin: 15px 0;
-}
+
 
 /* CÍM */
 .hero-content h1 {
