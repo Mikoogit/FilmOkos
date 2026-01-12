@@ -1,0 +1,145 @@
+.carousel-section {
+  margin-top: 40px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center; 
+  padding: 60px 0;
+}
+.section-title {
+  font-size: 2.4rem; /* kb. 38px */
+  font-weight: 800;
+  margin-bottom: 25px;
+  text-align: center;
+
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+
+
+.carousel-container {
+  position: relative;
+  width: 100%;
+  max-width: 1400px; 
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: visible;
+}
+
+.carousel-slider {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 20px;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  width: 100%;
+  justify-content: center;
+  .carousel-slider {
+  overflow-y: hidden;      /* függőleges scrollbar eltűnik */
+  scrollbar-width: none;   /* Firefox */
+}
+
+.carousel-slider::-webkit-scrollbar {
+  display: none;           /* Chrome, Edge, Safari */
+}
+
+
+
+.movie-card {
+  position: relative;
+  height: 300px;
+}
+
+.movie-title {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 10px 0;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  color: white;
+  background: rgba(0, 0, 0, 0.65);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.movie-card:hover .movie-title {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+
+
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+}
+
+.movie-card:hover {
+  transform: scale(1.08);
+  box-shadow: 0 0 25px rgba(219, 199, 126, 0.55); /* arany fény */
+  filter: brightness(1.15);
+  z-index: 5;
+}
+
+
+.movie-card img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  transition: transform 0.25s ease;
+}
+
+.movie-card:hover img {
+  transform: scale(1.05); 
+}
+
+
+/* ARROWS */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  border: none;
+  padding: 10px 14px;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  font-size: 20px;
+  color: black;
+  font-weight: bold;
+}
+
+.arrow.left {
+  left: -40px; /* 🔥 A nyíl a slider SZÉLÉHEZ igazodik */
+}
+
+.arrow.right {
+  right: -40px;
+}
+.carousel-slider {
+  overflow-y: hidden;      /* 🔥 eltünteti a függőleges scrollbart */
+  overflow-x: hidden;      /* csak vízszintesen engedjük a scrollBy-t */
+  scrollbar-width: none;   /* Firefox */
+}
+
+.carousel-slider::-webkit-scrollbar {
+  display: none;           /* Chrome, Edge, Safari */
+}
+

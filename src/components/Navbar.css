@@ -1,0 +1,118 @@
+/* NAVBAR */
+.navbar {
+  width: 100%;
+  height: 80px;
+  background: #0f0f0f;
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 2rem;
+  position: relative; /* FONTOS */
+  z-index: 1000;
+}
+
+/* LOGO */
+.navbar-logo img {
+  margin-left: 150px;
+  height: 150px;
+  width: auto;
+  object-fit: contain;
+  cursor: pointer;
+}
+
+/* RIGHT SIDE */
+.navbar-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* SEARCH */
+.navbar-search input {
+  width: 220px;
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: none;
+  outline: none;
+  background: #1a1a1a;
+  color: white;
+}
+
+/* LOGIN BUTTON */
+.login-btn {
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  color: black;
+  padding: 10px 18px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+/* PROFILE PIC */
+.profile-img {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  object-fit: cover;
+  padding: 2px;
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+}
+
+/* HAMBURGER */
+.hamburger {
+  width: 30px;
+  height: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.hamburger span {
+  height: 4px;
+  width: 28px;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  transition: 0.3s;
+}
+
+/* ANIMATION */
+.hamburger.open span:nth-child(1) {
+  transform: translateY(9px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+  transform: translateY(-9px) rotate(-45deg);
+}
+
+/* MOBILE MENU */
+.mobile-menu {
+  position: absolute;
+  top: 80px;
+  right: 0;
+  background: #1a1a1a;
+  width: 200px;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-radius: 10px;
+  box-shadow: 0 0 15px rgba(219, 199, 126, 0.4);
+  z-index: 9999; /* FONTOS */
+}
+
+.mobile-menu a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+}
+
+.mobile-menu a:hover {
+  color: #DBC77E;
+}

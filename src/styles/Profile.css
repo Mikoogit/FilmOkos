@@ -1,0 +1,81 @@
+.profil-page {
+  padding: 30px;
+  color: #e5c46a;
+  background-color: #0b0b0b;
+}
+
+.profil-top {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-bottom: 20px;
+}
+
+.avatar {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+}
+
+.username {
+  font-size: 22px;
+}
+
+.profil-tabs {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+.profil-tabs button {
+  background: #c9a94b;
+  border: none;
+  padding: 6px 16px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-weight: bold;
+}
+
+.profil-tabs .active {
+  background: #e5c46a;
+}
+
+.profil-content {
+  display: flex;
+  gap: 30px;
+}
+
+.profil-desc {
+  width: 260px;
+  border: 1px solid #e5c46a;
+  padding: 15px;
+}
+
+.profil-main h2 {
+  margin-bottom: 10px;
+}
+
+.film-list {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 25px;
+}
+
+.film-poster {
+  width: 100px;
+  border-radius: 8px;
+}
+
+.stats {
+  display: flex;
+  gap: 60px;
+}
+
+.stat h1 {
+  margin: 0;
+  font-size: 40px;
+}
+
+.stat p {
+  margin: 5px 0 0;
+}
