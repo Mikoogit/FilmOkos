@@ -1,60 +1,54 @@
-import React from "react";
-import "../styles/Profile.css"
+import "../styles/Profile.css";
 
-const  Profil = () => {
+export default function Profilepage() {
   return (
-    <div className="profil-page">
-      {/* Profil fejléc */}
-      <div className="profil-top">
+    <div className="profile-page">
+      {/* Felső rész */}
+      <div className="profile-header">
         <img
-          src="https://i.imgur.com/0y0y0y0.png"
-          alt="avatar"
           className="avatar"
+          src="https://via.placeholder.com/80"
+          alt="avatar"
         />
-        <h2 className="username">fnaf_fan01</h2>
+        <span className="username">fnaf_fan01</span>
       </div>
 
-      {/* Profil navigáció */}
-      <div className="profil-tabs">
-        <button className="active">Profil</button>
+      {/* Navigációs gombok */}
+      <div className="profile-tabs">
+        <button>Profil</button>
         <button>Látott</button>
         <button>Tervezett látni</button>
         <button>Értékelések</button>
       </div>
 
       {/* Tartalom */}
-      <div className="profil-content">
+      <div className="profile-content">
         {/* Leírás */}
-        <div className="profil-desc">
+        <div className="description-box">
           <h3>Leírás</h3>
-          <p>
-            imadom a fnaf filmet <br />
-            it be the nightguard
-          </p>
+          <p>imadom a fnaf filmet</p>
+          <p>it be the nightguard</p>
         </div>
 
         {/* Kedvenc filmek */}
-        <div className="profil-main">
-          <h2>Kedvenc Filmjeim:</h2>
+        <div className="favorites">
+          <h2>Kedvenc Filmeim:</h2>
 
-          <div className="film-list">
-            {[1, 2, 3, 4, 5].map((film) => (
-              <img
-                key={film}
-                src="https://i.imgur.com/JhZKQnH.jpg"
-                alt="film"
-                className="film-poster"
-              />
-            ))}
+          <div className="movie-list">
+            <img src="https://via.placeholder.com/120x180" alt="movie" />
+            <img src="https://via.placeholder.com/120x180" alt="movie" />
+            <img src="https://via.placeholder.com/120x180" alt="movie" />
+            <img src="https://via.placeholder.com/120x180" alt="movie" />
+            <img src="https://via.placeholder.com/120x180" alt="movie" />
           </div>
 
-          {/* Statisztika */}
+          {/* Statisztikák */}
           <div className="stats">
-            <div className="stat">
+            <div>
               <h1>67</h1>
               <p>Látott Filmek Száma</p>
             </div>
-            <div className="stat">
+            <div>
               <h1>13</h1>
               <p>Megnézendő Filmek Száma</p>
             </div>
@@ -63,6 +57,4 @@ const  Profil = () => {
       </div>
     </div>
   );
-};
-
-export default Profil;
+}

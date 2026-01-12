@@ -6,7 +6,8 @@ import ReviewsSection from "../components/ReviewsSection";
 export default function HomePage() {
     return (
         <>
-            <Separator thickness="6px" />
+            
+
             <Hero />
             <Separator thickness="2px" />
 
@@ -34,7 +35,9 @@ export default function HomePage() {
                 ]}
             />
         <ReviewsSection />
+        
         </>
+        
         
     );
 }

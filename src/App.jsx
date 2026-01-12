@@ -9,7 +9,7 @@ import Profil  from "./pages/Profilepage.jsx";
 import Login from './pages/LoginPages.jsx';
 import Error from './pages/ErrorPage.jsx';
 import MovieReview from './pages/MovieReviewPage.jsx';
-
+import MovieSeen from './pages/MoviesSeenPage.jsx';
 
 
 function App() {
@@ -24,6 +24,7 @@ function App() {
         <Route path='/profil' element={<Profil/>}/>
         <Route path='/bejelentkezes' element={<Login/>}/>
         <Route path='/ertekelesek' element={<MovieReview/>}/>
+        <Route path='/megnezve' element={<MovieSeen/>}/>
         <Route path='*' element={<Error/>}/>
       </Routes>
     
@@ -32,6 +33,7 @@ function App() {
     </>
   )
 }
-import Moviepage from './pages/MoviesPage.jsx';
+
+
 
 export default App

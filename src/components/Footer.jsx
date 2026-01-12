@@ -1,11 +1,13 @@
 import "./Footer.css";
 import logo from "../assets/logo.png"; // ha külön logót használsz
+import Separator from "./Separator";
 
 export default function Footer() {
   return (
+   <>
+    
     <footer className="footer">
-      <div className="footer-top-line"></div>
-
+      <Separator thickness="4px" />
       <div className="footer-content">
         <div className="footer-left">
           <img src={logo} alt="FilmOkos logo" className="footer-logo" />
@@ -21,5 +23,6 @@ export default function Footer() {
     Készítette: Kollár Milán, Kohajda Benjámin, Szabó Levente
   </div>
 </footer>
+</>
     );
 }
