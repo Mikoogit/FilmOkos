@@ -39,13 +39,13 @@ export default function Navbar() {
       {/* MOBILE MENU */}
       {menuOpen && (
         <div className="mobile-menu">
-          <a href="/">Főoldal</a>
+           <Link to="/" >Főoldal</Link>
           <Link to="filmek">Filmek</Link>
-          <a href="/watchlist">Watchlist</a>
-          <a href="/seen">Megnézve</a>
+           <Link to="/megnezendo" >Megnézendő</Link>
+          <Link to="/megnezve" >Megnézve</Link>
           <Link to="profil">Profil</Link>
-          <a href="/reviews">Értékelések</a>
-          <a href="/login">Bejelentkezés</a>
+           <Link to="/ertekelesek" >Értékelések</Link>
+           <Link to="/bejelentkezes" >Bejelentkezés</Link>
         </div>
         
       )}
