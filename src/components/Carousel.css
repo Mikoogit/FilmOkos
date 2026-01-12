@@ -7,7 +7,7 @@
   padding: 60px 0;
 }
 .section-title {
-  font-size: 2.4rem; /* kb. 38px */
+  font-size: 2.4rem; 
   font-weight: 800;
   margin-bottom: 25px;
   text-align: center;
@@ -39,12 +39,12 @@
   width: 100%;
   justify-content: center;
   .carousel-slider {
-  overflow-y: hidden;      /* függőleges scrollbar eltűnik */
-  scrollbar-width: none;   /* Firefox */
+  overflow-y: hidden;      
+  scrollbar-width: none;   
 }
 
 .carousel-slider::-webkit-scrollbar {
-  display: none;           /* Chrome, Edge, Safari */
+  display: none;           
 }
 
 
@@ -127,19 +127,19 @@
 }
 
 .arrow.left {
-  left: -40px; /* 🔥 A nyíl a slider SZÉLÉHEZ igazodik */
+  left: -40px; 
 }
 
 .arrow.right {
   right: -40px;
 }
 .carousel-slider {
-  overflow-y: hidden;      /* 🔥 eltünteti a függőleges scrollbart */
-  overflow-x: hidden;      /* csak vízszintesen engedjük a scrollBy-t */
-  scrollbar-width: none;   /* Firefox */
+  overflow-y: hidden;      
+  overflow-x: hidden;      
+  scrollbar-width: none;   
 }
 
 .carousel-slider::-webkit-scrollbar {
-  display: none;           /* Chrome, Edge, Safari */
+  display: none;           
 }
 

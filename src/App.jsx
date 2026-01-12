@@ -9,6 +9,7 @@ import Profil  from "./pages/Profilepage.jsx";
 import Login from './pages/LoginPages.jsx';
 import Error from './pages/ErrorPage.jsx';
 import MovieReview from './pages/MovieReviewPage.jsx';
+import ErrorPage from "./pages/ErrorPage.jsx";
 
 
 
@@ -25,6 +26,11 @@ function App() {
         <Route path='/bejelentkezes' element={<Login/>}/>
         <Route path='/ertekelesek' element={<MovieReview/>}/>
         <Route path='*' element={<Error/>}/>
+
+        <Route path="/" element={<HomePage />} />
+
+        {/* 404 */}
+        <Route path="*" element={<ErrorPage />} />
       </Routes>
     
       <Footer />
