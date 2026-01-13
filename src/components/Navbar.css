@@ -26,13 +26,15 @@
 
 /* LOGO */
 .navbar-logo img {
-  margin-top: 5px;
-  margin-left: 190px;
-  height: 50px;
+  
+  margin-top: 0.5rem;
+  margin-left: 10vw; /* responsive */
+  height: clamp(25px, 4vw, 40px);
   width: auto;
   object-fit: contain;
   cursor: pointer;
-} 
+}
+
 
 /* RIGHT SIDE */
 .navbar-right {
