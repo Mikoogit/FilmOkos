@@ -38,6 +38,9 @@
   cursor: pointer;
   font-weight: bold;
 }
+.profile-tabs button:hover {
+  background: #ffea7a;
+}
 
 /* Content */
 .profile-content {
