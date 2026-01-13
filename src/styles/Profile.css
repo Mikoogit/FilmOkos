@@ -7,6 +7,7 @@
 
 /* Header */
 .profile-header {
+  margin-left: 15%;
   display: flex;
   align-items: center;
   gap: 15px;
@@ -24,15 +25,32 @@
 }
 
 /* Tabs */
-.profile-tabs {
+.profil-tabs {
+  margin-left: 15%;
+  margin-right: 15%;
+  background: linear-gradient(90deg,#7A5C1E,#C9A64D,#DED086,#C9A64D,#8C6B2F);
+  border-radius: 25px;
+  min-height: 30px;
+  padding: 8px 0;
   margin-top: 20px;
   display: flex;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+  gap: 35px;
 }
-
-.profile-tabs button {
-  background: #caa24d;
+.profil-tabs button {
+  background: #433310;
+  color: #DAC28A;
   border: none;
+  border-radius: 25px;
+  padding: 6px 16px;
+  cursor: pointer;
+  font-weight: bold;
+}
+.profil-tabs button.active  {
+  background: #DAC28A;
+  border: solid black 2px;
+  color: #433310;
   padding: 6px 16px;
   border-radius: 20px;
   cursor: pointer;
@@ -44,21 +62,33 @@
   display: flex;
   gap: 40px;
   margin-top: 40px;
+  margin-left: 100px;
 }
 
 /* Description */
 .description-box {
-  width: 260px;
+  background-color: #111111;
+  margin-left: 190px;
+  width: 300px;
   border: 2px solid #caa24d;
   padding: 15px;
 }
 
 .description-box h3 {
+  text-align: center;
   margin-bottom: 10px;
 }
-
+.description-box p {
+  margin-top: 5%;
+  text-align: left;
+  color: rgb(230, 229, 229);
+}
 /* Favorites */
-.favorites {
+.favorites h2 {
+  background: -webkit-linear-gradient(50deg,#C9A64D,#DED086,#C9A64D,#8C6B2F);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-left: 2%;
   flex: 1;
 }
 

@@ -49,7 +49,7 @@ export default function Navbar() {
         )}
       </nav>
 
-      {/* 👇 A CSÍK TÉNYLEG A NAVBAR ALATT */}
+     
      <Separator thickness="4px" />
     </>
   );

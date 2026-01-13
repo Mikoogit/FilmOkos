@@ -1,6 +1,7 @@
 import "./ErrorPage.css";
 import hero from "../assets/hero-bg.png";
 import { Link } from "react-router-dom";
+import Separator from "../components/Separator";
 
 export default function ErrorPage() {
   return (
@@ -14,7 +15,7 @@ export default function ErrorPage() {
         <p className="error-text">Az oldal nem található</p>
         <Link to="/" className="error-button">Újra</Link>
       </div>
-
+    <Separator thickness="4px" />
     </div>
   );
 }

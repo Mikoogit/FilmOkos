@@ -1,6 +1,8 @@
+import React, {useState} from "react";
 import "../styles/Profile.css";
 
 export default function Profilepage() {
+  const [activeTab, setActiveTab] = useState("profil");
   return (
     <div className="profile-page">
       {/* Felső rész */}
@@ -14,25 +16,51 @@ export default function Profilepage() {
       </div>
 
       {/* Navigációs gombok */}
-      <div className="profile-tabs">
-        <button>Profil</button>
-        <button>Látott</button>
-        <button>Tervezett látni</button>
-        <button>Értékelések</button>
-      </div>
+      <div className="profil-tabs">
+  <button
+    className={activeTab === "profil" ? "active" : ""}
+    onClick={() => setActiveTab("profil")}
+  >
+    Profil
+  </button>
+
+  <button
+    className={activeTab === "latott" ? "active" : ""}
+    onClick={() => setActiveTab("latott")}
+  >
+    Látott
+  </button>
+
+  <button
+    className={activeTab === "tervezett" ? "active" : ""}
+    onClick={() => setActiveTab("tervezett")}
+  >
+    Tervezett látni
+  </button>
+
+  <button
+    className={activeTab === "ertekelesek" ? "active" : ""}
+    onClick={() => setActiveTab("ertekelesek")}
+  >
+    Értékelések
+  </button>
+</div>
 
       {/* Tartalom */}
       <div className="profile-content">
         {/* Leírás */}
         <div className="description-box">
           <h3>Leírás</h3>
-          <p>imadom a fnaf filmet</p>
-          <p>it be the nightguard</p>
+          <div className="line"></div>
+          <p>imadom a fnaf filmet
+            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde recusandae obcaecati laborum tempora voluptas placeat autem voluptatibus cupiditate sunt quidem, veritatis cumque asperiores nobis ipsum numquam cum accusantium facilis corrupti.
+          </p>
+          
         </div>
 
         {/* Kedvenc filmek */}
         <div className="favorites">
-          <h2>Kedvenc Filmeim:</h2>
+          <h2>Kedvenc Filmjeim:</h2>
 
           <div className="movie-list">
             <img src="https://via.placeholder.com/120x180" alt="movie" />
