@@ -1,5 +1,6 @@
 import "./Reviews.css";
 import { reviews } from "../reviews/reviews.js"; 
+import { Link } from "react-router-dom";
 import ReviewCard from "./ReviewCard";
 
 
@@ -16,7 +17,9 @@ export default function ReviewsSection() {
         ))}
       </div>
 
-      <button className="reviews-button">Több Értékelés</button>
+      {/* <button className="reviews-button">Több Értékelés</button> */}
+      <Link to="/ertekelesek" className="reviews-button">Több értékelés</Link>
+
     </section>
   );
 }

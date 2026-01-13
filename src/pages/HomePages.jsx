@@ -16,7 +16,7 @@ export default function HomePage() {
                 movies={[
                     { id: 1, title: "JAWS", poster: "/jaws.jpg" },
                     { id: 2, title: "JAWS", poster: "/jaws.jpg" },
-                    { id: 3, title: "JAWS", poster: "/jaws.jpg" },
+                    { id: 3, title: "JAWS", poster: "/sonic.jpg" },
                     { id: 4, title: "JAWS", poster: "/jaws.jpg" },
                     { id: 5, title: "JAWS", poster: "/jaws.jpg" },
                     { id: 6, title: "JAWS", poster: "/jaws.jpg" },
