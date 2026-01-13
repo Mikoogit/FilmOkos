@@ -7,7 +7,7 @@ export default function Profilepage() {
       <div className="profile-header">
         <img
           className="avatar"
-          src="https://via.placeholder.com/80"
+          src="https://placehold.co/80x80"
           alt="avatar"
         />
         <span className="username">fnaf_fan01</span>
@@ -35,11 +35,11 @@ export default function Profilepage() {
           <h2>Kedvenc Filmeim:</h2>
 
           <div className="movie-list">
-            <img src="https://via.placeholder.com/120x180" alt="movie" />
-            <img src="https://via.placeholder.com/120x180" alt="movie" />
-            <img src="https://via.placeholder.com/120x180" alt="movie" />
-            <img src="https://via.placeholder.com/120x180" alt="movie" />
-            <img src="https://via.placeholder.com/120x180" alt="movie" />
+            <img src="https://placehold.co/120x180" alt="movie" />
+            <img src="https://placehold.co/120x180" alt="movie" />
+            <img src="https://placehold.co/120x180" alt="movie" />
+            <img src="https://placehold.co/120x180" alt="movie" />
+            <img src="https://placehold.co/120x180" alt="movie" />
           </div>
 
           {/* Statisztikák */}

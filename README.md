@@ -39,7 +39,7 @@ TMDB API Key:
 
 ## Useful Resources:
 
-
+* PLaceholder images: https://placehold.co/
 * UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
 * Figma tutorial: https://www.youtube.com/watch?v=jQ1sfKIl50E
 * Better Figma tutorial: https://youtu.be/1pW_sk-2y40?si=tVg4F4noVoIkk0y
