@@ -27,11 +27,7 @@
 /* LOGO */
 .navbar-logo img {
   margin-top: 5px;
-<<<<<<< HEAD
   margin-left: 190px;
-=======
-  margin-left: 40px;
->>>>>>> 122d640820b24babd9b68e94c0a8fe74b32813f1
   height: 50px;
   width: auto;
   object-fit: contain;
@@ -40,6 +36,7 @@
 
 /* RIGHT SIDE */
 .navbar-right {
+  margin-right: 190px;
   display: flex;
   align-items: center;
   gap: 1rem;
