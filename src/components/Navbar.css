@@ -27,7 +27,11 @@
 /* LOGO */
 .navbar-logo img {
   margin-top: 5px;
+<<<<<<< HEAD
   margin-left: 190px;
+=======
+  margin-left: 40px;
+>>>>>>> 122d640820b24babd9b68e94c0a8fe74b32813f1
   height: 50px;
   width: auto;
   object-fit: contain;
@@ -61,6 +65,10 @@
   border: none;
   cursor: pointer;
   font-weight: 600;
+}
+.login-btn:hover{
+  background: #ffea7a;
+
 }
 
 /* PROFILE PIC */

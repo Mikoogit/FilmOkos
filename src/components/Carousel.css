@@ -133,6 +133,9 @@
 .arrow.right {
   right: -40px;
 }
+.arrow:hover {
+  background: #ffea7a;
+}
 .carousel-slider {
   overflow-y: hidden;      
   overflow-x: hidden;      
