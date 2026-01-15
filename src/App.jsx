@@ -10,6 +10,7 @@ import Login from './pages/LoginPages.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import MovieReview from './pages/MovieReviewPage.jsx';
 import MovieSeen from './pages/MoviesSeenPage.jsx';
+import RegisterPages from './pages/RegisterPages.jsx';
 // import { AuthProvider } from './context/AuthContext.jsx';
 
 
@@ -27,6 +28,7 @@ function App() {
           <Route path='/bejelentkezes' element={<Login/>}/>
           <Route path='/ertekelesek' element={<MovieReview/>}/>
           <Route path='/megnezve' element={<MovieSeen/>}/>
+          <Route path='/regisztracio' element={<RegisterPages/>} />
           {/* 404 */}
           <Route path="*" element={<ErrorPage />} />
         </Routes>
