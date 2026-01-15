@@ -1,7 +1,7 @@
 .profile-page {
   background-color: #0b0b0b;
   color: #e6c068;
-  min-height: 100vh;
+  min-height: 80svh;
   padding: 40px 60px;
 }
 
@@ -121,3 +121,132 @@
   margin-top: 5px;
   font-size: 14px;
 }
+/* MOBILE FIRST alapok: 480px alatt */
+@media (max-width: 480px) {
+  .profile-page {
+    padding: 20px 15px;
+  }
+
+  .profile-header {
+    margin-left: 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .avatar {
+    width: 60px;
+    height: 60px;
+  }
+
+  .username {
+    font-size: 18px;
+  }
+
+  .profil-tabs {
+    margin-left: 0;
+    margin-right: 0;
+    gap: 15px;
+    padding: 6px 0;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+
+  .profil-tabs button {
+    padding: 4px 12px;
+    font-size: 0.85rem;
+  }
+
+  .profile-content {
+    flex-direction: column;
+    margin-left: 0;
+    gap: 20px;
+  }
+
+  .description-box {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .favorites h2 {
+    font-size: 1.2rem;
+    margin-left: 0;
+  }
+
+  .movie-list {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+  }
+
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .stats h1 {
+    font-size: 36px;
+  }
+
+  .stats p {
+    font-size: 12px;
+  }
+}
+
+/* TABLET: 481px - 768px */
+@media (max-width: 768px) and (min-width: 481px) {
+  .profile-page {
+    padding: 30px 40px;
+  }
+
+  .profile-header {
+    margin-left: 0;
+    gap: 12px;
+  }
+
+  .avatar {
+    width: 65px;
+    height: 65px;
+  }
+
+  .username {
+    font-size: 20px;
+  }
+
+  .profil-tabs {
+    margin-left: 0;
+    margin-right: 0;
+    gap: 20px;
+    padding: 7px 0;
+    flex-wrap: wrap;
+  }
+
+  .profil-tabs button {
+    padding: 5px 14px;
+    font-size: 0.9rem;
+  }
+
+  .profile-content {
+    flex-direction: column;
+    margin-left: 0;
+    gap: 25px;
+  }
+
+  .description-box {
+    margin-left: 0;
+    width: 100%;
+  }
+
+  .movie-list {
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .stats {
+    justify-content: flex-start;
+    gap: 50px;
+  }
+}
+

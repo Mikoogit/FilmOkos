@@ -2,7 +2,6 @@ import { useState } from "react";
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import logo from "../assets/logo.png";
-import profilePic from "../assets/profile.png";
 import Separator from "./Separator";
 
 export default function Navbar() {
@@ -22,10 +21,6 @@ export default function Navbar() {
             <input type="text" placeholder="Kereső..." />
           </div>
 
-          <button className="login-btn">Bejelentkezés</button>
-
-          <img src={profilePic} alt="Profil" className="profile-img" />
-
           <div
             className={`hamburger ${menuOpen ? "open" : ""}`}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -36,21 +31,22 @@ export default function Navbar() {
           </div>
         </div>
 
+        {/* MOBILE MENU */}
         {menuOpen && (
           <div className="mobile-menu">
             <Link to="/">Főoldal</Link>
-            <Link to="filmek">Filmek</Link>
+            <Link to="/filmek">Filmek</Link>
             <Link to="/megnezendo">Megnézendő</Link>
             <Link to="/megnezve">Megnézve</Link>
-            <Link to="profil">Profil</Link>
+            <Link to="/profil">Profil</Link>
             <Link to="/ertekelesek">Értékelések</Link>
+            <Link to="/admin">Admin</Link>
             <Link to="/bejelentkezes">Bejelentkezés</Link>
           </div>
         )}
       </nav>
 
-     
-     <Separator thickness="4px" />
+      <Separator thickness="4px" />
     </>
   );
 }
