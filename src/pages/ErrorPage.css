@@ -1,6 +1,6 @@
 .error-page {
   width: 100%;
-  min-height: 100vh;
+  min-height: 80svh;
   background: black;
   position: relative;
   overflow: hidden;
