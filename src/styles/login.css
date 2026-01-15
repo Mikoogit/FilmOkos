@@ -54,7 +54,7 @@
 }
 
 .btn {
-  width: 100%;
+  width: 70%;
   border: none;
   border-radius: 25px;
   padding: 10px 0;
@@ -65,13 +65,14 @@
   color: #fff;
   background-color: #333;
   transition: background-color 0.3s ease;
+  text-decoration: none;
 }
 
 .btn.primary:hover,
 .btn.secondary:hover {
   background-color: #555;
+  text-decoration: none;
 }
-
 
 
 .or {
@@ -92,6 +93,4 @@
   position: absolute;
   left: -9999px;
 }
-
-
 

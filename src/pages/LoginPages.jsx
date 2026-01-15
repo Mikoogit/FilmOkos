@@ -87,9 +87,12 @@ export default function Login() {
 
             <p className="or">VAGY</p>
 
+            <div id="gomb">
             <Link to="/register" className="btn secondary">
               Regisztrálok
             </Link>
+            </div>
+            
           </>
         )}
       </div>
