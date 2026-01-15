@@ -1,8 +1,26 @@
 import React from "react";
 import logo from "../assets/logo.png";
 import "../styles/login.css";
+import {useRef,useState,useEffect} from "react";
 
 export default function Login() {
+  const userRef = useRef();
+  const errRef = useRef();
+  
+  const [user,setUser] = useState('');
+  const [pwd, setPwd] = useState('');
+  const [errMsg,setErrMsg] = useState('');
+  const [success,setSuccess] = useState(false);
+
+  useEffect(() => {
+    userRef.current.focus();
+  }, []);
+
+  useEffect(() => {
+    setErrMsg('');
+  }, [user,pwd]);
+
+
   return (
     <div className="login-page">
       <img src={logo} alt="Logo" className="login-logo" />

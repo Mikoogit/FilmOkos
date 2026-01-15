@@ -1,6 +1,6 @@
 /* Teljes oldal */
 .login-page {
-  min-height: 100vh;
+  min-height: 80svh;
   background: radial-gradient(circle, #1a1a1a, #000);
   display: flex;
   justify-content: center;
