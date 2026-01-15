@@ -16,13 +16,7 @@ export default function ErrorPage() {
           <Link to="/" className="error-button">Újra</Link>
         </div>
       </div>
-<<<<<<< HEAD
-      <Separator thickness="4px" />
-    </div>
-=======
-
       <Separator thickness="4px" />
     </>
->>>>>>> e096fc759c59110abf0c9b9558679bd50098ee85
   );
 }
