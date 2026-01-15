@@ -5,17 +5,24 @@ import Separator from "../components/Separator";
 
 export default function ErrorPage() {
   return (
-    <div className="error-page">
+    <>
+      <div className="error-page">
+        <img src={hero} alt="hero" className="error-bg" />
 
-      <img src={hero} alt="hero" className="error-bg" />
-
-      <div className="error-content">
-        <h1 className="error-title">Error</h1>
-        <h2 className="error-code">404</h2>
-        <p className="error-text">Az oldal nem található</p>
-        <Link to="/" className="error-button">Újra</Link>
+        <div className="error-content">
+          <h1 className="error-title">Error</h1>
+          <h2 className="error-code">404</h2>
+          <p className="error-text">Az oldal nem található</p>
+          <Link to="/" className="error-button">Újra</Link>
+        </div>
       </div>
+<<<<<<< HEAD
       <Separator thickness="4px" />
     </div>
+=======
+
+      <Separator thickness="4px" />
+    </>
+>>>>>>> e096fc759c59110abf0c9b9558679bd50098ee85
   );
 }

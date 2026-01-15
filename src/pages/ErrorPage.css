@@ -1,40 +1,62 @@
 .error-page {
   width: 100%;
-  height: 80vh;
+  min-height: 80svh;
   background: black;
+<<<<<<< HEAD
 
   position: relative;
   overflow: hidden;
 }
+=======
+  position: relative;
+  overflow: hidden;
+>>>>>>> e096fc759c59110abf0c9b9558679bd50098ee85
 
-/* A háttérkép valódi képként */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* háttérkép */
 .error-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
+<<<<<<< HEAD
   object-fit: contain;
   object-position: top;
   display: block;
   margin: 0 auto;
+=======
+  object-fit: cover;
+  object-position: top center;
+  z-index: 0;
+>>>>>>> e096fc759c59110abf0c9b9558679bd50098ee85
 }
 
-
-/* A szöveg a vászon közepén */
+/* SZÖVEG */
 .error-content {
+<<<<<<< HEAD
   position: absolute;
   top: 25%;
   left: 50%;
   transform: translate(-50%, -50%);
+=======
+  position: relative;
+>>>>>>> e096fc759c59110abf0c9b9558679bd50098ee85
   z-index: 1;
   text-align: center;
-  width: 100%;
-  max-width: 900px;
-  padding: 20px;
+  width: min(90%, 900px);
+  padding: clamp(12px, 3vw, 24px);
+  margin-top: clamp(40px, 10vh, 140px);
+  
+  
 }
 
-
-/* Error felirat */
+/* cím */
 .error-title {
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
   font-weight: 700;
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   -webkit-background-clip: text;
@@ -44,39 +66,37 @@
 
 /* 404 */
 .error-code {
-  font-size: 7rem;
+  font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 900;
   color: white;
   margin: 10px 0;
-  letter-spacing: 3px;
 }
 
-/* Szöveg */
+/* szöveg */
 .error-text {
-  font-size: 1.6rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.6rem);
   color: #d6d6d6;
-  margin-bottom: 35px;
+  margin-bottom: clamp(16px, 4vw, 35px);
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-/* Gomb */
+/* gomb */
 .error-button {
+  display: inline-block;
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
-  padding: 14px 40px;
+  padding: clamp(10px, 2.5vw, 14px) clamp(24px, 5vw, 40px);
   border-radius: 10px;
   font-weight: 700;
   color: black;
   text-decoration: none;
-  font-size: 1.2rem;
-  transition: 0.25s ease;
-  box-shadow: 0 0 15px rgba(219, 199, 126, 0.4);
 }
+
 
 .error-button:hover {
   background: #ffea7a;
   box-shadow: 0 0 20px rgba(255, 234, 122, 0.6);
 }
+<<<<<<< HEAD
 
 /* Responsive adjustments */
 @media (max-width: 768px) {
@@ -128,3 +148,5 @@
     font-size: 1rem;
   }
 }
+=======
+>>>>>>> e096fc759c59110abf0c9b9558679bd50098ee85
