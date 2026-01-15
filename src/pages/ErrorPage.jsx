@@ -15,7 +15,7 @@ export default function ErrorPage() {
         <p className="error-text">Az oldal nem található</p>
         <Link to="/" className="error-button">Újra</Link>
       </div>
-    <Separator thickness="4px" />
+      <Separator thickness="4px" />
     </div>
   );
 }

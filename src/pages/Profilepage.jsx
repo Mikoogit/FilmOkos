@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import "../styles/Profile.css";
 
 export default function Profilepage() {
@@ -17,34 +17,34 @@ export default function Profilepage() {
 
       {/* Navigációs gombok */}
       <div className="profil-tabs">
-  <button
-    className={activeTab === "profil" ? "active" : ""}
-    onClick={() => setActiveTab("profil")}
-  >
-    Profil
-  </button>
+        <button
+          className={activeTab === "profil" ? "active" : ""}
+          onClick={() => setActiveTab("profil")}
+        >
+          Profil
+        </button>
 
-  <button
-    className={activeTab === "latott" ? "active" : ""}
-    onClick={() => setActiveTab("latott")}
-  >
-    Látott
-  </button>
+        <button
+          className={activeTab === "latott" ? "active" : ""}
+          onClick={() => setActiveTab("latott")}
+        >
+          Látott
+        </button>
 
-  <button
-    className={activeTab === "tervezett" ? "active" : ""}
-    onClick={() => setActiveTab("tervezett")}
-  >
-    Tervezett látni
-  </button>
+        <button
+          className={activeTab === "tervezett" ? "active" : ""}
+          onClick={() => setActiveTab("tervezett")}
+        >
+          Tervezett látni
+        </button>
 
-  <button
-    className={activeTab === "ertekelesek" ? "active" : ""}
-    onClick={() => setActiveTab("ertekelesek")}
-  >
-    Értékelések
-  </button>
-</div>
+        <button
+          className={activeTab === "ertekelesek" ? "active" : ""}
+          onClick={() => setActiveTab("ertekelesek")}
+        >
+          Értékelések
+        </button>
+      </div>
 
       {/* Tartalom */}
       <div className="profile-content">
@@ -52,10 +52,8 @@ export default function Profilepage() {
         <div className="description-box">
           <h3>Leírás</h3>
           <div className="line"></div>
-          <p>imadom a fnaf filmet
-            Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde recusandae obcaecati laborum tempora voluptas placeat autem voluptatibus cupiditate sunt quidem, veritatis cumque asperiores nobis ipsum numquam cum accusantium facilis corrupti.
-          </p>
-          
+          <p>imadom a fnaf filmet. Lorem, ipsum dolor sit amet consectetur adipisicing elit.</p>
+
         </div>
 
         {/* Kedvenc filmek */}

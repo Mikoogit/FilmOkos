@@ -6,7 +6,7 @@ import ReviewsSection from "../components/ReviewsSection";
 export default function HomePage() {
     return (
         <>
-            
+
 
             <Hero />
             <Separator thickness="2px" />
@@ -34,10 +34,10 @@ export default function HomePage() {
                     { id: 6, title: "FNAF 2", poster: "/fnaf2.jpg" },
                 ]}
             />
-        <ReviewsSection />
-        
+            <ReviewsSection />
+
         </>
-        
-        
+
+
     );
 }
