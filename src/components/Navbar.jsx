@@ -44,6 +44,7 @@ export default function Navbar() {
             <Link to="/ertekelesek">Értékelések</Link>
             <Link to="/admin">Admin</Link>
             <Link to="/bejelentkezes">Bejelentkezés</Link>
+            <Link to="/regisztracio">Regisztráció</Link>
           </div>
         )}
       </nav>

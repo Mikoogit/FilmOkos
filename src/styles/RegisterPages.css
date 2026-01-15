@@ -1,0 +1,92 @@
+.register-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;   /* ⬅️ EZ A LÉNYEG */
+  justify-content: center;
+  align-items: center;
+  background: #0b0b0b;
+}
+
+.register-logo {
+  width: 180px;
+  margin-bottom: 30px;
+  opacity: 0.95;
+}
+.register-card {
+  display: flex;
+  width: 700px;
+  height: 360px;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 0 40px rgba(0, 0, 0, 0.7);
+}
+
+/* BAL OLDAL */
+.register-left {
+  flex: 1;
+  background: #1a1a1a;
+  color: #ccc;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 20px;
+}
+
+.login-btn {
+  padding: 10px 28px;
+  background: #2c2c2c;
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
+  transition: 0.2s;
+}
+
+.login-btn:hover {
+  background: #3a3a3a;
+}
+
+/* JOBB OLDAL */
+.register-right {
+  flex: 1;
+  background: #d6b25e;
+  padding: 30px;
+}
+
+.register-right h2 {
+  margin-bottom: 20px;
+}
+
+.register-right form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.register-right label {
+  font-size: 14px;
+}
+
+.register-right input {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #444;
+  padding: 6px 0;
+  outline: none;
+}
+
+.register-btn {
+  margin-top: 20px;
+  align-self: center;
+  padding: 10px 30px;
+  background: #2c2c2c;
+  color: #fff;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
+.register-btn:hover {
+  background: #1a1a1a;
+}
