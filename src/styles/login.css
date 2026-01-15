@@ -1,0 +1,95 @@
+/* Teljes oldal */
+.login-page {
+  min-height: 100vh;
+  background: radial-gradient(circle, #1a1a1a, #000);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+}
+
+/* Logo */
+.login-logo {
+  position: absolute;
+  top: 30px;
+  width: 120px;
+}
+
+/* Kártya */
+.login-container {
+  width: 400px;
+  padding: 30px 35px;
+  background: linear-gradient(180deg, #e6c46a, #c9a64a);
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
+  text-align: center;
+}
+
+/* Cím */
+.login-container h1 {
+  margin-bottom: 25px;
+  font-size: 26px;
+  color: #000;
+}
+
+/* Feliratok */
+.login-container label {
+  display: block;
+  text-align: left;
+  font-size: 14px;
+  margin-bottom: 5px;
+  color: #2b2b2b;
+}
+
+/* Inputok */
+.login-container input {
+  width: 100%;
+  border: none;
+  background: transparent;
+  border-bottom: 1px solid #444;
+  padding: 8px 0;
+  margin-bottom: 20px;
+  font-size: 14px;
+  outline: none;
+}
+
+/* Elfelejtett jelszó */
+.forgot {
+  display: block;
+  text-align: right;
+  font-size: 12px;
+  color: #555;
+  margin-bottom: 25px;
+  text-decoration: none;
+}
+
+/* Gombok */
+.btn {
+  width: 100%;
+  padding: 12px;
+  border-radius: 25px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 12px;
+}
+
+/* Fő gomb */
+.btn.primary {
+  background: #3a3a3a;
+  color: #fff;
+}
+
+/* Másodlagos gomb */
+.btn.secondary {
+  background: #3a3a3a;
+  color: #fff;
+}
+
+/* VAGY */
+.or {
+  display: block;
+  font-size: 12px;
+  margin: 10px 0;
+  color: #444;
+}
