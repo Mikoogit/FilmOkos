@@ -8,7 +8,17 @@
   overflow: hidden;
 }
 
-
+.ugrasgomb{
+   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  color: black;
+  padding: 12px 25px;
+  border: none;
+  border-radius: 8px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: 0.25s ease;
+  text-decoration: none;
+}
 
 /* HÁTTÉRKÉP */
 .hero-bg {

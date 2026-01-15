@@ -12,7 +12,9 @@ export default function Navbar() {
       <nav className="navbar">
         {/* LOGO */}
         <div className="navbar-logo">
+          <Link to={"/"}>
           <img src={logo} alt="FilmOkos logo" />
+          </Link>
         </div>
 
         {/* RIGHT SIDE */}
