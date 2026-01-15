@@ -10,6 +10,7 @@ import Login from './pages/LoginPages.jsx';
 import ErrorPage from './pages/ErrorPage.jsx';
 import MovieReview from './pages/MovieReviewPage.jsx';
 import MovieSeen from './pages/MoviesSeenPage.jsx';
+import { AuthProvider } from './context/AuthContext.jsx';
 
 
 

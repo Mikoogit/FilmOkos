@@ -1,40 +1,41 @@
 .error-page {
   width: 100%;
-  height: 80vh;
+  min-height: 80svh;
   background: black;
-  
   position: relative;
   overflow: hidden;
-} 
 
-/* A háttérkép valódi képként */
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* háttérkép */
 .error-bg {
+  position: absolute;
+  inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;      
-  object-position: top;     
-  display: block;
-  margin: 0 auto;
+  object-fit: cover;
+  object-position: top center;
+  z-index: 0;
 }
 
-
-/* A szöveg a vászon közepén */
+/* SZÖVEG */
 .error-content {
-  position: absolute;
-  top: 25%;                
-  left: 50%;
-  transform: translate(-50%, -50%);
+  position: relative;
   z-index: 1;
   text-align: center;
-  width: 100%;
-  max-width: 900px;
-  padding: 20px;
+  width: min(90%, 900px);
+  padding: clamp(12px, 3vw, 24px);
+  margin-top: clamp(40px, 10vh, 140px);
+  
+  
 }
 
-
-/* Error felirat */
+/* cím */
 .error-title {
-  font-size: 3.5rem;
+  font-size: clamp(1.8rem, 4vw, 3.5rem);
   font-weight: 700;
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   -webkit-background-clip: text;
@@ -44,54 +45,33 @@
 
 /* 404 */
 .error-code {
-  font-size: 7rem;
+  font-size: clamp(3.5rem, 8vw, 7rem);
   font-weight: 900;
   color: white;
   margin: 10px 0;
-  letter-spacing: 3px;
 }
 
-/* Szöveg */
+/* szöveg */
 .error-text {
-  font-size: 1.6rem;
+  font-size: clamp(0.95rem, 2.5vw, 1.6rem);
   color: #d6d6d6;
-  margin-bottom: 35px;
+  margin-bottom: clamp(16px, 4vw, 35px);
   text-transform: uppercase;
-  letter-spacing: 1px;
 }
 
-/* Gomb */
+/* gomb */
 .error-button {
+  display: inline-block;
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
-  padding: 14px 40px;
+  padding: clamp(10px, 2.5vw, 14px) clamp(24px, 5vw, 40px);
   border-radius: 10px;
   font-weight: 700;
   color: black;
   text-decoration: none;
-  font-size: 1.2rem;
-  transition: 0.25s ease;
-  box-shadow: 0 0 15px rgba(219, 199, 126, 0.4);
 }
+
 
 .error-button:hover {
   background: #ffea7a;
   box-shadow: 0 0 20px rgba(255, 234, 122, 0.6);
 }
-
-/* Responsive adjustments */
-@media (max-width: 768px) {
-  .error-content { top: 30%; padding: 16px; }
-  .error-title { font-size: 2.4rem; }
-  .error-code { font-size: 5rem; }
-  .error-text { font-size: 1.1rem; margin-bottom: 20px; }
-  .error-button { padding: 12px 32px; font-size: 1.05rem; }
-}
-
-@media (max-width: 480px) {
-  .error-content { top: 32%; padding: 12px; }
-  .error-title { font-size: 2rem; }
-  .error-code { font-size: 3.8rem; }
-  .error-text { font-size: 0.95rem; margin-bottom: 16px; }
-  .error-button { padding: 10px 24px; font-size: 1rem; }
-}
-
