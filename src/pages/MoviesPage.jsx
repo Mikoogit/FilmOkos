@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../styles/MoviePages.css";
-import "../api/moviesApi.js";
+import { getPopularMovies } from "../api/moviesApi.js"; // helyes útvonal szerint
 
 const filters = {
   genres: ["Műfaj", "Akció", "Dráma", "Vígjáték"],
@@ -20,9 +20,25 @@ export default function MoviePages() {
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 999;
 
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    async function fetchMovies() {
+      try {
+        const moviesFromApi = await getPopularMovies(currentPage);
+        setMovies(moviesFromApi);
+      } catch (error) {
+        console.error("API hiba:", error);
+        setMovies([]);
+      }
+    }
+    fetchMovies();
+  }, [currentPage]);
+
   const handleFilterClick = (type, value) => {
     setActiveFilters((prev) => ({ ...prev, [type]: value }));
     setCurrentPage(1);
+    // később ide jöhet az API hívás szűréssel
   };
 
   const handlePageChange = (page) => {
@@ -30,12 +46,6 @@ export default function MoviePages() {
   };
 
   const pagesToShow = [1, 2, 3, 4, "...", totalPages];
-
-  const movies = Array(30).fill(null).map((_, i) => ({
-    id: i + 1,
-    title: `FNAF Freddy ${i + 1}`,
-    poster_path: "/fpdH92J9FGiCFhT6NS8Ib6NplVI.jpg",
-  }));
 
   return (
     <div className="movie-grid-wrapper">
@@ -56,21 +66,24 @@ export default function MoviePages() {
       </div>
 
       <div className="movie-grid">
-        {movies.map((movie) => (
-          <div key={movie.id} className="movie-card">
-                          <img
-  loading="lazy"
-  src={
-    
-    movie.poster_path
-      ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-      : "/no-poster.png"
-  }
-  alt={movie.title}
-/>
-            <div className="movie-title">{movie.title}</div>
-          </div>
-        ))}
+        {movies.length > 0 ? (
+          movies.map((movie) => (
+            <div key={movie.id} className="movie-card">
+              <img
+                loading="lazy"
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                    : "/no-poster.png"
+                }
+                alt={movie.title}
+              />
+              <div className="movie-title">{movie.title}</div>
+            </div>
+          ))
+        ) : (
+          <p>Nincsenek filmek.</p>
+        )}
       </div>
 
       <div className="pagination">

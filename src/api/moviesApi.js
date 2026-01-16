@@ -24,3 +24,11 @@ export const TopRated = async () => {
   const data = await res.json();
   return data.results;
 };
+export const PopularMovies = async () => {
+  const res = await fetch(
+    `${BASE_URL}/movie/popular?api_key=${TMDB_API_KEY}&language=hu-HU`
+  );
+  const data = await res.json();
+  return data.results;
+};
+
