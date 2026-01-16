@@ -52,7 +52,17 @@ const resetTilt = (e) => {
         <div className="carousel-slider" ref={sliderRef}>
           {movies.map((movie) => (
             <div className="movie-card" key={movie.id} onMouseMove={(e) => handleTilt(e)} onMouseLeave={(e) => resetTilt(e)}>
-              <img src={"https://static.posters.cz/image/750webp/116103.webp"} alt={movie.title} />
+              <img
+  loading="lazy"
+  src={
+    
+    movie.poster_path
+      ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+      : "/no-poster.png"
+  }
+  alt={movie.title}
+/>
+
               <div className="movie-title">{movie.title}</div>
             </div>
           ))}
