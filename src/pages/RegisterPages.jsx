@@ -1,47 +1,87 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { useAuth } from "../auth/AuthContext.jsx";
+import { Link, useNavigate } from "react-router-dom";
 import "../styles/RegisterPages.css";
-import logo from "../assets/logo.png";
 
-const RegisterPages = () => {
+export default function RegisterPages() {
+  const { login } = useAuth();
+  const navigate = useNavigate();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [errMsg, setErrMsg] = useState("");
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setErrMsg("");
+
+    try {
+      const res = await fetch("http://localhost:3000/api/register", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        setErrMsg(err.error || "A regisztráció sikertelen");
+        return;
+      }
+
+      const data = await res.json();
+
+      login(data);
+      navigate("/profil");
+
+    } catch (err) {
+      setErrMsg("Szerver hiba");
+    }
+  };
+
   return (
-    <>
-    
-    <div className="register-page">
-   <Link to={"/"}><img src={logo} alt="Logo" className="register-logo"/></Link>
+    <section className="register-page">
       <div className="register-card">
-        
-        {/* BAL OLDAL */}
+
         <div className="register-left">
-          <p>Már van felhasználói fiókom</p>
+          <h2>Már van fiókod?</h2>
           <Link to="/bejelentkezes" className="login-btn">
             Bejelentkezés
           </Link>
         </div>
 
-        {/* JOBB OLDAL */}
         <div className="register-right">
           <h2>Regisztráció</h2>
 
-          <form>
-            <label>Felhasználói név:</label>
-            <input type="text" placeholder="Írd ide a felhasználó neved" />
+          {errMsg && <p className="errmsg">{errMsg}</p>}
 
-            <label>Jelszó:</label>
-            <input type="password" placeholder="Írd ide a jelszavad" />
+          <form onSubmit={handleSubmit}>
+            <label htmlFor="email">Email cím</label>
+            <input
+              id="email"
+              type="email"
+              placeholder="Email..."
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
 
-            <label>Jelszó ismét:</label>
-            <input type="password" placeholder="Írd ide a jelszavad" />
+            <label htmlFor="password">Jelszó</label>
+            <input
+              id="password"
+              type="password"
+              placeholder="Jelszó..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
 
-            <button type="submit" className="register-btn">
+            <button className="register-btn" type="submit">
               Regisztráció
             </button>
           </form>
         </div>
 
       </div>
-    </div>
-    </>
+    </section>
   );
-};
-
-export default RegisterPages;
+}

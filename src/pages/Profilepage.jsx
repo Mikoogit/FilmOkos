@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import "../styles/Profile.css";
 
-export default function Profilepage() {
+export default function ProfilePage() {
   const navigate = useNavigate();
   const location = useLocation();
 

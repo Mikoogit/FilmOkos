@@ -1,102 +1,95 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useState } from "react";
+import { useAuth } from "../auth/AuthContext.jsx";
 import { Link, useNavigate } from "react-router-dom";
 import "../styles/login.css";
-import logo from "../assets/logo.png";
 
-export default function Login() {
-  const userRef = useRef();
-  const errRef = useRef();
+export default function LoginPages() {
+  const { login } = useAuth();
   const navigate = useNavigate();
 
-  const [user, setUser] = useState("");
-  const [pwd, setPwd] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    userRef.current.focus();
-  }, []);
-
-  useEffect(() => {
-    setErrMsg("");
-  }, [user, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log("Felhasználó:", user, "Jelszó:", pwd);
+    setErrMsg("");
 
-    if (!user || !pwd) {
-      setErrMsg("Kérlek töltsd ki az összes mezőt!");
-      return;
+    try {
+      const res = await fetch("http://localhost:3000/api/login", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        setErrMsg(err.error || "Hibás email vagy jelszó");
+        return;
+      }
+
+      const data = await res.json();
+
+      login(data);
+      navigate("/profil");
+
+    } catch (err) {
+      setErrMsg("Szerver hiba");
     }
-
-    // Sikeres bejelentkezés
-    setUser("");
-    setPwd("");
-    setSuccess(true);
-
-    setTimeout(() => navigate("/"), 2000);
   };
 
   return (
     <section className="login-page">
       <div className="login-container">
-        {success ? (
-          <>
-            <h1>Sikeres bejelentkezés!</h1>
-            <p>Két másodperc múlva továbbirányítunk...</p>
-          </>
-        ) : (
-          <>
-            <h1>Üdvözöljük!</h1>
-            <p
-              ref={errRef}
-              className={errMsg ? "errmsg" : "offscreen"}
-              aria-live="assertive"
-              style={{ color: "red", minHeight: "1.2em" }} // fix hely hibának
+        <h1>Bejelentkezés</h1>
+
+        {errMsg && <p className="errmsg">{errMsg}</p>}
+
+        <form onSubmit={handleSubmit}>
+          <label htmlFor="email">Email cím</label>
+          <input
+            id="email"
+            type="email"
+            placeholder="Email..."
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+
+          <label htmlFor="password">Jelszó</label>
+
+          {/* PASSWORD INPUT WITH TOGGLE */}
+          <div className="input-group">
+            <input
+              id="password"
+              type={showPassword ? "text" : "password"}
+              placeholder="Jelszó..."
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+
+            <span
+              className="toggle-password"
+              onClick={() => setShowPassword(!showPassword)}
             >
-              {errMsg}
-            </p>
-            <form onSubmit={handleSubmit}>
-              <label htmlFor="username">Felhasználó név:</label>
-              <input
-                type="text"
-                id="username"
-                placeholder="Írd be a felhasználó neved"
-                ref={userRef}
-                autoComplete="off"
-                onChange={(e) => setUser(e.target.value)}
-                value={user}
-                required
-              />
+              {showPassword ? "🙈" : "👁️"}
 
-              <label htmlFor="password">Jelszó:</label>
-              <input
-                type="password"
-                id="password"
-                placeholder="Írd be a jelszavad"
-                onChange={(e) => setPwd(e.target.value)}
-                value={pwd}
-                required
-              />
+            </span>
+          </div>
 
-              <button type="submit" className="btn primary">
-                Bejelentkezés
-              </button>
-            </form>
+          <button className="btn primary" type="submit">
+            Bejelentkezés
+          </button>
+        </form>
 
-            <p className="or">VAGY</p>
+        <p className="or">— vagy —</p>
 
-            <div id="gomb">
-            <Link to="/register" className="btn secondary">
-              Regisztrálok
-            </Link>
-            </div>
-            
-          </>
-        )}
+        <Link className="btn secondary" to="/regisztracio">
+          Regisztráció
+        </Link>
       </div>
     </section>
-
   );
 }
