@@ -6,7 +6,7 @@
 body {
   overflow-y: auto;
   overflow-x: hidden;
-  scrollbar-width: none; /* Firefox */
+  scrollbar-width: none; 
 }
 
 body::-webkit-scrollbar {

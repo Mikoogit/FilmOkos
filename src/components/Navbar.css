@@ -84,11 +84,11 @@
 .hamburger {
   width: 30px;
   height: 22px;
-  display: flex; /* always visible */
+  display: flex; 
   flex-direction: column;
   justify-content: space-between;
   cursor: pointer;
-  margin-left: 0.5rem; /* kis távolság a többi elemtől */
+  margin-left: 0.5rem; 
   z-index: 1001;
 } 
 

@@ -1,5 +1,5 @@
 import "./Footer.css";
-import logo from "../assets/logo.png"; // ha külön logót használsz
+import logo from "../assets/logo.png"; 
 import Separator from "./Separator";
 
 export default function Footer() {
