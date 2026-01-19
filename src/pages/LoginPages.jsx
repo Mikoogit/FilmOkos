@@ -57,7 +57,6 @@ export default function LoginPages() {
             required
           />
 
-          <label htmlFor="password">Jelszó</label>
 
           {/* PASSWORD INPUT WITH TOGGLE */}
           <div className="input-group">
@@ -86,9 +85,10 @@ export default function LoginPages() {
 
         <p className="or">— vagy —</p>
 
-        <Link className="btn secondary" to="/regisztracio">
+        <Link className="register-btn" to="/regisztracio">
           Regisztráció
         </Link>
+        
       </div>
     </section>
   );

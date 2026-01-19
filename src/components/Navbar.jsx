@@ -78,12 +78,13 @@ export default function Navbar() {
               <>
                 <Link className="nav-btn" to="/bejelentkezes">Bejelentkezés</Link>
                 <Link className="nav-btn" to="/regisztracio">Regisztráció</Link>
+                <Link to="/filmek">Filmek</Link>
               </>
             )}
 
             {/* LOGGED IN ONLY */}
             {isAuthenticated && (
-              <button className="nav-btn logout-btn" onClick={logout}>
+              <button className="nav-btn logout-btn desktop-only" onClick={logout}>
                 Kijelentkezés
               </button>
             )}

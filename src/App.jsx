@@ -16,6 +16,7 @@ import AdminPage from "./pages/AdminPage.jsx";
 
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
+import MoviePages from "./pages/MoviesPage.jsx";
 
 function App() {
   return (
@@ -29,6 +30,9 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/bejelentkezes" element={<Login />} />
           <Route path="/regisztracio" element={<RegisterPages />} />
+          <Route path="/filmek" element={<MoviePages/>} />
+
+
 
           {/* USER + ADMIN ROUTES */}
           <Route

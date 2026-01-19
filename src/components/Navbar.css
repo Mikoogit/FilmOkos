@@ -220,7 +220,7 @@
   background: #ffea7a;
 
 }
-.nav-btn logout-btn{
+.nav-btn logout-btn desktop only{
   position: absolute;
   top: 80px;
   right: 0;
