@@ -42,9 +42,40 @@
 /* Film rács */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 12px;
-  justify-items: center;
+  grid-template-columns: repeat(8, 150px); /* 8 items per row by default */
+  gap: 14px;
+  justify-content: center;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+  .movie-grid {
+    grid-template-columns: repeat(6, 150px); /* 6 items per row */
+  }
+}
+
+@media (max-width: 1000px) {
+  .movie-grid {
+    grid-template-columns: repeat(5, 150px); /* 5 items per row */
+  }
+}
+
+@media (max-width: 800px) {
+  .movie-grid {
+    grid-template-columns: repeat(4, 150px); /* 4 items per row */
+  }
+}
+
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, 150px); /* 3 items per row */
+  }
+}
+
+@media (max-width: 400px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, 150px); /* 2 items per row */
+  }
 }
 
 .movie-card {

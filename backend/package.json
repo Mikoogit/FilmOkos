@@ -1,6 +1,10 @@
 {
   "name": "filmokos-backend",
   "version": "1.0.0",
+  "description": "",
+  "keywords": [],
+  "license": "ISC",
+  "author": "",
   "type": "module",
   "main": "server.js",
   "scripts": {
@@ -11,9 +15,5 @@
     "cors": "^2.8.5",
     "dotenv": "^16.6.1",
     "express": "^4.22.1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": ""
+  }
 }
