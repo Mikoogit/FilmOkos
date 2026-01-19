@@ -181,7 +181,7 @@
   /* mobile menu positioning */
   .mobile-menu {
     top: 64px;
-    right: 0;
+    right: 110;
     width: 220px;
   }
 }

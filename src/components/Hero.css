@@ -62,3 +62,6 @@
   font-size: 1.4rem;
   margin-bottom: 10px;
 }
+.ugrasgomb:hover{
+  background: #ffea7a;
+}

@@ -76,9 +76,9 @@ export default function Navbar() {
             {/* GUEST ONLY */}
             {!isAuthenticated && (
               <>
+                <Link to="/filmek">Filmek</Link>
                 <Link className="nav-btn" to="/bejelentkezes">Bejelentkezés</Link>
                 <Link className="nav-btn" to="/regisztracio">Regisztráció</Link>
-                <Link to="/filmek">Filmek</Link>
               </>
             )}
 
