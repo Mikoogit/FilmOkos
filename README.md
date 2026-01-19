@@ -26,6 +26,7 @@ Profile: https://wireframe.cc/rcgxOu
 The two potential APIs:
 
 * https://www.themoviedb.org/
+https://developer.themoviedb.org/reference/getting-started
 * https://www.omdbapi.com/
 
 TMDB API ID:
