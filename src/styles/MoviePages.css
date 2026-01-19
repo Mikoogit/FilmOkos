@@ -42,7 +42,7 @@
 /* Film rács */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(8, 150px); /* 8 items per row by default */
+  grid-template-columns: repeat(7, 150px); /* 8 items per row by default */
   gap: 14px;
   justify-content: center;
 }
