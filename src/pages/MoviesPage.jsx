@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MoviePages.css";
-import { getPopularMovies } from "../api/moviesApi.js"; // helyes útvonal szerint
+import { getPopularMovies } from "../api/moviesApi.js"; 
 
 const filters = {
   genres: ["Műfaj", "Akció", "Dráma", "Vígjáték"],

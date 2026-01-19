@@ -12,7 +12,8 @@
   width: 400px;
   max-width: 90vw; 
   padding: 40px 50px;
-  background: linear-gradient(180deg, #e6c46a, #c9a64a);
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+
   border-radius: 12px;
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
   text-align: center;
@@ -76,7 +77,7 @@
 
 
 .or {
-  font-size: 11px;
+  font-size: 16px;
   font-weight: 700;
   color: #5c5321;
   margin: 15px 0;
@@ -117,10 +118,11 @@
   font-size: 1.2rem;
   color: #ccc;
   transition: 0.2s ease;
+  margin-top: -12px;
 }
 
 .toggle-password:hover {
   color: white;
-}
+} 
 
 

@@ -9,6 +9,8 @@ export default function RegisterPages() {
 
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const [errMsg, setErrMsg] = useState("");
 
   const handleSubmit = async (e) => {
@@ -55,7 +57,7 @@ export default function RegisterPages() {
           {errMsg && <p className="errmsg">{errMsg}</p>}
 
           <form onSubmit={handleSubmit}>
-            <label htmlFor="email">Email cím</label>
+            <label htmlFor="email">Email cím: </label>
             <input
               id="email"
               type="email"
@@ -65,15 +67,27 @@ export default function RegisterPages() {
               required
             />
 
-            <label htmlFor="password">Jelszó</label>
+            
+
+            {/* PASSWORD INPUT WITH TOGGLE */}
+          <div className="input-group">
             <input
               id="password"
-              type="password"
+              type={showPassword ? "text" : "password"}
               placeholder="Jelszó..."
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
             />
+
+            <span
+              className="toggle-password-reg"
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? "🙈" : "👁️"}
+
+            </span>
+          </div>
 
             <button className="register-btn" type="submit">
               Regisztráció

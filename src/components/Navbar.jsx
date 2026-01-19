@@ -76,6 +76,7 @@ export default function Navbar() {
             {/* GUEST ONLY */}
             {!isAuthenticated && (
               <>
+                <Link to="/filmek">Filmek</Link>
                 <Link className="nav-btn" to="/bejelentkezes">Bejelentkezés</Link>
                 <Link className="nav-btn" to="/regisztracio">Regisztráció</Link>
               </>
@@ -83,7 +84,7 @@ export default function Navbar() {
 
             {/* LOGGED IN ONLY */}
             {isAuthenticated && (
-              <button className="nav-btn logout-btn" onClick={logout}>
+              <button className="nav-btn logout-btn desktop-only" onClick={logout}>
                 Kijelentkezés
               </button>
             )}

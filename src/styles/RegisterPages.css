@@ -49,12 +49,15 @@
 /* JOBB OLDAL */
 .register-right {
   flex: 1;
-  background: #d6b25e;
+  background: linear-gradient(120deg, #DBC77E 10%, #756A43 100%);
   padding: 30px;
 }
 
 .register-right h2 {
-  margin-bottom: 20px;
+  margin-bottom: 50px;
+  color: black;
+  font-weight: 900;
+  font-size: 30px;
 }
 
 .register-right form {
@@ -64,7 +67,12 @@
 }
 
 .register-right label {
-  font-size: 14px;
+  display: block;
+  text-align: left;
+  font-size: 20px;
+  font-weight: 400;
+  color: #443c19;
+  font-style: italic;
 }
 
 .register-right input {
@@ -79,14 +87,33 @@
   margin-top: 20px;
   align-self: center;
   padding: 10px 30px;
-  background: #2c2c2c;
   color: #fff;
   border: none;
-  border-radius: 20px;
   cursor: pointer;
+  font-weight:bold ;
+  font-size: 1rem;
+  background: #2c2c2c;
+  color: #fff;
+  border-radius: 20px;
+  text-decoration: none;
   transition: 0.2s;
 }
 
 .register-btn:hover {
   background: #1a1a1a;
 }
+.toggle-password-reg {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  font-size: 1.2rem;
+  color: #ccc;
+  transition: 0.2s ease;
+  margin-top: -6px;
+}
+
+.toggle-password:hover {
+  color: white;
+} 
