@@ -89,7 +89,7 @@ export default function SearchResults() {
   return (
     <div style={{ padding: "1rem" }}>
       <h2>
-        Találatok: <em>{query}</em>
+        Találatok erre: <em>{query}</em>
       </h2>
 
       <div style={styles.grid}>
