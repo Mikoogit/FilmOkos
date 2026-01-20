@@ -41,6 +41,25 @@ export const getMovieById = async (movieId) => {
   }
 
   return res.json();
+  
 };
 
+export const getMovieImages = async (movieId) => {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}/images?api_key=${TMDB_API_KEY}`
+  );
+  return res.json();
+};
+export const getMovieVideos = async (movieId) => {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}/videos?api_key=${TMDB_API_KEY}&language=hu-HU`
+  );
+  return res.json();
+};
 
+export const getMovieKeywords = async (movieId) => {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}/keywords?api_key=${TMDB_API_KEY}`
+  );
+  return res.json();
+};
