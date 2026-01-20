@@ -1,8 +1,10 @@
 import { useRef } from "react";
 import "./Carousel.css";
+import { useNavigate } from "react-router-dom";
 
 export default function Carousel({ title, movies }) {
   const sliderRef = useRef(null);
+  const navigate = useNavigate();
 
   const scrollLeft = () => {
     sliderRef.current.scrollBy({
@@ -51,7 +53,9 @@ const resetTilt = (e) => {
 
         <div className="carousel-slider" ref={sliderRef}>
           {movies.map((movie) => (
-            <div className="movie-card" key={movie.id} onMouseMove={(e) => handleTilt(e)} onMouseLeave={(e) => resetTilt(e)}>
+            <div onClick={() => navigate(`/filmek/${movie.id}`)}
+            style={{ cursor: "pointer" }} className="movie-card" key={movie.id} onMouseMove={(e) => handleTilt(e)} onMouseLeave={(e) => resetTilt(e)}>
+              
               <img
   loading="lazy"
   src={

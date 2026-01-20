@@ -1,9 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
-
 import HomePage from "./pages/HomePages.jsx";
 import Filmek from "./pages/MoviesPage.jsx";
 import Profil from "./pages/ProfilePage.jsx";
@@ -13,12 +11,10 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import MovieReview from "./pages/MovieReviewPage.jsx";
 import MovieSeen from "./pages/MoviesSeenPage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
-
 import { AuthProvider } from "./auth/AuthContext.jsx";
 import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import MoviePages from "./pages/MoviesPage.jsx";
 import MovieOpen from "./pages/MovieOpen.jsx";
-
 import SearchResults from "./components/SearchResults.jsx";
 
 function App() {
