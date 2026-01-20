@@ -7,7 +7,7 @@ export default function Hero() {
     <section className="hero">
       <img src={heroBg} alt="Hero háttér" className="hero-bg" />
 
-      <div className="hero-content">
+      <div className="home-hero-content">
         
 
         <h1>

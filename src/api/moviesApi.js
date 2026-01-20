@@ -31,4 +31,16 @@ export const getPopularMovies = async () => {
   const data = await res.json();
   return data.results;
 };
+export const getMovieById = async (movieId) => {
+  const res = await fetch(
+    `${BASE_URL}/movie/${movieId}?api_key=${TMDB_API_KEY}&language=hu-HU`
+  );
+
+  if (!res.ok) {
+    throw new Error("Nem sikerült lekérni a filmet");
+  }
+
+  return res.json();
+};
+
 
