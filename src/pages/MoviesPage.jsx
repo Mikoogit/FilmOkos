@@ -20,6 +20,13 @@ export default function MoviePages() {
     sort: "Sorrend",
   });
 
+  const [openMenus, setOpenMenus] = useState({
+    genre: false,
+    year: false,
+    rating: false,
+    sort: false,
+  });
+
   const [currentPage, setCurrentPage] = useState(1);
   const totalPages = 999;
 
@@ -38,9 +45,17 @@ export default function MoviePages() {
     fetchMovies();
   }, [currentPage]);
 
+  const toggleMenu = (type) => {
+    setOpenMenus((prev) => ({
+      ...prev,
+      [type]: !prev[type],
+    }));
+  };
+
   const handleFilterClick = (type, value) => {
     setActiveFilters((prev) => ({ ...prev, [type]: value }));
     setCurrentPage(1);
+    toggleMenu(type);
     // később ide jöhet az API hívás szűréssel
   };
 
@@ -53,19 +68,39 @@ export default function MoviePages() {
   return (
     <div className="movie-grid-wrapper">
       <div className="filter-bar">
-        {Object.entries(filters).map(([key, options]) => (
-          <div key={key} className="filter-group">
-            {options.map((opt) => (
+        {Object.entries(filters).map(([key, options]) => {
+          const typeKey = key.slice(0, -1);
+          const isOpen = openMenus[typeKey];
+          return (
+            <div key={key} className="filter-menu-wrapper">
               <button
-                key={opt}
-                className={activeFilters[key.slice(0, -1)] === opt ? "active" : ""}
-                onClick={() => handleFilterClick(key.slice(0, -1), opt)}
+                className="hamburger-button"
+                onClick={() => toggleMenu(typeKey)}
+                aria-expanded={isOpen}
               >
-                {opt}
+                <span className="hamburger-icon">
+                  <span></span>
+                  <span></span>
+                  <span></span>
+                </span>
+                <span className="filter-label">{options[0]}</span>
               </button>
-            ))}
-          </div>
-        ))}
+              {isOpen && (
+                <div className="filter-dropdown">
+                  {options.slice(1).map((opt) => (
+                    <button
+                      key={opt}
+                      className={`filter-option ${activeFilters[typeKey] === opt ? "active" : ""}`}
+                      onClick={() => handleFilterClick(typeKey, opt)}
+                    >
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              )}
+            </div>
+          );
+        })}
       </div>
 
       <div className="movie-grid">

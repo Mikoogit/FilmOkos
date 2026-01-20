@@ -11,32 +11,114 @@
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
-  gap: 10px;
+  gap: 15px;
+  flex-wrap: wrap;
 }
 
-.filter-group {
+.filter-menu-wrapper {
+  position: relative;
+}
+
+.hamburger-button {
   display: flex;
-  gap: 6px;
-}
-
-.filter-group button {
-  padding: 6px 14px;
-  border-radius: 12px;
-  border: none;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 2px solid #d9c58a;
   background-color: transparent;
   color: #d9c58a;
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
   transition: all 0.25s ease;
-  box-shadow: none;
 }
 
-.filter-group button.active,
-.filter-group button:hover {
+.hamburger-button:hover {
+  background-color: rgba(224, 201, 123, 0.1);
+  border-color: #e0c97b;
+}
+
+.hamburger-icon {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 18px;
+  height: 14px;
+}
+
+.hamburger-icon span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background-color: #d9c58a;
+  transition: all 0.3s ease;
+}
+
+.hamburger-button:hover .hamburger-icon span {
+  background-color: #e0c97b;
+}
+
+.filter-label {
+  white-space: nowrap;
+}
+
+.filter-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background-color: #1a1815;
+  border: 2px solid #d9c58a;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  min-width: 150px;
+  animation: slideDown 0.2s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-option {
+  display: block;
+  width: 100%;
+  padding: 10px 14px;
+  border: none;
+  background-color: transparent;
+  color: #d9c58a;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 13px;
+  transition: all 0.2s ease;
+  text-align: left;
+}
+
+.filter-option:first-child {
+  border-radius: 6px 6px 0 0;
+}
+
+.filter-option:last-child {
+  border-radius: 0 0 6px 6px;
+}
+
+.filter-option:hover {
+  background-color: rgba(224, 201, 123, 0.2);
+  color: #e0c97b;
+}
+
+.filter-option.active {
   background-color: #e0c97b;
   color: #120f0d;
-  box-shadow: 0 0 8px #e0c97b;
+  font-weight: 700;
 }
 
 /* Film rács */
