@@ -65,14 +65,15 @@
   display: flex;
   gap: 40px;
   margin-top: 40px;
-  margin-left: 100px;
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
 }
 
 /* Description */
 .description-box {
   background-color: #111111;
-  margin-left: 190px;
-  width: 300px;
+  width: 220px;
   border: 2px solid #caa24d;
   padding: 15px;
 }
@@ -87,22 +88,40 @@
   color: rgb(230, 229, 229);
 }
 /* Favorites */
+.favorites {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .favorites h2 {
   background: -webkit-linear-gradient(50deg,#C9A64D,#DED086,#C9A64D,#8C6B2F);
   -webkit-background-clip: text;
+  background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-left: 2%;
-  flex: 1;
+  text-align: center;
+  margin: 0;
+  width: 656px;
 }
 
 .movie-list {
-  display: flex;
-  gap: 15px;
+  display: grid;
+  grid-template-columns: repeat(7, 120px);
+  gap: 14px;
+  justify-content: center;
   margin: 20px 0;
 }
 
 .movie-list img {
+  width: 100%;
   border-radius: 6px;
+  box-shadow: 0 0 10px rgba(224, 201, 123, 0.6);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.movie-list img:hover {
+  transform: scale(1.05);
 }
 
 /* Stats */
@@ -121,10 +140,44 @@
   margin-top: 5px;
   font-size: 14px;
 }
-/* MOBILE FIRST alapok: 480px alatt */
-@media (max-width: 480px) {
+
+/* Responsive adjustments for movie grid */
+@media (max-width: 1200px) {
+  .movie-list {
+    grid-template-columns: repeat(6, 120px);
+  }
+}
+
+@media (max-width: 1000px) {
+  .movie-list {
+    grid-template-columns: repeat(5, 120px);
+  }
+}
+
+@media (max-width: 900px) {
+  .profile-content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .description-box {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .favorites {
+    width: 100%;
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(4, 120px);
+  }
+}
+
+@media (max-width: 800px) {
   .profile-page {
-    padding: 20px 15px;
+    padding: 30px 30px;
   }
 
   .profile-header {
@@ -146,6 +199,32 @@
   .profil-tabs {
     margin-left: 0;
     margin-right: 0;
+    gap: 20px;
+    flex-wrap: wrap;
+  }
+
+  .movie-list {
+    grid-template-columns: repeat(4, 110px);
+  }
+
+  .stats {
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+  }
+}
+
+@media (max-width: 600px) {
+  .profile-page {
+    padding: 20px 15px;
+  }
+
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .profil-tabs {
     gap: 15px;
     padding: 6px 0;
     flex-wrap: wrap;
@@ -174,15 +253,11 @@
   }
 
   .movie-list {
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 10px;
+    grid-template-columns: repeat(3, 100px);
   }
 
   .stats {
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
+    gap: 40px;
   }
 
   .stats h1 {
@@ -194,59 +269,19 @@
   }
 }
 
-/* TABLET: 481px - 768px */
-@media (max-width: 768px) and (min-width: 481px) {
-  .profile-page {
-    padding: 30px 40px;
-  }
-
-  .profile-header {
-    margin-left: 0;
-    gap: 12px;
-  }
-
-  .avatar {
-    width: 65px;
-    height: 65px;
-  }
-
-  .username {
-    font-size: 20px;
-  }
-
-  .profil-tabs {
-    margin-left: 0;
-    margin-right: 0;
-    gap: 20px;
-    padding: 7px 0;
-    flex-wrap: wrap;
-  }
-
-  .profil-tabs button {
-    padding: 5px 14px;
-    font-size: 0.9rem;
-  }
-
-  .profile-content {
-    flex-direction: column;
-    margin-left: 0;
-    gap: 25px;
-  }
-
-  .description-box {
-    margin-left: 0;
-    width: 100%;
-  }
-
+@media (max-width: 400px) {
   .movie-list {
-    justify-content: flex-start;
-    flex-wrap: wrap;
-    gap: 12px;
+    grid-template-columns: repeat(2, 90px);
   }
 
   .stats {
-    justify-content: flex-start;
-    gap: 50px;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .description-box {
+    max-width: 100%;
   }
 }
 

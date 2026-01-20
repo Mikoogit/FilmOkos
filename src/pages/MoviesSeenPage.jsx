@@ -64,9 +64,7 @@ export default function MovieSeen() {
         <img src="https://placehold.co/120x180" alt="movie" />
         <img src="https://placehold.co/120x180" alt="movie" />
         <img src="https://placehold.co/120x180" alt="movie" />
-      </div>
-
-      <div className="movie-list">
+        
         <img src="https://placehold.co/120x180" alt="movie" />
         <img src="https://placehold.co/120x180" alt="movie" />
         <img src="https://placehold.co/120x180" alt="movie" />
