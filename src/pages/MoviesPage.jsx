@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MoviePages.css";
-import { getPopularMovies } from "../api/moviesApi.js"; 
+import { getPopularMovies } from "../api/moviesApi.js";
 import { useNavigate } from "react-router-dom";
 
 
@@ -71,11 +71,11 @@ export default function MoviePages() {
       <div className="movie-grid">
         {movies.length > 0 ? (
           movies.map((movie) => (
-           <div
-  key={movie.id}
-  className="movie-card"
-  onClick={() => navigate(`/filmek/${movie.id}`)}
->
+            <div
+              key={movie.id}
+              className="movie-card"
+              onClick={() => navigate(`/filmek/${movie.id}`)}
+            >
 
               <img
                 loading="lazy"

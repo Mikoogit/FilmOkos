@@ -19,6 +19,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import MoviePages from "./pages/MoviesPage.jsx";
 import MovieOpen from "./pages/MovieOpen.jsx";
 
+import SearchResults from "./components/SearchResults.jsx";
 
 function App() {
   return (
@@ -32,13 +33,13 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/bejelentkezes" element={<Login />} />
           <Route path="/regisztracio" element={<RegisterPages />} />
-          <Route path="/filmek" element={<MoviePages/>}/>
+          <Route path="/filmek" element={<MoviePages />} />
           <Route path="/filmek/:movieId" element={<MovieOpen />} />
 
+          {/*ÚJ: TMDB keresés */}
+          <Route path="/search" element={<SearchResults />} />
 
           {/* USER + ADMIN ROUTES */}
-         
-
           <Route
             path="/profil"
             element={

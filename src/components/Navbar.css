@@ -226,20 +226,19 @@
   background: #ffea7a;
 
 }
-.nav-btn logout-btn desktop only{
-  position: absolute;
-  top: 80px;
-  right: 0;
-  background: #1a1a1a;
-  width: 200px;
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-  border-radius: 10px;
-  box-shadow: 0 0 15px rgba(219, 199, 126, 0.4);
-  z-index: 9999; 
-}
+.nav-btn.logout-btn{
+    background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+    color: black;
+    padding: 10px 18px;
+    border-radius: 6px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+  }
+  .nav-btn.logout-btn:hover{
+    background: #ffea7a;
+  
+  }
 .nav-btn.login-btn.desktop-only {
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   color: black;
