@@ -30,7 +30,7 @@
 
 
 /* SZÖVEG A KÉP FELETT */
-.hero-content {
+.home-hero-content {
   position: absolute;
   top: 35%; 
   transform: translateY(-50%);
@@ -44,13 +44,13 @@
 
 
 /* CÍM */
-.hero-content h1 {
+.home-hero-content h1 {
   font-size: 2.8rem;
   font-weight: 700;
   margin: 10px 0;
 }
 
-.hero-content h1 span {
+.home-hero-content h1 span {
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -58,7 +58,7 @@
 
 
 /* AL-CÍM */
-.hero-content p {
+.home-hero-content p {
   font-size: 1.4rem;
   margin-bottom: 10px;
 }

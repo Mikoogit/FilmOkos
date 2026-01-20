@@ -1,0 +1,231 @@
+* {
+  box-sizing: border-box;
+}
+/* ===== ALAP ===== */
+body {
+  background-color: #0d0d0d;
+}
+
+.movie-open-hero {
+  position: relative;
+  height: 80vh;
+  background-size: cover;
+  background-position: center;
+  color: white;
+}
+
+.hero-gradient {
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to right,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 40%,
+    rgba(0, 0, 0, 0.2) 100%
+  );
+}
+
+.hero-center {
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.75);
+  padding: 30px;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(6px);
+
+  overflow-wrap: anywhere;
+  word-break: break-word;
+}
+
+
+
+/* ===== BAL OLDAL (POSTER) ===== */
+.hero-left img.movie-poster {
+  width: 260px;
+  border-radius: 12px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.8);
+}
+
+.hero-content {
+  display: flex;
+  align-items: flex-start;
+  gap: 40px;
+
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 60px 20px;
+}
+
+
+.hero-center h1 {
+  font-size: 3rem;
+  margin-bottom: 10px;
+}
+
+.meta {
+  display: flex;
+  gap: 20px;
+  color: #cccccc;
+  font-size: 0.95rem;
+  margin-bottom: 10px;
+}
+
+.rating {
+  font-size: 1.3rem;
+  margin: 10px 0;
+}
+
+.color-dots {
+  display: flex;
+  gap: 10px;
+  margin: 10px 0 20px;
+}
+
+.dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+
+.dot.blue {
+  background-color: #1e90ff;
+}
+
+.dot.red {
+  background-color: #ff3b3b;
+}
+
+.dot.white {
+  background-color: #ffffff;
+}
+
+.overview-szoveg {
+  max-width: 600px;
+  line-height: 1.6;
+  color: #e0e0e0;
+}
+
+/* ===== JOBB OLDALI ÁRNYÉK ===== */
+.hero-right-shadow {
+  width: 120px;
+}
+
+/* ===== TARTALOM SZEKCIÓ ===== */
+.movie-open-content {
+  max-width: 1300px;
+  margin: 60px auto;
+  padding: 0 20px;
+  display: flex;
+  gap: 60px;
+  color: white;
+}
+
+/* ===== VÉLEMÉNYEK ===== */
+.reviews {
+  flex: 2;
+}
+
+.reviews h2 {
+  margin-bottom: 20px;
+}
+
+.review-box {
+  border: 1px solid #333;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #111;
+  margin-bottom: 10px;
+}
+
+.review-box strong {
+  display: block;
+  margin-bottom: 10px;
+  color: #ccc;
+}
+
+.textarea {
+  height: 100px;
+  border: 1px solid #444;
+  border-radius: 6px;
+  background-color: #0d0d0d;
+}
+
+.reviews p {
+  color: #aaa;
+  margin-top: 10px;
+}
+
+/* ===== KULCSSZAVAK ===== */
+.keywords {
+  flex: 1;
+}
+
+.keywords h3 {
+  margin-bottom: 15px;
+}
+
+.keywords ul {
+  list-style: none;
+  padding: 0;
+}
+
+.keywords li {
+  display: inline-block;
+  margin: 6px;
+  padding: 6px 12px;
+  border-radius: 20px;
+  background-color: #1a1a1a;
+  border: 1px solid #333;
+  font-size: 0.85rem;
+  color: #ddd;
+}
+
+/* ===== TRAILER ===== */
+.trailer-section {
+  max-width: 1300px;
+  margin: 60px auto;
+  padding: 0 20px;
+  color: white;
+}
+
+.trailer-video {
+  margin-top: 20px;
+  height: 450px;
+  background-color: #111;
+  border-radius: 12px;
+}
+
+/* ===== MÉDIA ===== */
+.media-section {
+  max-width: 1300px;
+  margin: 60px auto 100px;
+  padding: 0 20px;
+  color: white;
+}
+
+.media-gallery {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.media-gallery img,
+.media-gallery video {
+  width: 100%;
+  border-radius: 10px;
+  background-color: #111;
+}
+@media (max-width: 900px) {
+  .hero-content {
+    flex-direction: column;
+  }
+
+  .hero-center {
+    max-width: 100%;
+  }
+
+  .overview-szoveg {
+    max-width: 100%;
+  }
+}

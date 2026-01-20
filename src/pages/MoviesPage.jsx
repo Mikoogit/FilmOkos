@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
 import "../styles/MoviePages.css";
 import { getPopularMovies } from "../api/moviesApi.js"; 
+import { useNavigate } from "react-router-dom";
+
 
 const filters = {
   genres: ["Műfaj", "Akció", "Dráma", "Vígjáték"],
@@ -10,6 +12,7 @@ const filters = {
 };
 
 export default function MoviePages() {
+  const navigate = useNavigate();
   const [activeFilters, setActiveFilters] = useState({
     genre: "Műfaj",
     year: "Év",
@@ -45,7 +48,7 @@ export default function MoviePages() {
     setCurrentPage(page);
   };
 
-  const pagesToShow = [1, 2, 3, 4, "...", totalPages];
+  const pagesToShow = [1, 2, 3, "...", totalPages];
 
   return (
     <div className="movie-grid-wrapper">
@@ -68,7 +71,12 @@ export default function MoviePages() {
       <div className="movie-grid">
         {movies.length > 0 ? (
           movies.map((movie) => (
-            <div key={movie.id} className="movie-card">
+           <div
+  key={movie.id}
+  className="movie-card"
+  onClick={() => navigate(`/filmek/${movie.id}`)}
+>
+
               <img
                 loading="lazy"
                 src={
