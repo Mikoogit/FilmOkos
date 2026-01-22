@@ -11,7 +11,9 @@ Figma: https://www.figma.com/site/8hfh1aMpdKuxHnYUt9fjNZ/Untitled?node-id=0-1&t=
 ## Wireframe:
 
 Main page: https://wireframe.cc/uLJeLB
+
 All movies: https://wireframe.cc/uLHTqd
+
 Profile: https://wireframe.cc/rcgxOu
 
 * Seen: https://wireframe.cc/98Bjhg
