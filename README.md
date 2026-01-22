@@ -20,7 +20,7 @@ Profile: https://wireframe.cc/rcgxOu
 * Watchlist: https://wireframe.cc/1EPfsL
 * Reviews: https://wireframe.cc/qFDALM
 
-#Database
+## Database
 
 https://supabase.com/dashboard/org/yusafbifnrleghsjzxwy
 
