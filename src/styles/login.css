@@ -1,5 +1,5 @@
 .login-page {
-  min-height: 80svh;
+  min-height: 60svh;
   background-color: #121212;
   display: flex;
   justify-content: center;
@@ -104,7 +104,7 @@
   padding: 12px 40px 12px 12px;
   border-radius: 8px;
   border: 1px solid #444;
-  background: #111;
+  background: black;
   color: white;
   font-size: 1rem;
 }
@@ -123,6 +123,22 @@
 
 .toggle-password:hover {
   color: white;
-} 
+}
+input[type="password"]::-ms-reveal,
+input[type="password"]::-ms-clear {
+  display: none; 
+}
+
+input[type="password"]::-webkit-credentials-auto-fill-button {
+  display: none !important; 
+}
+
+input[type="password"]::-webkit-password-toggle-button {
+  display: none !important; 
+}
+
+
+
+
 
 
