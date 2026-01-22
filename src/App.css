@@ -33,3 +33,13 @@ body::-webkit-scrollbar {
 .skeleton {
   background-size: 400px 100%;
 }
+.fullscreen-loader {
+  position: fixed;
+  inset: 0;
+  background: radial-gradient(circle at center, #020203, #000);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  pointer-events: none; 
+}

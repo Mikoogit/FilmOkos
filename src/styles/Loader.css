@@ -1,0 +1,90 @@
+/* Loader wrapper */
+.loader {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.4rem;
+    animation: fadeIn 1s ease forwards;
+  }
+  
+  /* Reel container */
+  .reel {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: radial-gradient(circle, #2a2a2a 0 35%, #111 35% 100%);
+    box-shadow:
+      0 0 25px rgba(255,255,255,0.1),
+      inset 0 0 20px rgba(0,0,0,0.8);
+    position: relative;
+    animation: spin 1.4s linear infinite;
+  }
+  
+  /* Metallic shine */
+  .reel::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    background: conic-gradient(
+      from 0deg,
+      rgba(255,255,255,0.15),
+      rgba(255,255,255,0) 60deg,
+      rgba(255,255,255,0.15) 120deg,
+      rgba(255,255,255,0) 180deg,
+      rgba(255,255,255,0.15) 240deg,
+      rgba(255,255,255,0) 300deg,
+      rgba(255,255,255,0.15)
+    );
+    mix-blend-mode: screen;
+    pointer-events: none;
+  }
+  
+  /* Reel holes */
+  .hole {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: #000;
+    border-radius: 50%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow:
+      0 -45px 0 #000,
+      0 45px 0 #000,
+      45px 0 0 #000,
+      -45px 0 0 #000,
+      32px -32px 0 #000,
+      -32px -32px 0 #000,
+      32px 32px 0 #000,
+      -32px 32px 0 #000;
+  }
+  
+  /* Loading text */
+  .loading-text {
+    font-size: 1rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    opacity: 0.85;
+    animation: pulse 1.6s ease-in-out infinite;
+  }
+  
+  /* Animations */
+  @keyframes spin {
+    to { transform: rotate(360deg); }
+  }
+  
+  @keyframes pulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 1; }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.95); }
+    to { opacity: 1; transform: scale(1); }
+  }
+  
+
+  

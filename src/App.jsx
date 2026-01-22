@@ -17,10 +17,28 @@ import MoviePages from "./pages/MoviesPage.jsx";
 import MovieOpen from "./pages/MovieOpen.jsx";
 import SearchResults from "./components/SearchResults.jsx";
 
+import Loader from "./components/Loader.jsx";   
+import { useState, useEffect } from "react";    
+
 function App() {
+
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setLoading(false), 1500);
+    return () => clearTimeout(timer);
+  }, []);
+
   return (
     <AuthProvider>
       <BrowserRouter>
+        {/* Loader megjelenítése*/}
+        {loading && (
+          <div className="fullscreen-loader">
+            <Loader />
+          </div>
+        )}
+
         <Navbar />
 
         <Routes>
@@ -32,7 +50,7 @@ function App() {
           <Route path="/filmek" element={<MoviePages />} />
           <Route path="/filmek/:movieId" element={<MovieOpen />} />
 
-          {/*ÚJ: TMDB keresés */}
+          {/* ÚJ: TMDB keresés */}
           <Route path="/search" element={<SearchResults />} />
 
           {/* USER + ADMIN ROUTES */}
