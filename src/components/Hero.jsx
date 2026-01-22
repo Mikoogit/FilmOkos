@@ -10,8 +10,8 @@ export default function Hero() {
       <div className="home-hero-content">
         
 
-        <h1 className="udvozlo-szoveg">
-          Üdvözlünk a <span>FilmOkos</span>-on!
+        <h1 className="udvozlo-szoveg anim-typewriter">
+          Üdvözöljük a <span>FilmOkos</span>-on!
         </h1>
         <p className="udvozlo-leiras">A legjobb filmek, őszinte értékelésekkel!</p>
     <br />

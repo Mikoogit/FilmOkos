@@ -66,27 +66,40 @@
   background: #ffea7a;
 }
 
-/* Udovzlo Effectek*/
+/* Udvozlo Effectek */
+/* Udvozlo Effectek */
 .udvozlo-szoveg {
-  overflow: hidden; 
-  border-right: .15em solid white; 
-  white-space: nowrap; 
-  margin: 0 auto; 
-  animation: 
-    typing 3.5s steps(40, end),
-    blink-caret .75s step-end infinite;
+  overflow: hidden;
+  border-right: .15em solid white;
+  white-space: nowrap;
+  margin: 0 auto;
+  cursor: pointer;
+  display: inline-block;
 }
 
-@keyframes typing {
-  from { width: 0 }
-  to { width: 100% }
+/* Animation */
+.anim-typewriter {
+  animation: typewriter 10s steps(44) infinite,
+             blinkTextCursor 500ms steps(44) infinite;
+}
+
+/* Typewriter: 4s gépelés + 4s látható + 2s reset = 10s */
+@keyframes typewriter {
+  0% { width: 0; }
+  40% { width: 100%; }   /* 4s gépelés */
+  80% { width: 100%; }   /* 4s teljes szöveg látható */
+  100% { width: 0; }     /* reset */
+}
+
+/* Cursor villogás */
+@keyframes blinkTextCursor {
+  from { border-right-color: rgba(255,255,255,0.75); }
+  to { border-right-color: transparent; }
 }
 
 
-@keyframes blink-caret {
-  from, to { border-color: transparent }
-  100% { border-color: white; }
-}
+
+
 .udvozlo-leiras{
   font-size: 4rem;
   color: #fff;
