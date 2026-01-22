@@ -1,6 +1,6 @@
 /* NAVBAR */
 .navbar {
-  position: fixed;  /* sticky helyett fixed kell a scroll animációhoz */
+  position: sticky;  
   top: 0;
   left: 0;
   right: 0;
@@ -13,7 +13,7 @@
   justify-content: space-between;
   padding: 0 2rem;
   z-index: 9999;
-  transition: top 0.3s ease; /* ez kell a “jöjjön veled” animációhoz */
+  transition: top 0.3s ease; 
 }
 
 .line {
