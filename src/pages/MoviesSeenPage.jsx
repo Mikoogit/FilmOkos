@@ -37,7 +37,7 @@ export default function MovieSeen() {
 
         <button
           className={activeTab === "latott" ? "active" : ""}
-          onClick={() => handleTabClick("latott", "/latott")}
+          onClick={() => handleTabClick("latott", "/megnezve")}
         >
           Látott
         </button>
