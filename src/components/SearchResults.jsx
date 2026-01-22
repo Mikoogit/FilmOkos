@@ -1,7 +1,9 @@
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import { useSearchParams, Link } from "react-router-dom";
 import { GENRE_MAP } from "../genres/genreMap";
 import { fetchGenres } from "../genres/genreService";
+
+import "../styles/SearchResult.css";
 
 const API_KEY = "87eee4638866715a67d09c89be17ca69";
 
@@ -11,14 +13,17 @@ export default function SearchResults() {
 
   const [movies, setMovies] = useState([]);
   const [genres, setGenres] = useState({});
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
   const [page, setPage] = useState(1);
   const [hasMore, setHasMore] = useState(true);
+
+  const seenIdsRef = useRef(new Set());
+  const isFetchingRef = useRef(false);
 
   const isGenreSearch = GENRE_MAP.hasOwnProperty(query);
   const genreId = GENRE_MAP[query];
 
-  // Genre ID -> név visszafejtés
+  // 🎭 Műfajok
   useEffect(() => {
     async function loadGenres() {
       const list = await fetchGenres(API_KEY);
@@ -29,62 +34,83 @@ export default function SearchResults() {
     loadGenres();
   }, []);
 
-  // Filmek betöltése API-ból)
+  // 🎬 Fetch + filter + dedupe (LOCKOLT)
   const loadMovies = useCallback(async () => {
+    if (isFetchingRef.current || !hasMore) return;
+
+    isFetchingRef.current = true;
     setLoading(true);
 
-    let url = "";
-    if (isGenreSearch) {
-      url = `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}&language=hu-HU`;
-    } else {
-      url = `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
-        query
-      )}&page=${page}&language=hu-HU`;
+    const url = isGenreSearch
+      ? `https://api.themoviedb.org/3/discover/movie?api_key=${API_KEY}&with_genres=${genreId}&page=${page}&language=hu-HU`
+      : `https://api.themoviedb.org/3/search/movie?api_key=${API_KEY}&query=${encodeURIComponent(
+          query
+        )}&page=${page}&language=hu-HU`;
+
+    try {
+      const res = await fetch(url);
+      const data = await res.json();
+
+      if (!data.results?.length) {
+        setHasMore(false);
+        return;
+      }
+
+      const clean = [];
+
+      for (const movie of data.results) {
+        if (!movie.poster_path) continue;
+        if (seenIdsRef.current.has(movie.id)) continue;
+
+        seenIdsRef.current.add(movie.id);
+        clean.push(movie);
+      }
+
+      if (clean.length === 0) {
+        // ha az egész oldal kuka volt, próbáljuk a következőt
+        setPage((p) => p + 1);
+      } else {
+        setMovies((prev) => [...prev, ...clean]);
+      }
+    } finally {
+      isFetchingRef.current = false;
+      setLoading(false);
     }
+  }, [query, page, isGenreSearch, genreId, hasMore]);
 
-    const res = await fetch(url);
-    const data = await res.json();
-
-    if (data.results?.length) {
-      setMovies((prev) => [...prev, ...data.results]);
-    } else {
-      setHasMore(false);
-    }
-
-    setLoading(false);
-  }, [query, page, isGenreSearch, genreId]);
-
-  // Új keresés esetén reset
+  // 🔄 Új keresés = teljes reset
   useEffect(() => {
     setMovies([]);
     setPage(1);
     setHasMore(true);
+    seenIdsRef.current.clear();
   }, [query]);
 
-  // Betöltés page alapján
+  // ⬇️ Page change trigger
   useEffect(() => {
     loadMovies();
   }, [page, loadMovies]);
 
-  // Infinite scroll
+  // ♾️ Infinite scroll (STABIL)
   useEffect(() => {
     function handleScroll() {
       if (
         window.innerHeight + window.scrollY >=
-          document.body.offsetHeight - 300 &&
-        !loading &&
-        hasMore
+          document.body.offsetHeight - 400
       ) {
-        setPage((p) => p + 1);
+        if (!loading && hasMore && !isFetchingRef.current) {
+          setPage((p) => p + 1);
+        }
       }
     }
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, [loading, hasMore]);
 
-  if (!loading && movies.length === 0)
+  if (!loading && movies.length === 0) {
     return <p style={{ padding: "1rem" }}>Nincs találat</p>;
+  }
 
   return (
     <div style={{ padding: "1rem" }}>
@@ -92,80 +118,37 @@ export default function SearchResults() {
         Találatok erre: <em>{query}</em>
       </h2>
 
-      <div style={styles.grid}>
+      <div className="movie-grid">
         {movies.map((movie) => (
           <Link
             key={movie.id}
             to={`/filmek/${movie.id}`}
-            style={styles.card}
-            className="movie-card"
+            className="movie-kartya"
           >
             <img
-              src={
-                movie.poster_path
-                  ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-                  : "https://via.placeholder.com/300x450?text=Nincs+kép"
-              }
+              className="movie-poster"
+              src={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
               alt={movie.title}
-              style={styles.poster}
+              loading="lazy"
             />
 
             <h3>{movie.title}</h3>
             <p>Megjelenés: {movie.release_date?.slice(0, 4) || "N/A"}</p>
-
             <p>
               Műfajok:{" "}
-              {movie.genre_ids
-                ?.map((id) => genres[id] || id)
-                .join(", ")}
+              {movie.genre_ids?.map((id) => genres[id] || id).join(", ")}
             </p>
           </Link>
         ))}
       </div>
 
-      {/* Skeleton loader animáció */}
       {loading && (
-        <div style={styles.skeletonContainer}>
+        <div className="skeleton-container">
           {Array.from({ length: 6 }).map((_, i) => (
-            <div key={i} style={styles.skeletonCard} className="skeleton" />
+            <div key={i} className="skeleton" />
           ))}
         </div>
       )}
     </div>
   );
 }
-
-const styles = {
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-    gap: "1.5rem",
-  },
-  card: {
-    background: "#000000",
-    borderRadius: "12px",
-    padding: "1rem",
-    boxShadow: "0 4px 12px rgba(0,0,0,0.1)",
-    textAlign: "center",
-    textDecoration: "none",
-    color: "white",
-    transition: "transform 0.2s ease, box-shadow 0.2s ease",
-  },
-  poster: {
-    width: "100%",
-    borderRadius: "8px",
-    marginBottom: "0.5rem",
-  },
-  skeletonContainer: {
-    marginTop: "2rem",
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fill, minmax(220px, 1fr))",
-    gap: "1.5rem",
-  },
-  skeletonCard: {
-    height: "350px",
-    borderRadius: "12px",
-    background: "linear-gradient(90deg, #eee, #ddd, #eee)",
-    animation: "loading 1.5s infinite",
-  },
-};

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import "./Navbar.css";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -8,9 +8,37 @@ import { useAuth } from "../auth/AuthContext";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
+  const [showNavbar, setShowNavbar] = useState(true); // Scroll animáció
   const navigate = useNavigate();
-
   const { role, isAuthenticated, logout } = useAuth();
+
+  // Scroll logika
+  useEffect(() => {
+    let lastScrollY = 0;
+
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > lastScrollY && currentScrollY > 50) {
+        // Lefelé scroll → navbar eltűnik
+        setShowNavbar(false);
+      } else {
+        // Felfelé scroll → navbar visszajön
+        setShowNavbar(true);
+      }
+
+      lastScrollY = currentScrollY;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navbarStyle = {
+    top: showNavbar ? "0" : "-80px", // navbar magassága + buffer
+    transition: "top 0.3s ease"
+  };
 
   const handleSearchSubmit = (e) => {
     e.preventDefault();
@@ -23,8 +51,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="navbar">
-
+      <nav className="navbar" style={navbarStyle}>
         {/* LOGO */}
         <div className="navbar-logo">
           <Link to="/">
@@ -34,7 +61,6 @@ export default function Navbar() {
 
         {/* RIGHT SIDE (SEARCH + LOGIN/LOGOUT + HAMBURGER) */}
         <div className="navbar-right">
-
           {/* SEARCH */}
           <form className="navbar-search" onSubmit={handleSearchSubmit}>
             <input
@@ -72,7 +98,6 @@ export default function Navbar() {
         {/* MOBILE MENU */}
         {menuOpen && (
           <div className="mobile-menu">
-
             {/* MOBILE SEARCH */}
             <form className="mobile-search" onSubmit={handleSearchSubmit}>
               <input

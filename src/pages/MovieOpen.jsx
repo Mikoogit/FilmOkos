@@ -128,7 +128,7 @@ return (
 </section>
 
 <section className="image-section">
-  <h3>Képek/Videók</h3>
+  <h3>Média:</h3>
   <div className="media-gallery">
     
     {images.slice(0, 6).map((img) => (
