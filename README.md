@@ -20,14 +20,14 @@ Profile: https://wireframe.cc/rcgxOu
 * Watchlist: https://wireframe.cc/1EPfsL
 * Reviews: https://wireframe.cc/qFDALM
 
+## Database
+
+https://supabase.com/dashboard/org/yusafbifnrleghsjzxwy
+
 ## API Related
 
-
-The two potential APIs:
-
 * https://www.themoviedb.org/
-https://developer.themoviedb.org/reference/getting-started
-* https://www.omdbapi.com/
+* https://developer.themoviedb.org/reference/getting-started
 
 TMDB API ID:
 
@@ -42,8 +42,6 @@ TMDB API Key:
 
 * PLaceholder images: https://placehold.co/
 * UI/UX crash course: https://youtu.be/wIuVvCuiJhU?si=rOF2iVYj4LW0spF
-* Figma tutorial: https://www.youtube.com/watch?v=jQ1sfKIl50E
-* Better Figma tutorial: https://youtu.be/1pW_sk-2y40?si=tVg4F4noVoIkk0y
 * Realtime color visualizer: https://www.realtimecolors.com/
 * Bootstrap color themes: https://bootswatch.com/
 

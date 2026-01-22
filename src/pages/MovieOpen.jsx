@@ -131,7 +131,7 @@ return (
   <h3>Média:</h3>
   <div className="media-gallery">
     
-    {images.slice(0, 6).map((img) => (
+    {images.slice(0, 30).map((img) => (
       <img
         key={img.file_path}
         src={`https://image.tmdb.org/t/p/w300${img.file_path}`}
