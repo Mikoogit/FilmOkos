@@ -7,42 +7,44 @@ export default function Carousel({ title, movies }) {
   const navigate = useNavigate();
 
   const scrollLeft = () => {
-    sliderRef.current.scrollBy({
-      left: -6 * 220,
+    const slider = sliderRef.current;
+    slider.scrollBy({
+      left: -slider.clientWidth,
       behavior: "smooth",
     });
   };
 
   const scrollRight = () => {
-    sliderRef.current.scrollBy({
-      left: 6 * 220,
+    const slider = sliderRef.current;
+    slider.scrollBy({
+      left: slider.clientWidth,
       behavior: "smooth",
     });
   };
 
   const handleTilt = (e) => {
-  const card = e.currentTarget;
-  const rect = card.getBoundingClientRect();
-  const x = e.clientX - rect.left;
-  const y = e.clientY - rect.top;
+    const card = e.currentTarget;
+    const rect = card.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
 
-  const centerX = rect.width / 2;
-  const centerY = rect.height / 2;
+    const centerX = rect.width / 2;
+    const centerY = rect.height / 2;
 
-  const rotateX = ((y - centerY) / 20) * -1;
-  const rotateY = (x - centerX) / 20;
+    const rotateX = ((y - centerY) / 20) * -1;
+    const rotateY = (x - centerX) / 20;
 
-  card.style.transform = `
-    scale(1.08)
-    rotateX(${rotateX}deg)
-    rotateY(${rotateY}deg)
-  `;
-};
+    card.style.transform = `
+      scale(1.08)
+      rotateX(${rotateX}deg)
+      rotateY(${rotateY}deg)
+    `;
+  };
 
-const resetTilt = (e) => {
-  const card = e.currentTarget;
-  card.style.transform = "scale(1)";
-};
+  const resetTilt = (e) => {
+    const card = e.currentTarget;
+    card.style.transform = "scale(1)";
+  };
 
   return (
     <section className="carousel-section">
@@ -53,20 +55,23 @@ const resetTilt = (e) => {
 
         <div className="carousel-slider" ref={sliderRef}>
           {movies.map((movie) => (
-            <div onClick={() => navigate(`/filmek/${movie.id}`)}
-            style={{ cursor: "pointer" }} className="movie-card" key={movie.id} onMouseMove={(e) => handleTilt(e)} onMouseLeave={(e) => resetTilt(e)}>
-              
+            <div
+              key={movie.id}
+              className="movie-card"
+              onClick={() => navigate(`/filmek/${movie.id}`)}
+              onMouseMove={handleTilt}
+              onMouseLeave={resetTilt}
+              style={{ cursor: "pointer" }}
+            >
               <img
-  loading="lazy"
-  src={
-    
-    movie.poster_path
-      ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
-      : "/no-poster.png"
-  }
-  alt={movie.title}
-/>
-
+                loading="lazy"
+                src={
+                  movie.poster_path
+                    ? `https://image.tmdb.org/t/p/w300${movie.poster_path}`
+                    : "/no-poster.png"
+                }
+                alt={movie.title}
+              />
               <div className="movie-title">{movie.title}</div>
             </div>
           ))}

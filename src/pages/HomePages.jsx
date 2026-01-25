@@ -16,9 +16,37 @@ export default function HomePage() {
   const [upcomingMovies, setUpcomingMovies] = useState([]);
 
   useEffect(() => {
-    getWeeklyPopularMovies().then(data => setWeeklyMovies(data.slice(0, 6)));
-    getUpcomingMovies().then(data => setUpcomingMovies(data.slice(0, 6)));
-  }, []);
+  async function loadData() {
+    const popular = await getWeeklyPopularMovies();
+    const upcoming = await getUpcomingMovies();
+
+    // Normalizáló függvény: kisbetű, ékezet nélkül, whitespace nélkül
+    const normalize = (str) =>
+      str
+        ?.toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9]/g, "");
+
+    const filteredUpcoming = upcoming.filter((movie) => {
+      return !popular.some((p) => {
+        const sameId = p.id === movie.id;
+        const sameTitle = normalize(p.title) === normalize(movie.title);
+        const sameYear =
+          p.release_date?.slice(0, 4) === movie.release_date?.slice(0, 4);
+        // Ha azonos az ID, vagy ha azonos a cím és a megjelenési év, akkor duplikált
+        return sameId || (sameTitle && sameYear);
+      });
+    });
+
+    setWeeklyMovies(popular);
+    setUpcomingMovies(filteredUpcoming);
+  }
+
+  loadData();
+}, []);
+
+
 
   return (
     <>
