@@ -1,83 +1,159 @@
-/* ===== REVIEWS SECTION ===== */
+/* ===== MOVIE REVIEW FORM ===== */
 
-.reviews-section {
-  padding: 40px 0;
-  text-align: center;
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(219, 199, 126, 0.25);
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 700px;
+  margin: 2rem auto;
+  backdrop-filter: blur(4px);
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+  color: #ddd;
 }
 
-/* CÍM – GRADIENT SZÖVEG */
-.reviews-title {
-  font-size: 2rem;
+/* FORM CÍMEK */
+.card h2 {
+  font-size: 1.8rem;
   font-weight: 700;
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  margin-bottom: 30px;
+  margin-bottom: 1.5rem;
+  text-align: center;
 }
 
-/* ===== GRID (3×2) ===== */
-
-.reviews-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 25px;
-  width: 70%;
-  margin: 0 auto 40px auto;
-}
-
-/* ===== KÁRTYA ===== */
-
-.review-card {
-  background: transparent;
-  border-radius: 10px;
-  padding: 15px;
+/* FORM MEZŐK */
+.form-group {
+  margin-bottom: 1.2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  transition: 0.25s ease;
-  height: 100%;
 }
 
-/* POSZTER */
-.review-card img {
-  width: 100%;
-  height: 230px;
-  object-fit: contain;
-  border-radius: 8px;
-  margin-bottom: 10px;
+.form-group label {
+  font-weight: 600;
+  margin-bottom: 0.4rem;
+  color: #DBC77E;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 1rem;
+  background: #1f1f1f;
+  color: #f3f3f3;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  border-color: #DBC77E;
+  outline: none;
+}
+
+/* HIBAÜZENETEK */
+.error-text {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+/* GOMBOK */
+button.primary {
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  color: black;
+  padding: 0.7rem 1.4rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  cursor: pointer;
+  font-weight: 700;
+  transition: background 0.2s ease;
+}
+
+button.primary:hover {
+  background: #ffea7a;
+}
+
+button.primary:disabled {
+  background: #aaa;
+  cursor: not-allowed;
+}
+
+/* ===== REVIEW LISTA ===== */
+
+.review-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.review-item {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(219, 199, 126, 0.25);
+  border-radius: 10px;
+  padding: 1rem 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  backdrop-filter: blur(4px);
+}
+
+.review-main strong {
+  font-size: 1.1rem;
+  color: #DBC77E;
+}
+
+.review-date {
+  font-size: 0.85rem;
+  color: #999;
+  margin: 0.2rem 0 0.5rem 0;
+}
+
+.review-item p {
+  margin: 0.4rem 0 0 0;
+  line-height: 1.4;
+  color: #ccc;
 }
 
 /* CSILLAGOK */
-.review-rating {
-  font-size: 1.1rem;
+.review-main span {
   color: gold;
-  margin-bottom: 8px;
+  font-size: 1.1rem;
 }
 
-/* SZÖVEG – */
-.review-text {
-  font-size: 0.9rem;
-  color: #ccc;
-  text-align: center;
-  line-height: 1.3;
-  max-height: 2.6em;
-  overflow: hidden;
-}
-
-/* ===== GOMB ===== */
-
-.reviews-button {
-  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
-  color: black;
-  padding: 12px 25px;
+/* ADMIN TÖRLÉS GOMB */
+button.danger {
+  background: #b91c1c;
+  color: white;
   border: none;
-  border-radius: 8px;
-  font-weight: 700;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
   cursor: pointer;
-  transition: 0.25s ease;
-  text-decoration: none;
+  font-size: 0.85rem;
+  transition: background 0.2s ease;
 }
 
-.reviews-button:hover {
-  background: #ffea7a;
+button.danger:hover {
+  background: #dc2626;
+}
+
+button.small {
+  font-size: 0.85rem;
+  padding: 0.3rem 0.6rem;
+}
+
+/* RESZPONZÍV */
+@media (max-width: 600px) {
+  .review-item {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+
+  button.danger {
+    align-self: flex-end;
+  }
 }
