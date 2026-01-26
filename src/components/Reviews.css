@@ -62,7 +62,7 @@
 }
 
 /* GOMBOK */
-button.primary {
+button.primary-ertekel {
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   color: black;
   padding: 0.7rem 1.4rem;
@@ -74,11 +74,11 @@ button.primary {
   transition: background 0.2s ease;
 }
 
-button.primary:hover {
+button.primary-ertekel:hover {
   background: #ffea7a;
 }
 
-button.primary:disabled {
+button.primary-ertekel:disabled {
   background: #aaa;
   cursor: not-allowed;
 }

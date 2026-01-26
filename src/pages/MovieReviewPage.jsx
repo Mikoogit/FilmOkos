@@ -212,7 +212,7 @@ export default function MovieReview() {
 
         {submitError && <div className="error-text">{submitError}</div>}
 
-        <button type="submit" className="primary" disabled={submitting}>
+        <button type="submit" className="primary-ertekel" disabled={submitting}>
           {submitting ? "Mentés..." : "Értékelés elküldése"}
         </button>
       </form>
