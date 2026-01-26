@@ -3,8 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/HomePages.jsx";
-import Filmek from "./pages/MoviesPage.jsx";
-import Profil from "./pages/ProfilePage.jsx";
+import Profil from "./pages/Profilepage.jsx";
 import Login from "./pages/LoginPages.jsx";
 import RegisterPages from "./pages/RegisterPages.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -16,7 +15,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import MoviePages from "./pages/MoviesPage.jsx";
 import MovieOpen from "./pages/MovieOpen.jsx";
 import SearchResults from "./components/SearchResults.jsx";
-
+import Setup from "./pages/Setup.jsx";
 import Loader from "./components/Loader.jsx";   
 import { useState, useEffect } from "react";    
 
@@ -49,6 +48,8 @@ function App() {
           <Route path="/regisztracio" element={<RegisterPages />} />
           <Route path="/filmek" element={<MoviePages />} />
           <Route path="/filmek/:movieId" element={<MovieOpen />} />
+          <Route path="/setup" element={<Setup />} />
+
 
           {/* ÚJ: TMDB keresés */}
           <Route path="/search" element={<SearchResults />} />
