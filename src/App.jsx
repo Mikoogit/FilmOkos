@@ -1,9 +1,9 @@
 import "./App.css";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
 import Navbar from "./components/Navbar.jsx";
 import Footer from "./components/Footer.jsx";
 import HomePage from "./pages/HomePages.jsx";
-import Profil from "./pages/Profilepage.jsx";
+import Profil from "./pages/ProfilePage.jsx";
 import Login from "./pages/LoginPages.jsx";
 import RegisterPages from "./pages/RegisterPages.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
@@ -19,26 +19,25 @@ import Setup from "./pages/Setup.jsx";
 import Loader from "./components/Loader.jsx";   
 import { useState, useEffect } from "react";    
 
-function App() {
-
+function AppContent() {
+  const location = useLocation();
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const timer = setTimeout(() => setLoading(false), 2500);
+    setLoading(true);
+    const timer = setTimeout(() => setLoading(false), 1500);
     return () => clearTimeout(timer);
-  }, []);
+  }, [location.pathname]);
 
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        {/* Loader megjelenítése*/}
-        {loading && (
-          <div className="fullscreen-loader">
-            <Loader />
-          </div>
-        )}
+    <>
+      {loading && (
+        <div className="fullscreen-loader">
+          <Loader />
+        </div>
+      )}
 
-        <Navbar />
+      <Navbar />
 
         <Routes>
 
@@ -54,49 +53,55 @@ function App() {
           {/* ÚJ: TMDB keresés */}
           <Route path="/search" element={<SearchResults />} />
 
-          {/* USER + ADMIN ROUTES */}
-          <Route
-            path="/profil"
-            element={
-              <ProtectedRoute allowedRoles={["user", "admin"]}>
-                <Profil />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/profil"
+          element={
+            <ProtectedRoute allowedRoles={["user", "admin"]}>
+              <Profil />
+            </ProtectedRoute>
+          }
+        />
 
-          <Route
-            path="/ertekelesek"
-            element={
-              <ProtectedRoute allowedRoles={["user", "admin"]}>
-                <MovieReview />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/ertekelesek"
+          element={
+            <ProtectedRoute allowedRoles={["user", "admin"]}>
+              <MovieReview />
+            </ProtectedRoute>
+          }
+        />
 
-          <Route
-            path="/megnezve"
-            element={
-              <ProtectedRoute allowedRoles={["user", "admin"]}>
-                <MovieSeen />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/megnezve"
+          element={
+            <ProtectedRoute allowedRoles={["user", "admin"]}>
+              <MovieSeen />
+            </ProtectedRoute>
+          }
+        />
 
-          {/* ADMIN ONLY ROUTE */}
-          <Route
-            path="/admin"
-            element={
-              <ProtectedRoute allowedRoles={["admin"]}>
-                <AdminPage />
-              </ProtectedRoute>
-            }
-          />
+        <Route
+          path="/admin"
+          element={
+            <ProtectedRoute allowedRoles={["admin"]}>
+              <AdminPage />
+            </ProtectedRoute>
+          }
+        />
 
-          {/* 404 */}
-          <Route path="*" element={<ErrorPage />} />
-        </Routes>
+        <Route path="*" element={<ErrorPage />} />
+      </Routes>
 
-        <Footer />
+      <Footer />
+    </>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <BrowserRouter>
+        <AppContent />
       </BrowserRouter>
     </AuthProvider>
   );
