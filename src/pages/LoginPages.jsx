@@ -17,25 +17,12 @@ export default function LoginPages() {
     setErrMsg("");
 
     try {
-      const res = await fetch("http://localhost:3000/api/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email, password }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        setErrMsg(err.error || "Hibás email vagy jelszó");
-        return;
-      }
-
-      const data = await res.json();
-
-      login(data);
+      await login(email, password);   // <-- SUPABASE LOGIN
       navigate("/profil");
 
     } catch (err) {
-      setErrMsg("Szerver hiba");
+      console.error(err);
+      setErrMsg("Hibás email vagy jelszó");
     }
   };
 
@@ -57,8 +44,6 @@ export default function LoginPages() {
             required
           />
 
-
-          {/* PASSWORD INPUT WITH TOGGLE */}
           <div className="input-group">
             <input
               id="password"
@@ -74,7 +59,6 @@ export default function LoginPages() {
               onClick={() => setShowPassword(!showPassword)}
             >
               {showPassword ? "🙈" : "👁️"}
-
             </span>
           </div>
 
@@ -88,7 +72,6 @@ export default function LoginPages() {
         <Link className="register-btn" to="/regisztracio">
           Regisztráció
         </Link>
-        
       </div>
     </section>
   );

@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { supabase } from '../db/supaBaseClient';
 
 export function AdminLogin({ onLogin, onLogout, isLoggedIn }) {
-  const [email, setEmail] = useState('admin@example.com');
+  const [email, setEmail] = useState('admin@admin.com');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);

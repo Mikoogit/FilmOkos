@@ -6,12 +6,7 @@ import fetch from "node-fetch"; // Node fetch kell a REST híváshoz
 
 dotenv.config();
 
-console.log("ENV CHECK ↓↓↓");
-console.log("SUPABASE_URL =", process.env.SUPABASE_URL);
-console.log(
-  "SERVICE ROLE KEY PREFIX =",
-  process.env.SUPABASE_SERVICE_ROLE_KEY?.slice(0, 30)
-);
+
 
 const app = express();
 app.use(cors());

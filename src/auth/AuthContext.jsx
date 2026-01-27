@@ -1,41 +1,59 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { supabase } from "../db/supaBaseClient";
 
 const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState("guest");
+  const [role, setRole] = useState("guest"); // <-- szerepkör tárolása
 
   useEffect(() => {
-    const stored = localStorage.getItem("auth");
-    if (stored) {
-      try {
-        const parsed = JSON.parse(stored);
-        setUser(parsed.user);
-        setRole(parsed.user.role);
-      } catch {
-        localStorage.removeItem("auth");
+    // Betöltjük a session-t induláskor
+    supabase.auth.getSession().then(({ data }) => {
+      const u = data.session?.user || null;
+      setUser(u);
+      setRole(u?.user_metadata?.role || "guest"); // <-- szerepkör beállítása
+    });
+
+    // Figyeljük a Supabase auth változásokat
+    const { data: listener } = supabase.auth.onAuthStateChange(
+      (_event, session) => {
+        const u = session?.user || null;
+        setUser(u);
+        setRole(u?.user_metadata?.role || "guest"); // <-- szerepkör frissítése
       }
-    }
+    );
+
+    return () => listener.subscription.unsubscribe();
   }, []);
 
-  const login = (data) => {
-    localStorage.setItem("auth", JSON.stringify(data));
-    setUser(data.user);
-    setRole(data.user.role);
+  const login = async (email, password) => {
+    const { data, error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
+    });
+
+    if (error) throw error;
+
+    // sikeres login után beállítjuk a usert és a szerepkört
+    const u = data.user;
+    setUser(u);
+    setRole(u?.user_metadata?.role || "guest");
+
+    return data;
   };
 
-  const logout = () => {
-    localStorage.removeItem("auth");
+  const logout = async () => {
+    await supabase.auth.signOut();
     setUser(null);
-    setRole("guest");
+    setRole("guest"); // <-- visszaállítjuk vendégre
   };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        role,
+        role,               // <-- szerepkör átadása
         isAuthenticated: !!user,
         login,
         logout,

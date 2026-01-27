@@ -1,90 +1,95 @@
-/* ===== MOVIE REVIEW FORM ===== */
-
+/* --- KÁRTYA KERET --- */
 .card {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(219, 199, 126, 0.25);
-  border-radius: 12px;
+  background: #1c1c1c;
   padding: 2rem;
-  max-width: 700px;
-  margin: 2rem auto;
-  backdrop-filter: blur(4px);
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
-  color: #ddd;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 0 20px rgba(0,0,0,0.4);
+  margin-bottom: 3rem;
 }
 
-/* FORM CÍMEK */
+/* --- CÍM --- */
 .card h2 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
   margin-bottom: 1.5rem;
-  text-align: center;
+  font-size: 1.8rem;
+  font-weight: 600;
 }
 
-/* FORM MEZŐK */
+/* --- FORM --- */
 .form-group {
   margin-bottom: 1.2rem;
-  display: flex;
-  flex-direction: column;
 }
 
 .form-group label {
-  font-weight: 600;
+  display: block;
   margin-bottom: 0.4rem;
-  color: #DBC77E;
+  font-weight: 500;
 }
 
 .form-group input,
 .form-group select,
 .form-group textarea {
-  padding: 0.6rem 0.8rem;
-  border: 1px solid #d1d5db;
-  border-radius: 6px;
+  width: 100%;
+  padding: 0.7rem;
+  border-radius: 8px;
+  border: 1px solid #444;
+  background: #2a2a2a;
+  color: white;
   font-size: 1rem;
-  background: #1f1f1f;
-  color: #f3f3f3;
+  transition: border 0.2s ease;
 }
 
 .form-group input:focus,
 .form-group select:focus,
 .form-group textarea:focus {
-  border-color: #DBC77E;
+  border-color: #f59e0b;
   outline: none;
 }
 
-/* HIBAÜZENETEK */
+/* --- HIBAÜZENETEK --- */
 .error-text {
-  color: #dc2626;
-  font-size: 0.9rem;
+  color: #ff6b6b;
   margin-top: 0.3rem;
+  font-size: 0.9rem;
 }
 
-/* GOMBOK */
-button.primary-ertekel {
-  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+/* --- GOMBOK --- */
+.elkuld button {
+  background: #f59e0b;
   color: black;
-  padding: 0.7rem 1.4rem;
+  padding: 0.6rem;
+  margin: 20px;
+  border-radius: 8px;
   border: none;
-  border-radius: 6px;
-  font-size: 1rem;
+  font-weight: 600;
   cursor: pointer;
-  font-weight: 700;
   transition: background 0.2s ease;
 }
 
-button.primary-ertekel:hover {
-  background: #ffea7a;
+.elkuld button:hover {
+  background: #ffb733;
 }
 
-button.primary-ertekel:disabled {
-  background: #aaa;
-  cursor: not-allowed;
+button.danger {
+  background: #d9534f;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+  font-size: 0.9rem;
 }
 
-/* ===== REVIEW LISTA ===== */
+button.danger:hover {
+  background: #e46a66;
+}
 
+button.small {
+  padding: 0.3rem 0.6rem;
+  font-size: 0.8rem;
+}
+
+/* --- REVIEW LISTA --- */
 .review-list {
   display: flex;
   flex-direction: column;
@@ -92,68 +97,89 @@ button.primary-ertekel:disabled {
 }
 
 .review-item {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid rgba(219, 199, 126, 0.25);
+  background: #2a2a2a;
+  padding: 1.2rem;
   border-radius: 10px;
-  padding: 1rem 1.2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  backdrop-filter: blur(4px);
+  border-left: 4px solid #f59e0b;
+  position: relative;
 }
 
 .review-main strong {
   font-size: 1.1rem;
-  color: #DBC77E;
 }
 
 .review-date {
   font-size: 0.85rem;
-  color: #999;
-  margin: 0.2rem 0 0.5rem 0;
+  color: #bbbbbb;
+  margin-bottom: 0.5rem;
 }
 
-.review-item p {
-  margin: 0.4rem 0 0 0;
-  line-height: 1.4;
-  color: #ccc;
+/* --- REVIEW ACTIONS (Szerkesztés / Törlés) --- */
+.review-actions {
+  margin-top: 0.8rem;
+  display: flex;
+  gap: 0.6rem;
 }
 
-/* CSILLAGOK */
-.review-main span {
-  color: gold;
-  font-size: 1.1rem;
-}
-
-/* ADMIN TÖRLÉS GOMB */
-button.danger {
-  background: #b91c1c;
-  color: white;
+.review-actions button {
+  background: #444;
   border: none;
   padding: 0.4rem 0.8rem;
   border-radius: 6px;
+  color: white;
   cursor: pointer;
   font-size: 0.85rem;
-  transition: background 0.2s ease;
 }
-
-button.danger:hover {
-  background: #dc2626;
-}
-
-button.small {
+.torles button {
+  background: red;
+  border: none;
+  padding: 0.4rem 0.8rem;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
   font-size: 0.85rem;
-  padding: 0.3rem 0.6rem;
 }
 
-/* RESZPONZÍV */
+.review-actions button:hover {
+  background: #f59e0b;
+  
+}
+.torles button:hover {
+  background: #ff4c4c;
+  
+}
+
+/* --- EDIT MODE --- */
+.review-item textarea {
+  width: 100%;
+  background: #1f1f1f;
+  border: 1px solid #444;
+  border-radius: 8px;
+  padding: 0.6rem;
+  color: white;
+  margin-top: 0.6rem;
+}
+
+.review-item select {
+  background: #1f1f1f;
+  border: 1px solid #444;
+  color: white;
+  padding: 0.4rem;
+  border-radius: 6px;
+  margin-top: 0.6rem;
+}
+
+/* --- MOBIL RESPONSIVE --- */
 @media (max-width: 600px) {
-  .review-item {
-    flex-direction: column;
-    gap: 0.8rem;
+  .card {
+    padding: 1.2rem;
   }
 
-  button.danger {
-    align-self: flex-end;
+  .review-item {
+    padding: 1rem;
+  }
+
+  button.primary-ertekel {
+    width: 100%;
   }
 }

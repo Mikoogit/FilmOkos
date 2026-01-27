@@ -3,35 +3,28 @@ import { supabase } from "../db/supaBaseClient";
 import { useAuth } from "../auth/AuthContext.jsx";
 import "../components/Reviews.css";
 
+export default function MovieReview({ filmId }) {
+  const { user, role } = useAuth();
+  const isAdmin = role === "admin";
 
-export default function MovieReview() {
-  const { user } = useAuth();
-  const isAdmin = user?.role === "admin";
-
-  // -----------------------------
-  // FORM STATE
-  // -----------------------------
   const [form, setForm] = useState({
     name: "",
     rating: "5",
     comment: "",
   });
 
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({ rating: "5", comment: "" });
+
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
 
-  // -----------------------------
-  // LISTA STATE
-  // -----------------------------
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
 
-  // -----------------------------
-  // VALIDÁCIÓ
-  // -----------------------------
   const validate = () => {
     const newErrors = {};
 
@@ -52,12 +45,14 @@ export default function MovieReview() {
     return Object.keys(newErrors).length === 0;
   };
 
-  // -----------------------------
-  // FORM SUBMIT
-  // -----------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError(null);
+
+    if (!user) {
+      setSubmitError("Be kell jelentkezned az értékeléshez.");
+      return;
+    }
 
     if (!validate()) return;
 
@@ -65,15 +60,13 @@ export default function MovieReview() {
 
     const ratingNumber = Number(form.rating);
 
-    const { data, error } = await supabase
-      .from("reviews")
-      .insert({
-        name: form.name.trim(),
-        rating: ratingNumber,
-        comment: form.comment.trim(),
-      })
-      .select()
-      .single();
+    const { error } = await supabase.from("reviews").insert({
+      name: form.name.trim(),
+      rating: ratingNumber,
+      comment: form.comment.trim(),
+      film_api_id: filmId,
+      user_id: user.id,
+    });
 
     setSubmitting(false);
 
@@ -83,22 +76,69 @@ export default function MovieReview() {
       return;
     }
 
-    setForm({
-      name: "",
-      rating: "5",
-      comment: "",
+    setForm({ name: "", rating: "5", comment: "" });
+  };
+
+  const startEdit = (review) => {
+    setEditingId(review.id);
+    setEditForm({
+      rating: review.rating.toString(),
+      comment: review.comment,
     });
   };
 
-  // -----------------------------
-  // LISTA BETÖLTÉS
-  // -----------------------------
+  const saveEdit = async (id) => {
+    const ratingNumber = Number(editForm.rating);
+
+    const { error } = await supabase
+      .from("reviews")
+      .update({
+        rating: ratingNumber,
+        comment: editForm.comment.trim(),
+      })
+      .eq("id", id);
+
+    if (error) {
+      console.error(error);
+      alert("Nem sikerült frissíteni a véleményt.");
+      return;
+    }
+
+    setEditingId(null);
+  };
+
+  const handleDelete = async (id) => {
+    setDeleteError(null);
+
+    const { data: session } = await supabase.auth.getSession();
+    const userId = session?.session?.user?.id;
+
+    if (!userId) {
+      console.error("Nincs bejelentkezett user a Supabase session-ben.");
+      setDeleteError("Be kell jelentkezned a törléshez.");
+      return;
+    }
+
+    const { error } = await supabase
+      .from("reviews")
+      .delete()
+      .eq("id", id);
+
+    if (error) {
+      console.error("Supabase törlés hiba:", error);
+      setDeleteError("Nem sikerült törölni az értékelést.");
+      return;
+    }
+  };
+
   useEffect(() => {
     const fetchReviews = async () => {
       setLoading(true);
+
       const { data, error } = await supabase
         .from("reviews")
         .select("*")
+        .eq("film_api_id", filmId)
         .order("created_at", { ascending: false });
 
       if (error) {
@@ -112,28 +152,39 @@ export default function MovieReview() {
     };
 
     fetchReviews();
-  }, []);
+  }, [filmId]);
 
-  // -----------------------------
-  // REALTIME SUBSCRIPTION
-  // -----------------------------
+  // REALTIME FIX — filter helyett manuális szűrés
   useEffect(() => {
     const channel = supabase
-      .channel("public:reviews")
+      .channel(`reviews-${filmId}`)
       .on(
         "postgres_changes",
-        { event: "*", schema: "public", table: "reviews" },
+        {
+          event: "*",
+          schema: "public",
+          table: "reviews",
+        },
         (payload) => {
+          // Csak az adott filmhez tartozó review-kat kezeljük
+          const newFilmId = payload.new?.film_api_id;
+          const oldFilmId = payload.old?.film_api_id;
+
+          if (newFilmId !== filmId && oldFilmId !== filmId) return;
+
           setReviews((current) => {
             switch (payload.eventType) {
               case "INSERT":
                 return [payload.new, ...current];
+
               case "UPDATE":
                 return current.map((r) =>
                   r.id === payload.new.id ? payload.new : r
                 );
+
               case "DELETE":
                 return current.filter((r) => r.id !== payload.old.id);
+
               default:
                 return current;
             }
@@ -143,114 +194,137 @@ export default function MovieReview() {
       .subscribe();
 
     return () => supabase.removeChannel(channel);
-  }, []);
+  }, [filmId]);
 
-  // -----------------------------
-  // ADMIN TÖRLÉS
-  // -----------------------------
-  const handleDelete = async (id) => {
-    setDeleteError(null);
-
-    const { error } = await supabase.from("reviews").delete().eq("id", id);
-
-    if (error) {
-      console.error(error);
-      setDeleteError("Nem sikerült törölni az értékelést.");
-    }
-  };
-
-  // -----------------------------
-  // RENDER
-  // -----------------------------
   return (
     <div className="card">
       <h2>Értékelések</h2>
 
-      {/* FORM */}
-      <form onSubmit={handleSubmit} noValidate>
-        <div className="form-group">
-          <label htmlFor="name">Név</label>
-          <input
-            id="name"
-            type="text"
-            value={form.name}
-            onChange={(e) => setForm((f) => ({ ...f, name: e.target.value }))}
-            placeholder="Add meg a neved"
-          />
-          {errors.name && <div className="error-text">{errors.name}</div>}
-        </div>
+      {!user ? (
+        <p style={{ color: "#ccc", marginBottom: "1rem" }}>
+          Értékelés írásához be kell jelentkezned.
+        </p>
+      ) : (
+        <form onSubmit={handleSubmit} noValidate>
+          <div className="form-group">
+            <label>Név</label>
+            <input
+              type="text"
+              value={form.name}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, name: e.target.value }))
+              }
+            />
+            {errors.name && <div className="error-text">{errors.name}</div>}
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="rating">Értékelés (1–5)</label>
-          <select
-            id="rating"
-            value={form.rating}
-            onChange={(e) => setForm((f) => ({ ...f, rating: e.target.value }))}
-          >
-            <option value="1">1 - Nagyon rossz</option>
-            <option value="2">2 - Gyenge</option>
-            <option value="3">3 - Közepes</option>
-            <option value="4">4 - Jó</option>
-            <option value="5">5 - Kiváló</option>
-          </select>
-          {errors.rating && <div className="error-text">{errors.rating}</div>}
-        </div>
+          <div className="form-group">
+            <label>Értékelés</label>
+            <select
+              value={form.rating}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, rating: e.target.value }))
+              }
+            >
+              <option value="1">1 - Nagyon rossz</option>
+              <option value="2">2 - Gyenge</option>
+              <option value="3">3 - Közepes</option>
+              <option value="4">4 - Jó</option>
+              <option value="5">5 - Kiváló</option>
+            </select>
+          </div>
 
-        <div className="form-group">
-          <label htmlFor="comment">Vélemény</label>
-          <textarea
-            id="comment"
-            rows={4}
-            value={form.comment}
-            onChange={(e) =>
-              setForm((f) => ({ ...f, comment: e.target.value }))
-            }
-            placeholder="Írd le a tapasztalataidat..."
-          />
-          {errors.comment && <div className="error-text">{errors.comment}</div>}
-        </div>
+          <div className="form-group">
+            <label>Vélemény</label>
+            <textarea
+              rows={4}
+              value={form.comment}
+              onChange={(e) =>
+                setForm((f) => ({ ...f, comment: e.target.value }))
+              }
+            />
+          </div>
 
-        {submitError && <div className="error-text">{submitError}</div>}
+          {submitError && <div className="error-text">{submitError}</div>}
+          <div className="elkuld">
+          <button type="submit" disabled={submitting}>
+            {submitting ? "Mentés..." : "Értékelés elküldése"}
+          </button>
 
-        <button type="submit" className="primary-ertekel" disabled={submitting}>
-          {submitting ? "Mentés..." : "Értékelés elküldése"}
-        </button>
-      </form>
+          </div>
+        </form>
+      )}
 
-      <hr style={{ margin: "2rem 0" }} />
 
-      {/* LISTA */}
       {loading ? (
         <p>Betöltés...</p>
-      ) : loadError ? (
-        <p className="error-text">{loadError}</p>
       ) : reviews.length === 0 ? (
         <p>Még nincs értékelés.</p>
       ) : (
         <div className="review-list">
-          {reviews.map((review) => (
-            <div key={review.id} className="review-item">
-              <div className="review-main">
-                <strong>{review.name}</strong>{" "}
-                <span style={{ color: "#f59e0b" }}>
-                  {"★".repeat(review.rating)}
-                </span>
-                <div className="review-date">
-                  {new Date(review.created_at).toLocaleString()}
-                </div>
-                <p>{review.comment}</p>
-              </div>
+          {reviews.map((review) => {
+            const isOwner = review.user_id === user?.id;
 
-              {isAdmin && (
-                <button
-                  className="danger small"
-                  onClick={() => handleDelete(review.id)}
-                >
-                  Törlés
-                </button>
-              )}
-            </div>
-          ))}
+            return (
+              <div key={review.id} className="review-item">
+                {editingId === review.id ? (
+                  <>
+                    <strong>{review.name}</strong>
+
+                    <select
+                      value={editForm.rating}
+                      onChange={(e) =>
+                        setEditForm((f) => ({ ...f, rating: e.target.value }))
+                      }
+                    >
+                      <option value="1">1</option>
+                      <option value="2">2</option>
+                      <option value="3">3</option>
+                      <option value="4">4</option>
+                      <option value="5">5</option>
+                    </select>
+
+                    <textarea
+                      rows={3}
+                      value={editForm.comment}
+                      onChange={(e) =>
+                        setEditForm((f) => ({
+                          ...f,
+                          comment: e.target.value,
+                        }))
+                      }
+                    />
+
+                    <button onClick={() => saveEdit(review.id)}>Mentés</button>
+                    <button onClick={() => setEditingId(null)}>Mégse</button>
+                  </>
+                ) : (
+                  <>
+                    <strong>{review.name}</strong>{" "}
+                    <span style={{ color: "#f59e0b" }}>
+                      {"★".repeat(review.rating)}
+                    </span>
+                    <p>{review.comment}</p>
+
+                    {(isOwner || isAdmin) && (
+                      <div className="review-actions">
+                        {isOwner && (
+                          <button onClick={() => startEdit(review)}>
+                            Szerkesztés
+                          </button>
+                        )}
+                        <div className="torles">
+                        <button onClick={() => handleDelete(review.id)}>
+                          Törlés
+                        </button>
+                        </div>
+                      </div>
+                    )}
+                  </>
+                )}
+              </div>
+            );
+          })}
         </div>
       )}
 
