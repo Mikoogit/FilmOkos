@@ -7,33 +7,29 @@ export default function MovieReview({ filmId }) {
   const { user, role } = useAuth();
   const isAdmin = role === "admin";
 
-  const [form, setForm] = useState({
-    name: "",
-    rating: "5",
-    comment: "",
-  });
-
-  const [editingId, setEditingId] = useState(null);
-  const [editForm, setEditForm] = useState({ rating: "5", comment: "" });
-
+  const [form, setForm] = useState({ name: "", rating: "5", comment: "" });
   const [errors, setErrors] = useState({});
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState(null);
+
+  const [editingId, setEditingId] = useState(null);
+  const [editForm, setEditForm] = useState({ rating: "5", comment: "" });
 
   const [reviews, setReviews] = useState([]);
   const [loading, setLoading] = useState(true);
   const [loadError, setLoadError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
 
+  // -----------------------------
+  // VALIDÁCIÓ
+  // -----------------------------
   const validate = () => {
     const newErrors = {};
 
     if (!form.name.trim()) newErrors.name = "Név megadása kötelező.";
 
     const ratingNumber = Number(form.rating);
-    if (!form.rating || Number.isNaN(ratingNumber)) {
-      newErrors.rating = "Értékelés megadása kötelező.";
-    } else if (ratingNumber < 1 || ratingNumber > 5) {
+    if (!ratingNumber || ratingNumber < 1 || ratingNumber > 5) {
       newErrors.rating = "Az értékelésnek 1 és 5 között kell lennie.";
     }
 
@@ -45,6 +41,9 @@ export default function MovieReview({ filmId }) {
     return Object.keys(newErrors).length === 0;
   };
 
+  // -----------------------------
+  // ÚJ ÉRTÉKELÉS – INSTANT HOZZÁADÁS
+  // -----------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError(null);
@@ -56,29 +55,57 @@ export default function MovieReview({ filmId }) {
 
     if (!validate()) return;
 
-    setSubmitting(true);
+    const tempId = "temp-" + Math.random().toString(36).slice(2);
 
-    const ratingNumber = Number(form.rating);
-
-    const { error } = await supabase.from("reviews").insert({
+    const optimisticReview = {
+      id: tempId,
       name: form.name.trim(),
-      rating: ratingNumber,
+      rating: Number(form.rating),
       comment: form.comment.trim(),
       film_api_id: filmId,
       user_id: user.id,
-    });
+      created_at: new Date().toISOString(),
+    };
+
+    // INSTANT HOZZÁADÁS
+    setReviews((prev) => [optimisticReview, ...prev]);
+
+    const oldForm = form;
+    setForm({ name: "", rating: "5", comment: "" });
+    setSubmitting(true);
+
+    const { data, error } = await supabase
+      .from("reviews")
+      .insert({
+        name: optimisticReview.name,
+        rating: optimisticReview.rating,
+        comment: optimisticReview.comment,
+        film_api_id: filmId,
+        user_id: user.id,
+      })
+      .select()
+      .single();
 
     setSubmitting(false);
 
     if (error) {
       console.error(error);
-      setSubmitError("Hiba történt a mentés során. Próbáld újra.");
+      setSubmitError("Hiba történt a mentés során.");
+      // visszaállítjuk a listát
+      setReviews((prev) => prev.filter((r) => r.id !== tempId));
+      setForm(oldForm);
       return;
     }
 
-    setForm({ name: "", rating: "5", comment: "" });
+    // temp helyett a valódi DB rekord
+    setReviews((prev) =>
+      prev.map((r) => (r.id === tempId ? data : r))
+    );
   };
 
+  // -----------------------------
+  // SZERKESZTÉS – INSTANT UPDATE
+  // -----------------------------
   const startEdit = (review) => {
     setEditingId(review.id);
     setEditForm({
@@ -88,49 +115,51 @@ export default function MovieReview({ filmId }) {
   };
 
   const saveEdit = async (id) => {
-    const ratingNumber = Number(editForm.rating);
+    const updated = {
+      rating: Number(editForm.rating),
+      comment: editForm.comment.trim(),
+    };
+
+    // INSTANT UPDATE
+    setReviews((prev) =>
+      prev.map((r) => (r.id === id ? { ...r, ...updated } : r))
+    );
+
+    setEditingId(null);
 
     const { error } = await supabase
       .from("reviews")
-      .update({
-        rating: ratingNumber,
-        comment: editForm.comment.trim(),
-      })
+      .update(updated)
       .eq("id", id);
 
     if (error) {
       console.error(error);
       alert("Nem sikerült frissíteni a véleményt.");
-      return;
     }
-
-    setEditingId(null);
   };
 
+  // -----------------------------
+  // TÖRLÉS – INSTANT REMOVE
+  // -----------------------------
   const handleDelete = async (id) => {
     setDeleteError(null);
 
-    const { data: session } = await supabase.auth.getSession();
-    const userId = session?.session?.user?.id;
+    // INSTANT TÖRLÉS
+    const oldReviews = reviews;
+    setReviews((prev) => prev.filter((r) => r.id !== id));
 
-    if (!userId) {
-      console.error("Nincs bejelentkezett user a Supabase session-ben.");
-      setDeleteError("Be kell jelentkezned a törléshez.");
-      return;
-    }
-
-    const { error } = await supabase
-      .from("reviews")
-      .delete()
-      .eq("id", id);
+    const { error } = await supabase.from("reviews").delete().eq("id", id);
 
     if (error) {
-      console.error("Supabase törlés hiba:", error);
+      console.error(error);
       setDeleteError("Nem sikerült törölni az értékelést.");
-      return;
+      setReviews(oldReviews); // rollback
     }
   };
 
+  // -----------------------------
+  // LISTA BETÖLTÉSE
+  // -----------------------------
   useEffect(() => {
     const fetchReviews = async () => {
       setLoading(true);
@@ -154,19 +183,16 @@ export default function MovieReview({ filmId }) {
     fetchReviews();
   }, [filmId]);
 
-  // REALTIME FIX — filter helyett manuális szűrés
+  // -----------------------------
+  // REALTIME – mások változásaihoz
+  // -----------------------------
   useEffect(() => {
     const channel = supabase
       .channel(`reviews-${filmId}`)
       .on(
         "postgres_changes",
-        {
-          event: "*",
-          schema: "public",
-          table: "reviews",
-        },
+        { event: "*", schema: "public", table: "reviews" },
         (payload) => {
-          // Csak az adott filmhez tartozó review-kat kezeljük
           const newFilmId = payload.new?.film_api_id;
           const oldFilmId = payload.old?.film_api_id;
 
@@ -176,15 +202,12 @@ export default function MovieReview({ filmId }) {
             switch (payload.eventType) {
               case "INSERT":
                 return [payload.new, ...current];
-
               case "UPDATE":
                 return current.map((r) =>
                   r.id === payload.new.id ? payload.new : r
                 );
-
               case "DELETE":
                 return current.filter((r) => r.id !== payload.old.id);
-
               default:
                 return current;
             }
@@ -196,6 +219,9 @@ export default function MovieReview({ filmId }) {
     return () => supabase.removeChannel(channel);
   }, [filmId]);
 
+  // -----------------------------
+  // RENDER
+  // -----------------------------
   return (
     <div className="card">
       <h2>Értékelések</h2>
@@ -246,15 +272,14 @@ export default function MovieReview({ filmId }) {
           </div>
 
           {submitError && <div className="error-text">{submitError}</div>}
-          <div className="elkuld">
-          <button type="submit" disabled={submitting}>
-            {submitting ? "Mentés..." : "Értékelés elküldése"}
-          </button>
 
+          <div className="elkuld">
+            <button type="submit" disabled={submitting}>
+              {submitting ? "Mentés..." : "Értékelés elküldése"}
+            </button>
           </div>
         </form>
       )}
-
 
       {loading ? (
         <p>Betöltés...</p>
@@ -314,9 +339,9 @@ export default function MovieReview({ filmId }) {
                           </button>
                         )}
                         <div className="torles">
-                        <button onClick={() => handleDelete(review.id)}>
-                          Törlés
-                        </button>
+                          <button onClick={() => handleDelete(review.id)}>
+                            Törlés
+                          </button>
                         </div>
                       </div>
                     )}

@@ -25,7 +25,7 @@ function AppContent() {
 
   useEffect(() => {
     setLoading(true);
-    const timer = setTimeout(() => setLoading(false), 1500);
+    const timer = setTimeout(() => setLoading(false), 200);
     return () => clearTimeout(timer);
   }, [location.pathname]);
 
@@ -62,14 +62,14 @@ function AppContent() {
           }
         />
 
-        <Route
+        {/* <Route
           path="/ertekelesek"
           element={
             <ProtectedRoute allowedRoles={["user", "admin"]}>
               <MovieReview />
             </ProtectedRoute>
           }
-        />
+        /> */}
 
         <Route
           path="/megnezve"
