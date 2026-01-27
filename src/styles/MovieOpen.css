@@ -9,6 +9,14 @@ body {
   color: white;
   
 }
+.linkv-2{
+  color: white;
+  position: absolute;
+  padding-left: 20px;
+}
+a.linkv:hover, a.linkv-2:hover {
+  color: #e0c97b ;
+}
 .movie-open-hero {
   position: relative;
   height: 80vh;
