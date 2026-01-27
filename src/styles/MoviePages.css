@@ -82,6 +82,7 @@
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -124,7 +125,8 @@
 /* Film rács */
 .movie-grid {
   display: grid;
-  grid-template-columns: repeat(7, 150px); /* 8 items per row by default */
+  grid-template-columns: repeat(7, 180px);
+  /* 7 items per row by default */
   gap: 14px;
   justify-content: center;
 }
@@ -132,31 +134,36 @@
 /* Responsive adjustments */
 @media (max-width: 1200px) {
   .movie-grid {
-    grid-template-columns: repeat(6, 150px); /* 6 items per row */
+    grid-template-columns: repeat(6, );
+    /* 6 items per row */
   }
 }
 
 @media (max-width: 1000px) {
   .movie-grid {
-    grid-template-columns: repeat(5, 150px); /* 5 items per row */
+    grid-template-columns: repeat(5, 180px);
+    /* 5 items per row */
   }
 }
 
 @media (max-width: 800px) {
   .movie-grid {
-    grid-template-columns: repeat(4, 150px); /* 4 items per row */
+    grid-template-columns: repeat(4, 180px);
+    /* 4 items per row */
   }
 }
 
 @media (max-width: 600px) {
   .movie-grid {
-    grid-template-columns: repeat(3, 150px); /* 3 items per row */
+    grid-template-columns: repeat(3, 180px);
+    /* 3 items per row */
   }
 }
 
-@media (max-width: 400px) {
+@media (max-width: 1px) {
   .movie-grid {
-    grid-template-columns: repeat(2, 150px); /* 2 items per row */
+    grid-template-columns: repeat(2, 180px);
+    /* 2 items per row */
   }
 }
 
