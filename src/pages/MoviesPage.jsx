@@ -2,6 +2,7 @@
 import React, { useState, useEffect, useMemo } from "react";
 import { discoverMovies, getGenres } from "../api/moviesApi.js";
 import { useNavigate } from "react-router-dom";
+import "../styles/MoviePages.css";
 
 const staticFilters = {
   years: ["Év", "2026", "2025", "2024"],
@@ -102,34 +103,40 @@ export default function MoviesPage() {
   const handleFilterClick = (type, value) => {
     setActiveFilters((prev) => ({ ...prev, [type]: value }));
     setCurrentPage(1);
-    toggleMenu(type);
+    setOpenMenus((prev) => ({ ...prev, [type]: false }));
   };
 
   const handlePageChange = (page) => {
+    if (typeof page !== "number") return;
     if (page < 1 || page > totalPages || page === currentPage) return;
     setCurrentPage(page);
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const getPagesToShow = () => {
-    const last = totalPages;
-    const current = currentPage;
+  const getPagesToShow = (current, last) => {
     const pages = [];
     if (last <= 7) {
       for (let i = 1; i <= last; i++) pages.push(i);
-    } else {
-      pages.push(1);
-      if (current > 4) pages.push("...");
-      const start = Math.max(2, current - 1);
-      const end = Math.min(last - 1, current + 1);
-      for (let p = start; p <= end; p++) pages.push(p);
-      if (current < last - 3) pages.push("...");
-      pages.push(last);
+      return pages;
     }
+
+    pages.push(1);
+
+    const left = Math.max(2, current - 1);
+    const right = Math.min(last - 1, current + 1);
+
+    if (left > 2) pages.push("left-ellipsis");
+
+    for (let p = left; p <= right; p++) pages.push(p);
+
+    if (right < last - 1) pages.push("right-ellipsis");
+
+    pages.push(last);
+
     return pages;
   };
 
-  const pagesToShow = getPagesToShow();
+  const pagesToShow = getPagesToShow(currentPage, totalPages);
 
   // add fallback class to .poster if browser doesn't support aspect-ratio
   useEffect(() => {
@@ -138,9 +145,25 @@ export default function MoviesPage() {
     }
   }, [movies]);
 
+  // Close menus when clicking outside
+  useEffect(() => {
+    const onClick = (e) => {
+      const wrappers = document.querySelectorAll(".filter-menu-wrapper");
+      let inside = false;
+      wrappers.forEach((wr) => {
+        if (wr.contains(e.target)) inside = true;
+      });
+      if (!inside) {
+        setOpenMenus({ genre: false, year: false, rating: false, sort: false });
+      }
+    };
+    document.addEventListener("click", onClick);
+    return () => document.removeEventListener("click", onClick);
+  }, []);
+
   return (
     <div className="movie-grid-wrapper">
-      <div className="filter-bar">
+      <div className="filter-bar" role="toolbar" aria-label="Filters">
         {Object.entries(filters).map(([key, options]) => {
           const typeKey =
             key === "genres"
@@ -156,10 +179,15 @@ export default function MoviesPage() {
             <div key={key} className="filter-menu-wrapper">
               <button
                 className="hamburger-button"
-                onClick={() => toggleMenu(typeKey)}
+                onClick={(e) => {
+                  e.stopPropagation();
+                  toggleMenu(typeKey);
+                }}
                 aria-expanded={isOpen}
+                aria-haspopup="menu"
+                aria-controls={`filter-${typeKey}`}
               >
-                <span className="hamburger-icon">
+                <span className="hamburger-icon" aria-hidden>
                   <span></span>
                   <span></span>
                   <span></span>
@@ -167,18 +195,29 @@ export default function MoviesPage() {
                 <span className="filter-label">{label}</span>
               </button>
               {isOpen && (
-                <div className="filter-dropdown">
-                  {options.map((opt) => (
-                    <button
-                      key={opt}
-                      className={`filter-option ${
-                        activeFilters[typeKey] === opt ? "active" : ""
-                      }`}
-                      onClick={() => handleFilterClick(typeKey, opt)}
-                    >
-                      {opt}
-                    </button>
-                  ))}
+                <div
+                  id={`filter-${typeKey}`}
+                  className={`filter-dropdown open`}
+                  role="menu"
+                  aria-hidden={!isOpen}
+                >
+                  <div className="filter-options">
+                    {options.map((opt) => (
+                      <button
+                        key={opt}
+                        role="menuitem"
+                        className={`filter-option ${
+                          activeFilters[typeKey] === opt ? "active" : ""
+                        }`}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleFilterClick(typeKey, opt);
+                        }}
+                      >
+                        {opt}
+                      </button>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
@@ -186,7 +225,7 @@ export default function MoviesPage() {
         })}
       </div>
 
-      <div className="movie-grid">
+      <div className="movie-grid" role="list">
         {loading ? (
           <p>Betöltés…</p>
         ) : movies.length > 0 ? (
@@ -197,6 +236,9 @@ export default function MoviesPage() {
               onClick={() => navigate(`/filmek/${movie.id}`)}
               tabIndex={0}
               role="button"
+              onKeyDown={(e) => {
+                if (e.key === "Enter" || e.key === " ") navigate(`/filmek/${movie.id}`);
+              }}
             >
               <div className="poster">
                 <img
@@ -217,28 +259,37 @@ export default function MoviesPage() {
         )}
       </div>
 
-      <div className="pagination">
-        <button onClick={() => handlePageChange(currentPage - 1)} disabled={currentPage === 1}>
+      <div className="pagination" role="navigation" aria-label="Pagination">
+        <button
+          onClick={() => handlePageChange(currentPage - 1)}
+          disabled={currentPage === 1}
+          aria-label="Previous page"
+        >
           Prev
         </button>
+
         {pagesToShow.map((p, idx) =>
-          p === "..." ? (
-            <span key={idx} className="dots">
-              ...
+          p === "left-ellipsis" || p === "right-ellipsis" ? (
+            <span key={p + idx} className="dots" aria-hidden>
+              …
             </span>
           ) : (
             <button
               key={p}
               className={currentPage === p ? "active" : ""}
               onClick={() => handlePageChange(p)}
+              aria-current={currentPage === p ? "page" : undefined}
+              aria-label={`Page ${p}`}
             >
               {p}
             </button>
           )
         )}
+
         <button
           onClick={() => handlePageChange(currentPage + 1)}
           disabled={currentPage === totalPages}
+          aria-label="Next page"
         >
           Next
         </button>

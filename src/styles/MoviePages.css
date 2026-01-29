@@ -1,3 +1,9 @@
+/* MoviePages.css
+   Complete styles for movies grid, filter bar, dropdowns, pagination.
+   Make sure this file is imported in MoviesPage.jsx.
+*/
+
+/* Page wrapper */
 .movie-grid-wrapper {
   background-color: #120f0d;
   padding: 20px;
@@ -6,174 +12,243 @@
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Szűrő sáv */
+/* ----------------------
+   Filter bar & dropdown
+   ---------------------- */
 .filter-bar {
   margin-bottom: 15px;
   display: flex;
   justify-content: center;
-  gap: 15px;
+  gap: 12px;
   flex-wrap: wrap;
+  align-items: center;
 }
 
+/* Each menu container */
 .filter-menu-wrapper {
   position: relative;
+  z-index: 300; /* ensures dropdown sits above other content */
 }
 
+/* Trigger button */
 .hamburger-button {
-  display: flex;
+  display: inline-flex;
   align-items: center;
   gap: 8px;
   padding: 8px 12px;
   border-radius: 8px;
   border: 2px solid #d9c58a;
-  background-color: transparent;
+  background: transparent;
   color: #d9c58a;
   font-weight: 600;
   cursor: pointer;
   font-size: 14px;
-  transition: all 0.25s ease;
+  transition: background-color 0.18s ease, border-color 0.18s ease,
+    transform 0.08s ease;
 }
-
-.hamburger-button:hover {
-  background-color: rgba(224, 201, 123, 0.1);
+.hamburger-button:active { transform: translateY(1px); }
+.hamburger-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(224,201,123,0.12);
   border-color: #e0c97b;
 }
 
+/* Icon inside button */
 .hamburger-icon {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
-  gap: 4px;
+  gap: 3px;
   width: 18px;
   height: 14px;
 }
-
 .hamburger-icon span {
   display: block;
-  width: 100%;
   height: 2px;
-  background-color: #d9c58a;
-  transition: all 0.3s ease;
+  width: 100%;
+  background-color: currentColor;
+  opacity: 0.95;
+  border-radius: 1px;
 }
 
-.hamburger-button:hover .hamburger-icon span {
-  background-color: #e0c97b;
-}
-
+/* Label */
 .filter-label {
   white-space: nowrap;
 }
 
+/* Dropdown panel */
 .filter-dropdown {
   position: absolute;
-  top: 100%;
-  left: 0;
-  margin-top: 8px;
+  top: calc(100% + 10px);
+  left: 50%;
+  transform: translateX(-50%) translateY(6px);
+  min-width: 170px;
+  max-width: 320px;
   background-color: #1a1815;
   border: 2px solid #d9c58a;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5);
-  z-index: 100;
-  min-width: 150px;
-  animation: slideDown 0.2s ease;
+  border-radius: 10px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.18s ease, transform 0.18s ease;
+  will-change: opacity, transform;
 }
 
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+/* Visible state: add "open" class or set aria-hidden="false" */
+.filter-menu-wrapper .filter-dropdown.open,
+.filter-dropdown[aria-hidden="false"] {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateX(-50%) translateY(0);
 }
 
+/* Arrow (optional visual) */
+.filter-dropdown::before {
+  content: "";
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 14px;
+  height: 14px;
+  background: #1a1815;
+  border-left: 2px solid #d9c58a;
+  border-top: 2px solid #d9c58a;
+  transform: translateX(-50%) rotate(45deg);
+  border-radius: 2px;
+  box-shadow: -2px -2px 6px rgba(0,0,0,0.15);
+}
+
+/* Options container */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  padding: 6px;
+  gap: 6px;
+  max-height: 320px;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Option button */
 .filter-option {
   display: block;
   width: 100%;
-  padding: 10px 14px;
-  border: none;
-  background-color: transparent;
-  color: #d9c58a;
-  font-weight: 500;
-  cursor: pointer;
-  font-size: 13px;
-  transition: all 0.2s ease;
   text-align: left;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: transparent;
+  border: none;
+  color: #d9c58a;
+  font-weight: 600;
+  font-size: 13px;
+  cursor: pointer;
+  transition: background-color 0.14s ease, color 0.14s ease,
+    transform 0.06s ease;
 }
-
-.filter-option:first-child {
-  border-radius: 6px 6px 0 0;
-}
-
-.filter-option:last-child {
-  border-radius: 0 0 6px 6px;
-}
-
-.filter-option:hover {
-  background-color: rgba(224, 201, 123, 0.2);
+.filter-option:hover,
+.filter-option:focus {
+  background: rgba(224,201,123,0.12);
   color: #e0c97b;
+  outline: none;
 }
-
 .filter-option.active {
-  background-color: #e0c97b;
+  background: #e0c97b;
   color: #120f0d;
   font-weight: 700;
 }
 
-/* Film rács */
+/* Divider between groups (optional) */
+.filter-option + .filter-option {
+  border-top: 1px solid transparent;
+}
+
+/* Small-screen behavior: dropdown expands full width under the bar */
+@media (max-width: 640px) {
+  .filter-dropdown {
+    left: 0;
+    right: 0;
+    transform: translateX(0) translateY(6px);
+    min-width: auto;
+    border-radius: 8px;
+  }
+  .filter-dropdown::before { display: none; }
+}
+
+/* ----------------------
+   Movie grid & cards
+   ---------------------- */
 .movie-grid {
   display: grid;
   grid-template-columns: repeat(7, 180px);
-  /* 7 items per row by default */
   gap: 14px;
   justify-content: center;
 }
 
 /* Responsive adjustments */
+@media (max-width: 1400px) {
+  .movie-grid {
+    grid-template-columns: repeat(6, 180px);
+  }
+}
+
 @media (max-width: 1200px) {
   .movie-grid {
-    grid-template-columns: repeat(6, );
-    /* 6 items per row */
+    grid-template-columns: repeat(5, 180px);
   }
 }
 
 @media (max-width: 1000px) {
   .movie-grid {
-    grid-template-columns: repeat(5, 180px);
-    /* 5 items per row */
+    grid-template-columns: repeat(4, 180px);
   }
 }
 
 @media (max-width: 800px) {
   .movie-grid {
-    grid-template-columns: repeat(4, 180px);
-    /* 4 items per row */
+    grid-template-columns: repeat(3, 180px);
   }
 }
 
 @media (max-width: 600px) {
   .movie-grid {
-    grid-template-columns: repeat(3, 180px);
-    /* 3 items per row */
+    grid-template-columns: repeat(2, 160px);
   }
 }
 
-@media (max-width: 1px) {
+@media (max-width: 420px) {
   .movie-grid {
-    grid-template-columns: repeat(2, 180px);
-    /* 2 items per row */
+    grid-template-columns: repeat(2, 140px);
+    gap: 10px;
   }
 }
 
 .movie-card {
   width: 180px;
   cursor: pointer;
+  outline: none;
+}
+.movie-card:focus {
+  box-shadow: 0 0 0 4px rgba(224,201,123,0.08);
+  border-radius: 8px;
+}
+
+.poster {
+  aspect-ratio: 2 / 3; /* preferred; fallback handled below */
+  overflow: hidden;
+  border-radius: 6px;
+  background: linear-gradient(180deg, rgba(0,0,0,0.2), rgba(0,0,0,0.6));
+}
+
+.poster.fallback {
+  height: 270px; /* fallback if aspect-ratio unsupported */
 }
 
 .movie-card img {
   width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
   border-radius: 6px;
   box-shadow: 0 0 10px rgba(224, 201, 123, 0.6);
   transition: transform 0.3s ease;
@@ -192,7 +267,9 @@
   letter-spacing: 0.5px;
 }
 
-/* Lapozó */
+/* ----------------------
+   Pagination
+   ---------------------- */
 .pagination {
   margin-top: 28px;
   display: flex;
@@ -214,6 +291,11 @@
   box-shadow: none;
 }
 
+.pagination button[disabled] {
+  opacity: 0.35;
+  cursor: default;
+}
+
 .pagination button.active,
 .pagination button:hover {
   background-color: #e0c97b;
@@ -226,3 +308,45 @@
   opacity: 0.7;
   padding: 0 6px;
 }
+
+/* ----------------------
+   Misc & fixes
+   ---------------------- */
+
+/* If another stylesheet overrides colors, prefer current ones */
+.movie-grid-wrapper,
+.filter-bar,
+.filter-dropdown,
+.movie-card,
+.movie-title {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Add fallback class to .poster if browser doesn't support aspect-ratio
+   (Your React code adds .fallback; keep this rule) */
+.poster.fallback img {
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Accessibility helpers */
+.visually-hidden {
+  position: absolute !important;
+  height: 1px; width: 1px;
+  overflow: hidden;
+  clip: rect(1px, 1px, 1px, 1px);
+  white-space: nowrap;
+}
+
+/* Ensure dropdown scrollbars are styled lightly */
+.filter-options::-webkit-scrollbar {
+  width: 8px;
+}
+.filter-options::-webkit-scrollbar-thumb {
+  background: rgba(224,201,123,0.18);
+  border-radius: 6px;
+}
+
+/* Debugging helper: quickly show layout in development */
+/* .filter-bar { outline: 1px dashed rgba(255,0,0,0.08); } */
