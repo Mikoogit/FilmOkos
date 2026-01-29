@@ -1,68 +1,55 @@
-import React from "react";
-import "./Profile.css";
+import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
+import "../styles/Profile.css"
 
 const Profil = () => {
+  const { state } = useLocation();
+  const navigate = useNavigate();
+
+  const user = state?.user;
+  const token = state?.token;
+
+  const [profile, setProfile] = useState(null);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    if (!user || !token) {
+      navigate("/login");
+      return;
+    }
+
+    fetch(`http://localhost:3000/api/profile/${user.id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`
+      }
+    })
+      .then(res => res.json())
+      .then(data => {
+        setProfile(data.data);
+      })
+      .catch(() => setError("Nem sikerült betölteni a profilt"));
+  }, []);
+
+  if (error) return <p>{error}</p>;
+  if (!profile) return <p>Betöltés...</p>;
+
   return (
-    
     <div className="profil-page">
-      
-      {/* Profil fejléc */}
+
       <div className="profil-top">
         <img
-          src="https://i.imgur.com/0y0y0y0.png"
+          src={profile.avatar_url || "/default-avatar.png"}
           alt="avatar"
           className="avatar"
         />
-        <h2 className="username">fnaf_fan01</h2>
+        <h2 className="username">{profile.username}</h2>
       </div>
 
-      {/* Profil navigáció */}
-      <div className="profil-tabs">
-        <button className="active">Profil</button>
-        <button>Látott</button>
-        <button>Tervezett látni</button>
-        <button>Értékelések</button>
+      <div className="profil-desc">
+        <h3>Leírás</h3>
+        <p>{profile.bio || "Nincs leírás"}</p>
       </div>
 
-      {/* Tartalom */}
-      <div className="profil-content">
-        {/* Leírás */}
-        <div className="profil-desc">
-          <h3>Leírás</h3>
-          <p>
-            imadom a fnaf filmet <br />
-            it be the nightguard
-          </p>
-        </div>
-
-        {/* Kedvenc filmek */}
-        <div className="profil-main">
-          <h2>Kedvenc Filmjeim:</h2>
-
-          <div className="film-list">
-            {[1, 2, 3, 4, 5].map((film) => (
-              <img
-                key={film}
-                src="https://i.imgur.com/JhZKQnH.jpg"
-                alt="film"
-                className="film-poster"
-              />
-            ))}
-          </div>
-
-          {/* Statisztika */}
-          <div className="stats">
-            <div className="stat">
-              <h1>67</h1>
-              <p>Látott Filmek Száma</p>
-            </div>
-            <div className="stat">
-              <h1>13</h1>
-              <p>Megnézendő Filmek Száma</p>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   );
 };

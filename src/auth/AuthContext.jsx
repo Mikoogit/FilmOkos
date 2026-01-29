@@ -38,7 +38,12 @@ export function AuthProvider({ children }) {
     // sikeres login után beállítjuk a usert és a szerepkört
     const u = data.user;
     setUser(u);
-    setRole(u?.user_metadata?.role || "guest");
+    if (u) {
+  setRole(u.user_metadata?.role || "user");
+} else {
+  setRole("guest");
+}
+
 
     return data;
   };
