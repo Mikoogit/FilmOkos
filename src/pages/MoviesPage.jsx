@@ -6,7 +6,7 @@ import "../styles/MoviePages.css";
 
 const staticFilters = {
   years: ["Év", "2026", "2025", "2024"],
-  ratings: ["Értékelés", "5+", "4+", "3+"],
+  ratings: ["Értékelés", "90", "80", "70", "60", "50", "40"],
   sortBy: ["Sorrend", "Népszerűség", "Újdonság", "Értékelés"],
 };
 
@@ -16,10 +16,69 @@ const sortMap = {
   Értékelés: "vote_average.desc",
 };
 const ratingMap = {
-  "5+": 5,
-  "4+": 4,
-  "3+": 3,
+  "90": 90,
+  "80": 80,
+  "70": 70,
+  "60": 60,
+  "50": 50,
+  "40": 40,
+  "30": 30,
 };
+
+function EllipsisPageInput({ totalPages, onGoToPage }) {
+  const [editing, setEditing] = React.useState(false);
+  const [value, setValue] = React.useState("");
+
+  React.useEffect(() => {
+    if (!editing) setValue("");
+  }, [editing]);
+
+  const commit = () => {
+    const n = Number(value);
+    if (!Number.isFinite(n)) {
+      setEditing(false);
+      return;
+    }
+    const page = Math.max(1, Math.min(Math.floor(n), totalPages));
+    onGoToPage(page);
+    setEditing(false);
+  };
+
+  return editing ? (
+    <input
+      type="number"
+      className="page-input"
+      min={1}
+      max={totalPages}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
+      onKeyDown={(e) => {
+        if (e.key === "Enter") commit();
+        if (e.key === "Escape") setEditing(false);
+      }}
+      onBlur={commit}
+      aria-label="Go to page"
+      autoFocus
+      style={{ width: 64 }}
+    />
+  ) : (
+    <button
+      type="button"
+      className="dots"
+      aria-hidden="false"
+      onClick={(e) => {
+        e.stopPropagation();
+        setEditing(true);
+      }}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") setEditing(true);
+      }}
+      title="Ugrás oldalra"
+    >
+      …
+    </button>
+  );
+}
 
 export default function MoviesPage() {
   const navigate = useNavigate();
@@ -270,9 +329,11 @@ export default function MoviesPage() {
 
         {pagesToShow.map((p, idx) =>
           p === "left-ellipsis" || p === "right-ellipsis" ? (
-            <span key={p + idx} className="dots" aria-hidden>
-              …
-            </span>
+            <EllipsisPageInput
+              key={p + idx}
+              totalPages={totalPages}
+              onGoToPage={(num) => handlePageChange(num)}
+            />
           ) : (
             <button
               key={p}
