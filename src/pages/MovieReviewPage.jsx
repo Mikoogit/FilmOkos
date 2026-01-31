@@ -42,7 +42,7 @@ export default function MovieReview({ filmId }) {
   };
 
   // -----------------------------
-  // ÚJ ÉRTÉKELÉS – INSTANT HOZZÁADÁS
+  // ÚJ ÉRTÉKELÉS 
   // -----------------------------
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -67,7 +67,7 @@ export default function MovieReview({ filmId }) {
       created_at: new Date().toISOString(),
     };
 
-    // INSTANT HOZZÁADÁS
+    // HOZZÁADÁS
     setReviews((prev) => [optimisticReview, ...prev]);
 
     const oldForm = form;
@@ -104,7 +104,7 @@ export default function MovieReview({ filmId }) {
   };
 
   // -----------------------------
-  // SZERKESZTÉS – INSTANT UPDATE
+  // SZERKESZTÉS – UPDATE
   // -----------------------------
   const startEdit = (review) => {
     setEditingId(review.id);
@@ -120,7 +120,7 @@ export default function MovieReview({ filmId }) {
       comment: editForm.comment.trim(),
     };
 
-    // INSTANT UPDATE
+    // UPDATE
     setReviews((prev) =>
       prev.map((r) => (r.id === id ? { ...r, ...updated } : r))
     );
@@ -139,7 +139,7 @@ export default function MovieReview({ filmId }) {
   };
 
   // -----------------------------
-  // TÖRLÉS – INSTANT REMOVE
+  // TÖRLÉS 
   // -----------------------------
   const handleDelete = async (id) => {
     setDeleteError(null);

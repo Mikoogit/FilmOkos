@@ -1,27 +1,60 @@
-import "./Reviews.css";
-import { reviews } from "../reviews/reviews.js"; 
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { getMovieById } from "../api/moviesApi";
 import ReviewCard from "./ReviewCard";
+import "../styles/ReviewSection.css";
 
+export default function LatestReviews({ reviews = [] }) {
+  const [finalReviews, setFinalReviews] = useState([]);
+  const [movies, setMovies] = useState({});
 
-export default function ReviewsSection() {
-  const six = reviews.slice(0, 6);
+  useEffect(() => {
+    async function load() {
+      const goodReviews = [];
+      const movieMap = {};
+
+      for (const r of reviews) {
+        if (goodReviews.length >= 9) break;
+        if (!r.film_api_id) continue;
+
+        try {
+          const movie = await getMovieById(r.film_api_id);
+          movieMap[r.id] = movie;
+          goodReviews.push(r);
+        } catch (err) {
+          console.warn("TMDB fetch failed for:", r.film_api_id);
+        }
+      }
+
+      setMovies(movieMap);
+      setFinalReviews(goodReviews);
+    }
+
+    load();
+  }, [reviews]);
 
   return (
-    <section className="reviews-section">
-      <h2 className="reviews-title">Legújabb Értékelések</h2>
+    <section className="latest-reviews">
+      <h2>Legújabb Értékelések</h2>
 
-      <div className="reviews-grid">
-        {six.map((r) => (
-          <ReviewCard key={r.id} {...r} />
-        ))}
+      <div className="review-grid">
+        {finalReviews.map((review) => {
+          const movie = movies[review.id];
+          if (!movie) return null;
+
+          return (
+            <ReviewCard
+              key={review.id}
+              movieId={review.film_api_id}
+              poster={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
+              backdrop={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
+              rating={review.rating}
+              text={review.comment}
+            />
+          );
+        })}
       </div>
 
-      {/* <button className="reviews-button">Több Értékelés</button> */}
-      <Link to="/ertekelesek" className="reviews-button">Több értékelés</Link>
-
+      <button className="more-reviews-btn">Több Értékelés</button>
     </section>
   );
 }
-
-

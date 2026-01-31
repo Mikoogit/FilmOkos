@@ -67,7 +67,6 @@ export default function SearchResults() {
       }
 
       if (clean.length === 0) {
-        // ha az egész oldal kuka volt, próbáljuk a következőt
         setPage((p) => p + 1);
       } else {
         setMovies((prev) => [...prev, ...clean]);
@@ -78,7 +77,7 @@ export default function SearchResults() {
     }
   }, [query, page, isGenreSearch, genreId, hasMore]);
 
-  // 🔄 Új keresés = teljes reset
+  // Új keresés = teljes reset
   useEffect(() => {
     setMovies([]);
     setPage(1);
@@ -86,12 +85,12 @@ export default function SearchResults() {
     seenIdsRef.current.clear();
   }, [query]);
 
-  // ⬇️ Page change trigger
+  // Page change trigger
   useEffect(() => {
     loadMovies();
   }, [page, loadMovies]);
 
-  // ♾️ Infinite scroll (STABIL)
+  // Infinite scroll 
   useEffect(() => {
     function handleScroll() {
       if (

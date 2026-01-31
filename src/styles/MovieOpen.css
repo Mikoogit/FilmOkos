@@ -242,7 +242,7 @@ a.linkv:hover, a.linkv-2:hover {
 .trailer-video {
   width: 100%;
   height: 0;
-  padding-bottom: 56.25%; /* 16:9 aspect ratio */
+  padding-bottom: 56.25%; 
   position: relative;
 }
 
@@ -257,41 +257,37 @@ a.linkv:hover, a.linkv-2:hover {
 
 /* Ez a sötét háttér, ami lefedi az egész képernyőt */
 .lightbox {
-  position: fixed; /* Rögzítjük a képernyőhöz */
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.85); /* Átlátszó fekete háttér */
+  background-color: rgba(0, 0, 0, 0.85); 
   display: flex;
-  justify-content: center; /* Vízszintes középre igazítás */
-  align-items: center; /* Függőleges középre igazítás */
-  z-index: 9999; /* Legyen minden más elem felett */
-  cursor: zoom-out; /* Jelzi, hogy kattintásra bezáródik */
+  justify-content: center; 
+  align-items: center; 
+  z-index: 9999; 
+  cursor: zoom-out; 
   opacity: 0;
-  animation: fadeIn 0.3s forwards; /* Kis animáció a megjelenéshez */
+  animation: fadeIn 0.3s forwards; 
 }
 
 /* ===== A KÉNYSZERÍTETT NAGY KÉP ===== */
 .lightbox-image {
-  /* Kényszerítjük, hogy a magassága a képernyő 85%-a legyen */
   height: 85vh !important; 
   
-  /* A szélesség igazodjon a magassághoz, hogy ne torzuljon */
   width: auto !important;
   
-  /* De azért ne lógjon le oldalra sem (max 95% szélesség) */
   max-width: 95vw !important;
   
   /* Ez biztosítja a méretarányt */
   object-fit: contain !important;
   
   border-radius: 8px;
-  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9); /* Erős árnyék */
+  box-shadow: 0 0 50px rgba(0, 0, 0, 0.9); 
   background-color: transparent;
 }
 
-/* Külön szabály mobilra, ott inkább a szélesség domináljon */
 @media (max-width: 768px) {
   .lightbox-image {
     width: 95vw !important;
@@ -300,18 +296,16 @@ a.linkv:hover, a.linkv-2:hover {
   }
 }
 
-/* A kicsi képek legyenek kattinthatóak */
 .clickable-image {
   cursor: zoom-in;
   transition: transform 0.2s ease;
 }
 
 .clickable-image:hover {
-  transform: scale(1.05); /* Kicsit nőjön meg, ha ráviszed az egeret */
+  transform: scale(1.05); 
   opacity: 0.8;
 }
 
-/* Egyszerű animáció a megjelenéshez */
 @keyframes fadeIn {
   to {
     opacity: 1;
