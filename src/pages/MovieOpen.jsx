@@ -51,7 +51,7 @@ const MovieOpen = () => {
     fetchAllMovieData();
   }, [movieId]);
 
-  // Betöltjük a profilt, ha be vagyunk jelentkezve
+  // Betölti a profilt
   useEffect(() => {
     if (!user) return;
     let mounted = true;
@@ -138,9 +138,9 @@ const MovieOpen = () => {
 
       const json = await res.json();
       const updated = json.data || null;
-      console.log('Profile list updated response:', json);
+      console.log('Profil sikeresen frissítve, válasz:', json);
       console.log('Updated object:', updated);
-      alert('Profil lista frissítve');
+      alert('Profil lista sikeresen frissítve');
       
       // Refresh profile data from server to ensure we have latest
       const refreshRes = await fetch(`http://localhost:3000/api/profile/${user.id}`);
