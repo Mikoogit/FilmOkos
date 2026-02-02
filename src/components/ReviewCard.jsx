@@ -27,7 +27,7 @@ export default function ReviewCard({ movieId, poster, backdrop, rating, text, re
                   className="reviewer-avatar"
                   onClick={(e) => {
                     e.stopPropagation();
-                    if (reviewerId) navigate(`/profil?userId=${reviewerId}`);
+                    if (reviewerId) navigate(`/user/${reviewerId}`);
                   }}
                   style={{ cursor: "pointer" }}
                 />

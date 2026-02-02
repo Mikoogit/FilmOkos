@@ -49,6 +49,9 @@ function AppContent() {
           <Route path="/filmek/:movieId" element={<MovieOpen />} />
           <Route path="/setup" element={<Setup />} />
 
+          {/* Public user profile (view-only) */}
+          <Route path="/user/:userId" element={<Profil />} />
+
 
           {/* ÚJ: TMDB keresés */}
           <Route path="/search" element={<SearchResults />} />

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation, useParams } from "react-router-dom";
 import "../styles/Profile.css";
 import { useAuth } from "../auth/AuthContext";
 import { getMovieById } from "../api/moviesApi";
@@ -18,6 +18,8 @@ export default function ProfilePage() {
   const [editData, setEditData] = useState({ username: "", bio: "", avatar_url: "" });
   const [isSaving, setIsSaving] = useState(false);
 
+  const params = useParams();
+
   // Alapértelmezett tab az URL alapján
   const [activeTab, setActiveTab] = useState(
     location.pathname.replace("/", "") || "profil"
@@ -30,9 +32,9 @@ export default function ProfilePage() {
   };
 
   useEffect(() => {
-    // determine which profile to view: query param userId overrides authenticated user
-    const params = new URLSearchParams(location.search || "");
-    const targetId = params.get("userId") || user?.id || null;
+    // determine which profile to view: route param > query param > authenticated user
+    const searchParams = new URLSearchParams(location.search || "");
+    const targetId = params?.userId || searchParams.get("userId") || user?.id || null;
     setViewUserId(targetId);
 
     if (!targetId) return;
