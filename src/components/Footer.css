@@ -38,6 +38,8 @@
 .footer-title {
   font-size: 1.3rem;
   font-weight: 700;
+  text-decoration: wavy;
+  font-style:italic ;
   background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
@@ -48,6 +50,12 @@
   margin: 4px 0;
   font-size: 1rem;
   color: #ccc;
+}
+.footer-right p img {
+  text-decoration: none;
+  height: 46px;
+  position: relative;
+  padding-top: 15px;
 }
 /* Készítette rész */
 .footer-madeby {

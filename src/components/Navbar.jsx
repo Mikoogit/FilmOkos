@@ -20,10 +20,10 @@ export default function Navbar() {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Lefelé scroll → navbar eltűnik
+        // Lefelé scroll -> navbar eltűnik
         setShowNavbar(false);
       } else {
-        // Felfelé scroll → navbar visszajön
+        // Felfelé scroll -> navbar visszajön
         setShowNavbar(true);
       }
 
@@ -70,6 +70,7 @@ export default function Navbar() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </form>
+          
 
           {/* LOGIN / LOGOUT BUTTON (DESKTOP ONLY) */}
           {!isAuthenticated && (
