@@ -9,6 +9,11 @@ import {
 import MovieReview from "../pages/MovieReviewPage.jsx";
 import "../styles/MovieOpen.css";
 import "../styles/ImageClick.css";
+import { useAuth } from "../auth/AuthContext";
+import { supabase } from "../db/supaBaseClient";
+import heartIcon from "../assets/heart.png";
+import bookmark from "../assets/bookmark.png";
+import check from "../assets/check-circle.png";
 
 
 
@@ -20,6 +25,11 @@ const MovieOpen = () => {
   const [videos, setVideos] = useState([]);
   const [keywords, setKeywords] = useState([]);
   const [selectedImage, setSelectedImage] = useState(null);
+  const { user } = useAuth();
+  const [profile, setProfile] = useState(null);
+  const [inWatchlist, setInWatchlist] = useState(false);
+  const [inFavorites, setInFavorites] = useState(false);
+  const [inSeen, setInSeen] = useState(false);
 
   useEffect(() => {
     async function fetchAllMovieData() {
@@ -40,6 +50,134 @@ const MovieOpen = () => {
 
     fetchAllMovieData();
   }, [movieId]);
+
+  // Betöltjük a profilt, ha be vagyunk jelentkezve
+  useEffect(() => {
+    if (!user) return;
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!mounted) return;
+        const p = json.data || null;
+        setProfile(p);
+        // DB uses `planned` for watchlist and `favorites` for favorites
+        const planned = p?.planned || [];
+        const favsRaw = p?.favorites ?? [];
+        let favsArr = [];
+        if (Array.isArray(favsRaw)) favsArr = favsRaw;
+        else if (typeof favsRaw === "string") {
+          try { favsArr = JSON.parse(favsRaw); }
+          catch (_) { favsArr = favsRaw ? favsRaw.split(",") : []; }
+        }
+        setInWatchlist((planned || []).map(String).includes(String(movieId)));
+        setInFavorites((favsArr || []).map(String).includes(String(movieId)));
+        setInSeen((p?.seen || []).map(String).includes(String(movieId)));
+      } catch (err) {
+        console.error(err);
+      }
+    })();
+    return () => (mounted = false);
+  }, [user, movieId]);
+
+  const toggleList = async (listName) => {
+    if (!user) {
+      alert("Jelentkezz be a művelethez");
+      return;
+    }
+
+    const { data } = await supabase.auth.getSession();
+    const token = data?.session?.access_token;
+    if (!token) {
+      alert("Hiányzó token");
+      return;
+    }
+
+    const currentlyIn =
+      listName === "watchlist" ? inWatchlist : listName === "favorites" ? inFavorites : inSeen;
+
+    const action = currentlyIn ? "remove" : "add";
+
+    // Map logical lists to actual DB columns
+    const columnMap = { watchlist: "planned", favorites: "favorites", seen: "seen" };
+    const columnName = columnMap[listName] || listName;
+    const bodyPayload = { list: columnName, movieId: movieId, action };
+
+    try {
+      console.log('Sending profile list update', { userId: user.id, body: bodyPayload });
+      const { data: sessData } = await supabase.auth.getSession();
+      console.log('Client session data:', sessData);
+
+      const res = await fetch(`http://localhost:3000/api/profile/${user.id}/list`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(bodyPayload),
+      });
+
+      if (!res.ok) {
+        // Próbáljuk JSON-ként olvasni, ha nem megy akkor plain text
+        let message = "Hiba a lista frissítésénél";
+        try {
+          const jsonErr = await res.json();
+          if (jsonErr) message = jsonErr.error || jsonErr.message || JSON.stringify(jsonErr);
+        } catch (e) {
+          try {
+            const txt = await res.text();
+            if (txt) message = txt;
+          } catch (_) {}
+        }
+        console.error("Profile list update failed (status", res.status, "):", message);
+        alert(`(${res.status}) ${message}`);
+        return;
+      }
+
+      const json = await res.json();
+      const updated = json.data || null;
+      console.log('Profile list updated response:', json);
+      console.log('Updated object:', updated);
+      alert('Profil lista frissítve');
+      
+      // Refresh profile data from server to ensure we have latest
+      const refreshRes = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+      if (refreshRes.ok) {
+        const refreshJson = await refreshRes.json();
+        const freshProfile = refreshJson.data || updated;
+        console.log('Fresh profile after update:', freshProfile);
+        setProfile(freshProfile);
+        
+        // dispatch event so other pages can react
+        try {
+          window.dispatchEvent(new CustomEvent('profileUpdated', { detail: freshProfile }));
+        } catch (e) {}
+
+        // normalize updated fields from fresh data
+        const updatedPlanned = freshProfile?.planned || [];
+        const updatedFavsRaw = freshProfile?.favorites ?? [];
+        console.log('updatedFavsRaw:', updatedFavsRaw, 'type:', typeof updatedFavsRaw);
+        let updatedFavs = [];
+        if (Array.isArray(updatedFavsRaw)) updatedFavs = updatedFavsRaw;
+        else if (typeof updatedFavsRaw === "string") {
+          try { updatedFavs = JSON.parse(updatedFavsRaw); }
+          catch (_) { updatedFavs = updatedFavsRaw ? updatedFavsRaw.split(",") : []; }
+        }
+        console.log('updatedFavs after normalization:', updatedFavs);
+
+        setInWatchlist((updatedPlanned || []).map(String).includes(String(movieId)));
+        setInFavorites((updatedFavs || []).map(String).includes(String(movieId)));
+        setInSeen((freshProfile?.seen || []).map(String).includes(String(movieId)));
+      } else {
+        console.error("Failed to refresh profile");
+      }
+    } catch (err) {
+      console.error('Toggle list error:', err);
+      alert(err?.message || 'Ismeretlen hiba');
+    }
+  };
 
   if (!movie) return <h1 style={{ color: "white" }}>BETÖLTÉS...</h1>;
 
@@ -72,6 +210,32 @@ const MovieOpen = () => {
               <div className="rating">⭐⭐⭐⭐⭐</div>
 
               <p className="overview-szoveg">{movie.overview}</p>
+
+              <div className="movie-actions">
+                <button
+                  className={"action-btn list" + (inWatchlist ? "active" : "")}
+                  onClick={() => toggleList("watchlist")}
+                >
+                  <img src={bookmark} alt="mini" className="mini-logo" />
+                  Megnézendő
+                </button>
+
+                <button
+                  className={"action-btn favorite" + (inFavorites ? "active" : "")}
+                  onClick={() => toggleList("favorites")}
+                >
+                  <img src={heartIcon} alt="kedvenc" className="mini-logo" />
+                  Kedvenc
+                </button>
+
+                <button
+                  className={"action-btn seen" + (inSeen ? "active" : "")}
+                  onClick={() => toggleList("seen")}
+                >
+                  <img src={check} alt="mini" className="mini-logo" />
+                  Láttam
+                </button>
+              </div>
             </div>
 
             <div className="hero-right-shadow" />

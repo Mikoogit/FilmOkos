@@ -324,7 +324,7 @@ export default function MoviesPage() {
           disabled={currentPage === 1}
           aria-label="Previous page"
         >
-          Prev
+          Előző
         </button>
 
         {pagesToShow.map((p, idx) =>
@@ -352,7 +352,7 @@ export default function MoviesPage() {
           disabled={currentPage === totalPages}
           aria-label="Next page"
         >
-          Next
+          Következő
         </button>
       </div>
     </div>

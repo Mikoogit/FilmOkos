@@ -20,7 +20,7 @@ export default function Footer() {
         </div>
       </div>
   <div className="footer-madeby">
-    Készítette: Kollár Milán, Kohajda Benjámin, Szabó Levente
+    Készítette: Kollár Milán Gábor, Kohajda Benjámin Olivér, Szabó Levente
   </div>
 </footer>
 </>

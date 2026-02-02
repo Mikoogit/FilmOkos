@@ -1,7 +1,7 @@
 import "../styles//ReviewCard.css";
 import { useNavigate } from "react-router-dom";
 
-export default function ReviewCard({ movieId, poster, backdrop, rating, text }) {
+export default function ReviewCard({ movieId, poster, backdrop, rating, text, reviewerName, reviewerAvatar, reviewerId }) {
   
   const navigate = useNavigate();
 
@@ -18,6 +18,23 @@ export default function ReviewCard({ movieId, poster, backdrop, rating, text }) 
             {"☆".repeat(5 - rating)}
           </div>
           <p className="review-text">{text}</p>
+          {reviewerName && (
+            <div className="reviewer-info">
+              {reviewerAvatar && (
+                <img
+                  src={reviewerAvatar}
+                  alt={reviewerName}
+                  className="reviewer-avatar"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    if (reviewerId) navigate(`/profil?userId=${reviewerId}`);
+                  }}
+                  style={{ cursor: "pointer" }}
+                />
+              )}
+              <span className="reviewer-name">{reviewerName}</span>
+            </div>
+          )}
         </div>
       </div>
 

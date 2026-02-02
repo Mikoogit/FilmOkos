@@ -49,6 +49,9 @@ export default function LatestReviews({ reviews = [] }) {
               backdrop={`https://image.tmdb.org/t/p/w780${movie.backdrop_path}`}
               rating={review.rating}
               text={review.comment}
+              reviewerName={review.reviewerName || review.name}
+              reviewerAvatar={review.avatar}
+              reviewerId={review.user_id}
             />
           );
         })}

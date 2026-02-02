@@ -56,7 +56,39 @@ export default function HomePage() {
         .order("created_at", { ascending: false })
         .limit(6);
 
-      setReviews(data || []);
+      if (!data || data.length === 0) {
+        setReviews([]);
+        return;
+      }
+
+      // Fetch reviewer profiles
+      try {
+        const userIds = Array.from(new Set(data.map((r) => r.user_id).filter(Boolean)));
+        if (userIds.length > 0) {
+          const { data: profiles } = await supabase
+            .from("profiles")
+            .select("id, avatar_url, username")
+            .in("id", userIds);
+
+          const profileMap = (profiles || []).reduce((acc, p) => {
+            acc[p.id] = p;
+            return acc;
+          }, {});
+
+          const merged = data.map((r) => ({
+            ...r,
+            avatar: profileMap[r.user_id]?.avatar_url || null,
+            reviewerName: profileMap[r.user_id]?.username || r.name,
+          }));
+
+          setReviews(merged);
+        } else {
+          setReviews(data);
+        }
+      } catch (err) {
+        console.error("Failed to load reviewer profiles", err);
+        setReviews(data);
+      }
     }
 
     loadReviews();

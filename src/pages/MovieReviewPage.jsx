@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { supabase } from "../db/supaBaseClient";
 import { useAuth } from "../auth/AuthContext.jsx";
 import "../components/Reviews.css";
@@ -6,6 +7,7 @@ import "../components/Reviews.css";
 export default function MovieReview({ filmId }) {
   const { user, role } = useAuth();
   const isAdmin = role === "admin";
+  const navigate = useNavigate();
 
   const [form, setForm] = useState({ name: "", rating: "5", comment: "" });
   const [errors, setErrors] = useState({});
@@ -160,6 +162,38 @@ export default function MovieReview({ filmId }) {
   // -----------------------------
   // LISTA BETÖLTÉSE
   // -----------------------------
+  // Ha bejelentkezett felhasználó van, töltsük be a profil nevét alapértelmezettnek
+  useEffect(() => {
+    if (!user) return;
+    let mounted = true;
+    (async () => {
+      try {
+        const res = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+        if (!res.ok) return;
+        const json = await res.json();
+        if (!mounted) return;
+        const name = json.data?.username || (user.email ? user.email.split('@')[0] : "");
+        setForm((f) => ({ ...f, name }));
+      } catch (err) {
+        console.error('Failed to load profile for review name autofill', err);
+      }
+    })();
+
+    // listen for external profile updates
+    const handler = (e) => {
+      const updated = e?.detail || null;
+      if (!updated) return;
+      const name = updated?.username || (user.email ? user.email.split('@')[0] : "");
+      setForm((f) => ({ ...f, name }));
+    };
+    window.addEventListener('profileUpdated', handler);
+
+    return () => {
+      mounted = false;
+      window.removeEventListener('profileUpdated', handler);
+    };
+  }, [user]);
+
   useEffect(() => {
     const fetchReviews = async () => {
       setLoading(true);
@@ -174,7 +208,34 @@ export default function MovieReview({ filmId }) {
         console.error(error);
         setLoadError("Nem sikerült betölteni az értékeléseket.");
       } else {
-        setReviews(data || []);
+        // fetch reviewer profiles to show avatars
+        try {
+          const userIds = Array.from(new Set((data || []).map((r) => r.user_id).filter(Boolean)));
+          if (userIds.length > 0) {
+            const { data: profiles } = await supabase
+              .from("profiles")
+              .select("id, avatar_url, username")
+              .in("id", userIds);
+
+            const profileMap = (profiles || []).reduce((acc, p) => {
+              acc[p.id] = p;
+              return acc;
+            }, {});
+
+            const merged = (data || []).map((r) => ({
+              ...r,
+              avatar: profileMap[r.user_id]?.avatar_url || null,
+              reviewerName: profileMap[r.user_id]?.username || r.name,
+            }));
+
+            setReviews(merged);
+          } else {
+            setReviews(data || []);
+          }
+        } catch (err) {
+          console.error("Failed to load reviewer profiles", err);
+          setReviews(data || []);
+        }
       }
 
       setLoading(false);
@@ -237,9 +298,7 @@ export default function MovieReview({ filmId }) {
             <input
               type="text"
               value={form.name}
-              onChange={(e) =>
-                setForm((f) => ({ ...f, name: e.target.value }))
-              }
+              readOnly
             />
             {errors.name && <div className="error-text">{errors.name}</div>}
           </div>
@@ -325,7 +384,15 @@ export default function MovieReview({ filmId }) {
                   </>
                 ) : (
                   <>
-                    <strong>{review.name}</strong>{" "}
+                    <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
+                      <img
+                        src={review.avatar || "https://placehold.co/48x48"}
+                        alt={review.reviewerName || review.name}
+                        style={{ width: 48, height: 48, borderRadius: 24, cursor: "pointer", objectFit: "cover" }}
+                        onClick={() => navigate(`/profil?userId=${review.user_id}`)}
+                      />
+                      <strong>{review.reviewerName || review.name}</strong>
+                    </div>{" "}
                     <span style={{ color: "#f59e0b" }}>
                       {"★".repeat(review.rating)}
                     </span>

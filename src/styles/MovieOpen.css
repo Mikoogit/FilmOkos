@@ -311,3 +311,73 @@ a.linkv:hover, a.linkv-2:hover {
     opacity: 1;
   }
 }
+
+/* ===== MOVIE ACTIONS (Megnézendő, Kedvenc, Láttam gombok) ===== */
+.movie-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 24px;
+  flex-wrap: wrap;
+}
+
+.action-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(224, 201, 123, 0.3);
+  font-size: 0;
+}
+.action-btn.favorite{
+  background: linear-gradient(135deg, #d30e0e 0%, #c81919 100%);
+  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.4);
+}
+.action-btn.seen{
+  background: linear-gradient(135deg, #0f9f1d 0%, #13c130 100%);
+  box-shadow: 0 4px 15px rgba(248, 113, 113, 0.4);
+}
+.action-btn.list{
+  background: linear-gradient(135deg, #12d4ea 0%, #1d5991 100%);
+  box-shadow: 0 4px 15px rgba(48, 122, 219, 0.4);
+}
+
+.action-btn:hover {
+  transform: scale(1.1);
+
+}
+
+.action-btn.active {
+  box-shadow: 0 4px 15px rgba(74, 222, 128, 0.4);
+}
+
+.action-btn.active:hover {
+  transform: scale(1.1);
+
+}
+
+.action-btn .mini-logo {
+  width: 20px;
+  height: 20px;
+}
+
+@media (max-width: 768px) {
+  .movie-actions {
+    gap: 12px;
+  }
+
+  .action-btn {
+    width: 45px;
+    height: 45px;
+  }
+
+  .action-btn .mini-logo {
+    width: 24px;
+    height: 24px;
+  }
+}
