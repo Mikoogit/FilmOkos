@@ -96,8 +96,8 @@ useEffect(() => {
       {/* Navigációs gombok */}
       <div className="profil-tabs">
         <button
-          className={activeTab === "profile" ? "active" : ""}
-          onClick={() => handleTabClick("profile", "/profile")}
+          className={activeTab === "profil" ? "active" : ""}
+          onClick={() => handleTabClick("profil", "/profil")}
         >
           Profil
         </button>
