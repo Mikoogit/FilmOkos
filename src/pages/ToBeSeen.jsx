@@ -4,16 +4,15 @@ import { useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { getMovieById } from "../api/moviesApi.js";
 
-export default function MovieSeen() {
+export default function Megnezendo() {
   const navigate = useNavigate();
   const location = useLocation();
-  const [seenMovies, setSeenMovies] = useState([]);
+  const [plannedMovies, setPlannedMovies] = useState([]);
   const [profile, setProfile] = useState(null);
   const [viewUserId, setViewUserId] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
-
   const [activeTab, setActiveTab] = useState(
-    location.pathname.replace("/", "") || "latott"
+    location.pathname.replace("/", "") || "megnezendo"
   );
 
   const handleTabClick = (tab, path) => {
@@ -36,23 +35,23 @@ useEffect(() => {
       setProfile(json.data);
 
       // normalize seen list
-      let seenRaw = json.data?.seen || [];
-      let seenIds = [];
+      let plannedRaw = json.data?.planned || [];
+      let plannedIds = [];
 
-      if (Array.isArray(seenRaw)) seenIds = seenRaw;
-      else if (typeof seenRaw === "string") {
+      if (Array.isArray(plannedRaw)) plannedIds = plannedRaw;
+      else if (typeof plannedRaw === "string") {
         try {
-          seenIds = JSON.parse(seenRaw);
+          plannedIds = JSON.parse(plannedRaw);
         } catch {
-          seenIds = seenRaw.split(",");
+          plannedIds = plannedRaw.split(",");
         }
       }
 
       const movies = await Promise.all(
-        seenIds.map((id) => getMovieById(id).catch(() => null))
+        plannedIds.map((id) => getMovieById(id).catch(() => null))
       );
 
-      setSeenMovies(movies.filter(Boolean));
+      setPlannedMovies(movies.filter(Boolean));
     } catch (err) {
       console.error(err);
     }
@@ -64,8 +63,6 @@ useEffect(() => {
 
   return (
     <div className="profile-page">
-      
-
       {/* Felső rész */}
       <div className="profile-header">
         <img
@@ -96,8 +93,8 @@ useEffect(() => {
         </button>
 
         <button
-          className={activeTab === "megnezve" ? "active" : ""}
-          onClick={() => handleTabClick("megnezve", "/megnezve")}
+          className={activeTab === "latott" ? "active" : ""}
+          onClick={() => handleTabClick("latott", "/megnezve")}
         >
           Látott
         </button>
@@ -124,14 +121,15 @@ useEffect(() => {
 
         {/* Kedvenc filmek */}
         <div className="favorites">
-          <h2>Látott Filmek:</h2>
-            <div className="movie-list">
-  {seenMovies.length === 0 ? (
+        <h2>Megnézendő filmek:</h2>
+
+<div className="movie-list">
+  {plannedMovies.length === 0 ? (
     <p style={{ color: "white", fontStyle: "italic" }}>
-      Még nem jelölt meg látott filmet.
+      Még nincs megjelölve megtekintendő film.
     </p>
   ) : (
-    seenMovies.map((movie) => (
+    plannedMovies.map((movie) => (
       <img
         key={movie.id}
         src={`https://image.tmdb.org/t/p/w200${movie.poster_path}`}

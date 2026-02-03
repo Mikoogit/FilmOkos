@@ -18,6 +18,7 @@ import SearchResults from "./components/SearchResults.jsx";
 import Setup from "./pages/Setup.jsx";
 import Loader from "./components/Loader.jsx";   
 import { useState, useEffect } from "react";    
+import Megnezendo from "./pages/ToBeSeen.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -48,6 +49,7 @@ function AppContent() {
           <Route path="/filmek" element={<MoviePages />} />
           <Route path="/filmek/:movieId" element={<MovieOpen />} />
           <Route path="/setup" element={<Setup />} />
+          
 
           {/* Public user profile (view-only) */}
           <Route path="/user/:userId" element={<Profil />} />
@@ -79,6 +81,14 @@ function AppContent() {
           element={
             <ProtectedRoute allowedRoles={["user", "admin"]}>
               <MovieSeen />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/megnezendo"
+          element={
+            <ProtectedRoute allowedRoles={["user", "admin"]}>
+              <Megnezendo />
             </ProtectedRoute>
           }
         />

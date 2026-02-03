@@ -287,10 +287,10 @@ export default function ProfilePage() {
         </button>
 
         <button
-          className={activeTab === "tervezett" ? "active" : ""}
-          onClick={() => handleTabClick("tervezett", "/tervezett")}
+          className={activeTab === "megnezendo" ? "active" : ""}
+          onClick={() => handleTabClick("megnezendo", "/megnezendo")}
         >
-          Tervezett látni
+          Megnézendő
         </button>
 
         <button
