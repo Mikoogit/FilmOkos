@@ -179,10 +179,10 @@ export function ReviewList({ isAdmin }) {
               <div key={review.id} className="review-item">
                 <div className="reviewer-profile" style={{ display: "flex", alignItems: "center", marginBottom: 8 }}>
                   <img
-                    src={review.avatar || "/default-avatar.png"}
+                    src={review.avatar || "../src/assets/profile.png"}
                     alt={review.reviewerName || "Profilkép"}
                     style={{ width: 40, height: 40, borderRadius: "50%", marginRight: 10, objectFit: "cover" }}
-                    onError={(e) => { e.target.src = "/default-avatar.png"; }}
+                    onError={(e) => { e.target.src = "../src/assets/profile.png"; }}
                   />
                   <span style={{ fontWeight: "bold" }}>
                     {review.reviewerName || "Ismeretlen felhasználó"}
