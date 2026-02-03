@@ -5,8 +5,7 @@ import { useNavigate } from "react-router-dom";
 import "../styles/MoviePages.css";
 
 const staticFilters = {
-  years: ["Év", "2026", "2025", "2024"],
-  ratings: ["Értékelés", "90", "80", "70", "60", "50", "40"],
+  years: ["Év", "2026", "2025", "2024", "2023", "2022", "2021", "2020", "2019", "2018", "2017", "2016", "2015", "2014", "2013", "2012", "2011", "2010", "2009", "2008", "2007", "2006", "2005", "2004", "2003", "2002", "2001", "2000", "2020-as évek", "2010-es évek", "2000-es évek", "1990-es évek", "1980-as évek", "1970-as évek"],
   sortBy: ["Sorrend", "Népszerűség", "Újdonság", "Értékelés"],
 };
 
@@ -14,15 +13,6 @@ const sortMap = {
   Népszerűség: "popularity.desc",
   Újdonság: "primary_release_date.desc",
   Értékelés: "vote_average.desc",
-};
-const ratingMap = {
-  "90": 90,
-  "80": 80,
-  "70": 70,
-  "60": 60,
-  "50": 50,
-  "40": 40,
-  "30": 30,
 };
 
 function EllipsisPageInput({ totalPages, onGoToPage }) {
@@ -87,14 +77,12 @@ export default function MoviesPage() {
   const [activeFilters, setActiveFilters] = useState({
     genre: "Műfaj",
     year: "Év",
-    rating: "Értékelés",
     sort: "Sorrend",
   });
 
   const [openMenus, setOpenMenus] = useState({
     genre: false,
     year: false,
-    rating: false,
     sort: false,
   });
 
@@ -107,7 +95,6 @@ export default function MoviesPage() {
     () => ({
       genres: genres.map((g) => g.name),
       years: staticFilters.years,
-      ratings: staticFilters.ratings,
       sortBy: staticFilters.sortBy,
     }),
     [genres]
@@ -137,7 +124,6 @@ export default function MoviesPage() {
             activeFilters.year && activeFilters.year !== "Év"
               ? activeFilters.year
               : undefined,
-          minRating: ratingMap[activeFilters.rating],
           sortBy: sortMap[activeFilters.sort],
         };
         const { results, total_pages } = await discoverMovies(params);
@@ -213,7 +199,7 @@ export default function MoviesPage() {
         if (wr.contains(e.target)) inside = true;
       });
       if (!inside) {
-        setOpenMenus({ genre: false, year: false, rating: false, sort: false });
+        setOpenMenus({ genre: false, year: false, sort: false });
       }
     };
     document.addEventListener("click", onClick);
@@ -229,7 +215,7 @@ export default function MoviesPage() {
               ? "genre"
               : key === "sortBy"
               ? "sort"
-              : key === "ratings"
+              : key === "ratings" //ITT VAGYOOK NÉZZ ENGEM ITT VALAMI BAJ LEEEESZ. TUTIIII.!
               ? "rating"
               : "year";
           const isOpen = openMenus[typeKey];
