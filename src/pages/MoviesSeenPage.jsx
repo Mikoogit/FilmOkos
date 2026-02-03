@@ -16,6 +16,18 @@ export default function MovieSeen() {
     location.pathname.replace("/", "") || "latott"
   );
 const params = useParams();
+const { user } = useAuth();
+useEffect(() => {
+  const searchParams = new URLSearchParams(location.search || "");
+  const targetId =
+    params?.userId ||
+    searchParams.get("userId") ||
+    user?.id ||
+    null;
+
+  setViewUserId(targetId);
+}, [user, location.search, params?.userId]);
+
 
   const handleTabClick = (tab, path) => {
   setActiveTab(tab);
@@ -27,22 +39,23 @@ const params = useParams();
   }
 };
 
-  const { user } = useAuth();
+  
 
 useEffect(() => {
-  if (!user) return;
+  if (!viewUserId) return;
 
   let mounted = true;
 
   (async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+      const res = await fetch(
+        `http://localhost:3000/api/profile/${viewUserId}`
+      );
       const json = await res.json();
       if (!mounted) return;
 
       setProfile(json.data);
 
-      // normalize seen list
       let seenRaw = json.data?.seen || [];
       let seenIds = [];
 
@@ -66,7 +79,8 @@ useEffect(() => {
   })();
 
   return () => (mounted = false);
-}, [user]);
+}, [viewUserId]);
+
 
 
   return (

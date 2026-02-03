@@ -1,12 +1,14 @@
 import React, { useState,useEffect } from "react";
 import "../styles/Profile.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation,useParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { getMovieById } from "../api/moviesApi.js";
 
 export default function Megnezendo() {
   const navigate = useNavigate();
   const location = useLocation();
+  const { user } = useAuth();
+  const params = useParams();
   const [plannedMovies, setPlannedMovies] = useState([]);
   const [profile, setProfile] = useState(null);
   const [viewUserId, setViewUserId] = useState(null);
@@ -14,6 +16,19 @@ export default function Megnezendo() {
   const [activeTab, setActiveTab] = useState(
     location.pathname.replace("/", "") || "megnezendo"
   );
+
+useEffect(() => {
+  const searchParams = new URLSearchParams(location.search || "");
+  const targetId =
+    params?.userId ||
+    searchParams.get("userId") ||
+    user?.id ||
+    null;
+
+  setViewUserId(targetId);
+}, [user, location.search, params?.userId]);
+
+
 
    const handleTabClick = (tab, path) => {
   setActiveTab(tab);
@@ -24,22 +39,23 @@ export default function Megnezendo() {
     navigate(path);
   }
 };
-  const { user } = useAuth();
+
 
 useEffect(() => {
-  if (!user) return;
+  if (!viewUserId) return;
 
   let mounted = true;
 
   (async () => {
     try {
-      const res = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+      const res = await fetch(
+        `http://localhost:3000/api/profile/${viewUserId}`
+      );
       const json = await res.json();
       if (!mounted) return;
 
       setProfile(json.data);
 
-      // normalize seen list
       let plannedRaw = json.data?.planned || [];
       let plannedIds = [];
 
@@ -63,7 +79,8 @@ useEffect(() => {
   })();
 
   return () => (mounted = false);
-}, [user]);
+}, [viewUserId]);
+
 
 
   return (
