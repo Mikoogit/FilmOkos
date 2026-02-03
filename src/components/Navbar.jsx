@@ -116,9 +116,10 @@ export default function Navbar() {
             {(role === "user" || role === "admin") && (
               <>
                 <Link to="/filmek" onClick={() => setMenuOpen(false)}>Filmek</Link>
+                <hr />
+                <Link to="/profil" onClick={() => setMenuOpen(false)}>Profil</Link>
                 <Link to="/megnezendo" onClick={() => setMenuOpen(false)}>Megnézendő</Link>
                 <Link to="/megnezve" onClick={() => setMenuOpen(false)}>Megnézve</Link>
-                <Link to="/profil" onClick={() => setMenuOpen(false)}>Profil</Link>
                 <Link to="/ertekelesek" onClick={() => setMenuOpen(false)}>Értékelések</Link>
               </>
             )}

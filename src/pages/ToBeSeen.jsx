@@ -15,10 +15,15 @@ export default function Megnezendo() {
     location.pathname.replace("/", "") || "megnezendo"
   );
 
-  const handleTabClick = (tab, path) => {
-    setActiveTab(tab);
+   const handleTabClick = (tab, path) => {
+  setActiveTab(tab);
+
+  if (viewUserId) {
+    navigate(`${path}?userId=${viewUserId}`);
+  } else {
     navigate(path);
-  };
+  }
+};
   const { user } = useAuth();
 
 useEffect(() => {

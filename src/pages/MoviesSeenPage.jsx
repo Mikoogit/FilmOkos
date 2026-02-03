@@ -1,6 +1,6 @@
 import React, { useState,useEffect } from "react";
 import "../styles/Profile.css";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, useLocation,useParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { getMovieById } from "../api/moviesApi.js";
 
@@ -15,11 +15,18 @@ export default function MovieSeen() {
   const [activeTab, setActiveTab] = useState(
     location.pathname.replace("/", "") || "latott"
   );
+const params = useParams();
 
   const handleTabClick = (tab, path) => {
-    setActiveTab(tab);
+  setActiveTab(tab);
+
+  if (viewUserId) {
+    navigate(`${path}?userId=${viewUserId}`);
+  } else {
     navigate(path);
-  };
+  }
+};
+
   const { user } = useAuth();
 
 useEffect(() => {
@@ -89,8 +96,8 @@ useEffect(() => {
       {/* Navigációs gombok */}
       <div className="profil-tabs">
         <button
-          className={activeTab === "profil" ? "active" : ""}
-          onClick={() => handleTabClick("profil", "/profil")}
+          className={activeTab === "profile" ? "active" : ""}
+          onClick={() => handleTabClick("profile", "/profile")}
         >
           Profil
         </button>

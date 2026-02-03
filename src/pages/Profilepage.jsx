@@ -26,10 +26,16 @@ export default function ProfilePage() {
   );
 
   // Tab váltás kezelése
-  const handleTabClick = (tab, path) => {
-    setActiveTab(tab);
-    navigate(path); // navigál az adott route-ra
-  };
+ const handleTabClick = (tab, path) => {
+  setActiveTab(tab);
+
+  if (viewUserId) {
+    navigate(`${path}?userId=${viewUserId}`);
+  } else {
+    navigate(path);
+  }
+};
+
 
   useEffect(() => {
     // determine which profile to view: route param > query param > authenticated user
@@ -280,8 +286,8 @@ export default function ProfilePage() {
         </button>
 
         <button
-          className={activeTab === "latott" ? "active" : ""}
-          onClick={() => handleTabClick("latott", "/megnezve")}
+          className={activeTab === "megnezve" ? "active" : ""}
+          onClick={() => handleTabClick("megnezve", "/megnezve")}
         >
           Látott
         </button>
