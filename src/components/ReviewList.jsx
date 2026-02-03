@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { supabase } from '../db/supaBaseClient';
 import "../components/Reviews.css";
+import ReviewCard from './ReviewCard';
 
 
 export function ReviewList({ isAdmin }) {
@@ -145,3 +146,4 @@ export function ReviewList({ isAdmin }) {
     </div>
   );
 }
+export default ReviewList;

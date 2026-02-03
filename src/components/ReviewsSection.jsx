@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import { getMovieById } from "../api/moviesApi";
 import ReviewCard from "./ReviewCard";
 import "../styles/ReviewSection.css";
@@ -21,7 +22,7 @@ export default function LatestReviews({ reviews = [] }) {
           movieMap[r.id] = movie;
           goodReviews.push(r);
         } catch (err) {
-          console.warn("TMDB fetch failed for:", r.film_api_id);
+          console.warn("TMDB lekérése kor", r.film_api_id);
         }
       }
 
@@ -57,7 +58,10 @@ export default function LatestReviews({ reviews = [] }) {
         })}
       </div>
 
-      <button className="more-reviews-btn">Több Értékelés</button>
+      <Link className="more-reviews-btn" to="/ertekelesek">
+        További értékelések
+        </Link>
+        
     </section>
   );
 }

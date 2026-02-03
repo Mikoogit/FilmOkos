@@ -13,6 +13,9 @@
   margin-bottom: 1.5rem;
   font-size: 1.8rem;
   font-weight: 600;
+  background: linear-gradient(90deg, #DBC77E 0%, #756A43 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 /* --- FORM --- */
