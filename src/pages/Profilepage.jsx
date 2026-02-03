@@ -328,6 +328,8 @@ export default function ProfilePage() {
               ))
             )}
           </div>
+          
+        <div class="line"></div>
 
           {/* Statisztikák */}
           <div className="stats">
@@ -343,5 +345,6 @@ export default function ProfilePage() {
         </div>
       </div>
     </div>
+
   );
 }

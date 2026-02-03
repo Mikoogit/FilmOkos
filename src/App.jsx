@@ -8,6 +8,7 @@ import Login from "./pages/LoginPages.jsx";
 import RegisterPages from "./pages/RegisterPages.jsx";
 import ErrorPage from "./pages/ErrorPage.jsx";
 import MovieReview from "./pages/MovieReviewPage.jsx";
+import ReviewList from "./components/ReviewList.jsx";
 import MovieSeen from "./pages/MoviesSeenPage.jsx";
 import AdminPage from "./pages/AdminPage.jsx";
 import { AuthProvider } from "./auth/AuthContext.jsx";
@@ -67,14 +68,14 @@ function AppContent() {
           }
         />
 
-        {/* <Route
+        <Route
           path="/ertekelesek"
           element={
             <ProtectedRoute allowedRoles={["user", "admin"]}>
-              <MovieReview />
+              <ReviewList/>
             </ProtectedRoute>
           }
-        /> */}
+        />
 
         <Route
           path="/megnezve"
