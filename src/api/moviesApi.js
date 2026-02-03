@@ -25,7 +25,7 @@ export const discoverMovies = async ({
   year,
   minRating,
   sortBy,
-  minVoteCount,
+  minVoteCount, // Include as a parameter
   language = "hu-HU",
 } = {}) => {
   const url = new URL(`${BASE_URL}/discover/movie`);
@@ -36,7 +36,7 @@ export const discoverMovies = async ({
   if (genreId) url.searchParams.set("with_genres", genreId);
   if (year) url.searchParams.set("primary_release_year", year);
   if (minRating) url.searchParams.set("vote_average.gte", minRating);
-  if (minVoteCount) url.searchParams.set("vote_count.gte", minVoteCount);
+  if (minVoteCount) url.searchParams.set("vote_count.gte", minVoteCount); // Add this line
   if (sortBy) url.searchParams.set("sort_by", sortBy);
 
   url.searchParams.set("include_adult", "false");
@@ -44,6 +44,7 @@ export const discoverMovies = async ({
   const data = await fetchJson(url.toString());
   return { results: data.results, total_pages: data.total_pages, total_results: data.total_results };
 };
+
 
 /* --- Compatibility / convenience wrappers --- */
 
