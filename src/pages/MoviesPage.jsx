@@ -113,18 +113,16 @@ export default function MoviesPage() {
   }, []);
 
   useEffect(() => {
-    async function fetchMovies() {
+    const fetchMovies = async () => {
       setLoading(true);
       try {
         const selectedGenre = genres.find((g) => g.name === activeFilters.genre);
         const params = {
           page: currentPage,
           genreId: selectedGenre && selectedGenre.id ? selectedGenre.id : undefined,
-          year:
-            activeFilters.year && activeFilters.year !== "Év"
-              ? activeFilters.year
-              : undefined,
+          year: activeFilters.year && activeFilters.year !== "Év" ? activeFilters.year : undefined,
           sortBy: sortMap[activeFilters.sort],
+          minVoteCount: activeFilters.sort === "Értékelés" ? 300 : undefined, // Set minimum vote count if sorting by rating
         };
         const { results, total_pages } = await discoverMovies(params);
         setMovies(results || []);
@@ -136,7 +134,8 @@ export default function MoviesPage() {
       } finally {
         setLoading(false);
       }
-    }
+    };
+
     fetchMovies();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, activeFilters, genres]);
@@ -214,10 +213,10 @@ export default function MoviesPage() {
             key === "genres"
               ? "genre"
               : key === "sortBy"
-              ? "sort"
-              : key === "ratings" //ITT VAGYOOK NÉZZ ENGEM ITT VALAMI BAJ LEEEESZ. TUTIIII.!
-              ? "rating"
-              : "year";
+                ? "sort"
+                : key === "ratings" //ITT VAGYOOK NÉZZ ENGEM ITT VALAMI BAJ LEEEESZ. TUTIIII.!
+                  ? "rating"
+                  : "year";
           const isOpen = openMenus[typeKey];
           const label = activeFilters[typeKey] || options[0];
           return (
@@ -251,9 +250,8 @@ export default function MoviesPage() {
                       <button
                         key={opt}
                         role="menuitem"
-                        className={`filter-option ${
-                          activeFilters[typeKey] === opt ? "active" : ""
-                        }`}
+                        className={`filter-option ${activeFilters[typeKey] === opt ? "active" : ""
+                          }`}
                         onClick={(e) => {
                           e.stopPropagation();
                           handleFilterClick(typeKey, opt);
