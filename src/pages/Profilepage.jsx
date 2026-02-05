@@ -20,6 +20,17 @@ export default function ProfilePage() {
 
   const params = useParams();
 
+  useEffect(() => {
+  const searchParams = new URLSearchParams(location.search || "");
+  const targetId =
+    params?.userId ||
+    searchParams.get("userId") ||
+    user?.id ||
+    null;
+
+  setViewUserId(targetId);
+}, [user, location.search]);
+
   // Alapértelmezett tab az URL alapján
   const [activeTab, setActiveTab] = useState(
     location.pathname.replace("/", "") || "profil"
@@ -104,7 +115,7 @@ export default function ProfilePage() {
           catch (_) { favIds = favsRaw ? favsRaw.split(",") : []; }
         }
         console.log('Favorite IDs after normalization:', favIds);
-        const ids = favIds.slice(0, 10);
+        const ids = favIds.slice(0, 14);
         const movies = await Promise.all(
           ids.map((id) => getMovieById(id).catch(() => null))
         );
