@@ -5,27 +5,47 @@ const AuthContext = createContext(null);
 
 export function AuthProvider({ children }) {
   const [user, setUser] = useState(null);
-  const [role, setRole] = useState("guest"); // <-- szerepkör tárolása
+  const [role, setRole] = useState("guest");
 
   useEffect(() => {
-    // Betöltjük a session-t induláskor
     supabase.auth.getSession().then(({ data }) => {
       const u = data.session?.user || null;
       setUser(u);
-      setRole(u?.user_metadata?.role || "guest"); // <-- szerepkör beállítása
+
+      // 🔥 A role NEM user_metadata-ból jön, hanem a profiles táblából
+      if (u) {
+        loadRole(u.id);
+      } else {
+        setRole("guest");
+      }
     });
 
-    // Figyeljük a Supabase auth változásokat
     const { data: listener } = supabase.auth.onAuthStateChange(
-      (_event, session) => {
+      async (_event, session) => {
         const u = session?.user || null;
         setUser(u);
-        setRole(u?.user_metadata?.role || "guest"); // <-- szerepkör frissítése
+
+        if (u) {
+          loadRole(u.id);
+        } else {
+          setRole("guest");
+        }
       }
     );
 
     return () => listener.subscription.unsubscribe();
   }, []);
+
+  // 🔥 Szerepkör betöltése a profiles táblából
+  const loadRole = async (userId) => {
+    const { data } = await supabase
+      .from("profiles")
+      .select("role")
+      .eq("id", userId)
+      .single();
+
+    setRole(data?.role || "guest");
+  };
 
   const login = async (email, password) => {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -35,15 +55,14 @@ export function AuthProvider({ children }) {
 
     if (error) throw error;
 
-    // sikeres login után beállítjuk a usert és a szerepkört
     const u = data.user;
     setUser(u);
-    if (u) {
-  setRole(u.user_metadata?.role || "user");
-} else {
-  setRole("guest");
-}
 
+    if (u) {
+      await loadRole(u.id);
+    } else {
+      setRole("guest");
+    }
 
     return data;
   };
@@ -51,14 +70,15 @@ export function AuthProvider({ children }) {
   const logout = async () => {
     await supabase.auth.signOut();
     setUser(null);
-    setRole("guest"); // <-- visszaállítjuk vendégre
+    setRole("guest");
   };
 
   return (
     <AuthContext.Provider
       value={{
         user,
-        role,               // <-- szerepkör átadása
+        role,
+        setRole,   // 🔥 EZ KELL A ROLE VÁLTÁSHOZ
         isAuthenticated: !!user,
         login,
         logout,

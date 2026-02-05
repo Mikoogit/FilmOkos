@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
 import Separator from "./Separator";
 import { useAuth } from "../auth/AuthContext";
+import MakeAdmin from "./MakeMeAdmin";
 
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -70,7 +71,8 @@ export default function Navbar() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </form>
-          
+
+
 
           {/* LOGIN / LOGOUT BUTTON (DESKTOP ONLY) */}
           {!isAuthenticated && (
@@ -126,8 +128,12 @@ export default function Navbar() {
 
             {/* ADMIN ONLY */}
             {role === "admin" && (
-              <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>
+              <>
+                <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>
+                <MakeAdmin />
+              </>
             )}
+
 
             {/* GUEST ONLY */}
             {!isAuthenticated && (
@@ -144,7 +150,7 @@ export default function Navbar() {
 
             {/* LOGGED IN ONLY */}
             {isAuthenticated && (
-              <button 
+              <button
                 className="nav-btn logout-btn"
                 onClick={() => {
                   logout();

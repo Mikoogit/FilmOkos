@@ -10,16 +10,23 @@ import ErrorPage from "./pages/ErrorPage.jsx";
 import MovieReview from "./pages/MovieReviewPage.jsx";
 import ReviewList from "./components/ReviewList.jsx";
 import MovieSeen from "./pages/MoviesSeenPage.jsx";
-import AdminPage from "./pages/AdminPage.jsx";
-import { AuthProvider } from "./auth/AuthContext.jsx";
-import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import MoviePages from "./pages/MoviesPage.jsx";
 import MovieOpen from "./pages/MovieOpen.jsx";
 import SearchResults from "./components/SearchResults.jsx";
 import Setup from "./pages/Setup.jsx";
-import Loader from "./components/Loader.jsx";   
-import { useState, useEffect } from "react";    
+import Loader from "./components/Loader.jsx";
 import Megnezendo from "./pages/ToBeSeen.jsx";
+
+import { useState, useEffect } from "react";
+import { AuthProvider } from "./auth/AuthContext.jsx";
+import ProtectedRoute from "./auth/ProtectedRoute.jsx";
+import AdminRoute from "./auth/AdminRoute.jsx";
+
+// ADMIN OLDALAK
+import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import AdminUsers from "./pages/admin/AdminUsers.jsx";
+import AdminMovies from "./pages/admin/AdminMovies.jsx";
+import AdminSettings from "./pages/admin/AdminSettings.jsx";
 
 function AppContent() {
   const location = useLocation();
@@ -41,24 +48,21 @@ function AppContent() {
 
       <Navbar />
 
-        <Routes>
+      <Routes>
 
-          {/* PUBLIC ROUTES */}
-          <Route path="/" element={<HomePage />} />
-          <Route path="/bejelentkezes" element={<Login />} />
-          <Route path="/regisztracio" element={<RegisterPages />} />
-          <Route path="/filmek" element={<MoviePages />} />
-          <Route path="/filmek/:movieId" element={<MovieOpen />} />
-          <Route path="/setup" element={<Setup />} />
-          
+        {/* PUBLIC ROUTES */}
+        <Route path="/" element={<HomePage />} />
+        <Route path="/bejelentkezes" element={<Login />} />
+        <Route path="/regisztracio" element={<RegisterPages />} />
+        <Route path="/filmek" element={<MoviePages />} />
+        <Route path="/filmek/:movieId" element={<MovieOpen />} />
+        <Route path="/setup" element={<Setup />} />
+        <Route path="/search" element={<SearchResults />} />
 
-          {/* Public user profile (view-only) */}
-          <Route path="/user/:userId" element={<Profil />} />
+        {/* Publikus user profil (view-only) */}
+        <Route path="/user/:userId" element={<Profil />} />
 
-
-          {/* ÚJ: TMDB keresés */}
-          <Route path="/search" element={<SearchResults />} />
-
+        {/* USER + ADMIN ROUTES */}
         <Route
           path="/profil"
           element={
@@ -72,7 +76,7 @@ function AppContent() {
           path="/ertekelesek"
           element={
             <ProtectedRoute allowedRoles={["user", "admin"]}>
-              <ReviewList/>
+              <ReviewList />
             </ProtectedRoute>
           }
         />
@@ -85,6 +89,7 @@ function AppContent() {
             </ProtectedRoute>
           }
         />
+
         <Route
           path="/megnezendo"
           element={
@@ -94,15 +99,44 @@ function AppContent() {
           }
         />
 
+        {/* ADMIN ROUTES */}
         <Route
           path="/admin"
           element={
-            <ProtectedRoute allowedRoles={["admin"]}>
-              <AdminPage />
-            </ProtectedRoute>
+            <AdminRoute>
+              <AdminDashboard />
+            </AdminRoute>
           }
         />
 
+        <Route
+          path="/admin/users"
+          element={
+            <AdminRoute>
+              <AdminUsers />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/movies"
+          element={
+            <AdminRoute>
+              <AdminMovies />
+            </AdminRoute>
+          }
+        />
+
+        <Route
+          path="/admin/settings"
+          element={
+            <AdminRoute>
+              <AdminSettings />
+            </AdminRoute>
+          }
+        />
+
+        {/* 404 */}
         <Route path="*" element={<ErrorPage />} />
       </Routes>
 
