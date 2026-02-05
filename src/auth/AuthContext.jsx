@@ -12,7 +12,6 @@ export function AuthProvider({ children }) {
       const u = data.session?.user || null;
       setUser(u);
 
-      // 🔥 A role NEM user_metadata-ból jön, hanem a profiles táblából
       if (u) {
         loadRole(u.id);
       } else {
