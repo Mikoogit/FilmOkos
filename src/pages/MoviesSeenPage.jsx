@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import "../styles/Profile.css";
+import defaultAvatar from "../assets/profile.png";
 import { useNavigate, useLocation,useParams } from "react-router-dom";
 import { useAuth } from "../auth/AuthContext.jsx";
 import { getMovieById } from "../api/moviesApi.js";
@@ -91,7 +92,7 @@ useEffect(() => {
       <div className="profile-header">
         <img
           className="avatar"
-          src={profile?.avatar_url || "https://placehold.co/80x80"}
+          src={profile?.avatar_url || defaultAvatar}
           alt="avatar"
         />
         <div className="header-content">

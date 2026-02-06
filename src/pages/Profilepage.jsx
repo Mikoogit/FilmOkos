@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation, useParams } from "react-router-dom";
 import "../styles/Profile.css";
+import defaultAvatar from "../assets/profile.png";
 import { useAuth } from "../auth/AuthContext";
 import { getMovieById } from "../api/moviesApi";
 import { supabase } from "../db/supaBaseClient";
+
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -49,7 +51,7 @@ export default function ProfilePage() {
 
 
   useEffect(() => {
-    // determine which profile to view: route param > query param > authenticated user
+
     const searchParams = new URLSearchParams(location.search || "");
     const targetId = params?.userId || searchParams.get("userId") || user?.id || null;
     setViewUserId(targetId);
@@ -66,7 +68,7 @@ export default function ProfilePage() {
         const json = await res.json();
         if (mounted) {
           setProfile(json.data || null);
-          // only prefill editData when viewing own profile
+
           if (targetId === user?.id) {
             setEditData({
               username: json.data?.username || "",
@@ -82,7 +84,7 @@ export default function ProfilePage() {
     return () => (mounted = false);
   }, [user, location.search]);
 
-  // Listen for profile updates dispatched from other pages (e.g. MovieOpen)
+
   useEffect(() => {
     const handler = (e) => {
       const updated = e?.detail || null;
@@ -99,13 +101,13 @@ export default function ProfilePage() {
     return () => window.removeEventListener('profileUpdated', handler);
   }, []);
 
-  // Ha profil betöltődött, lekérjük a kedvencek film adatait (max 10)
+  // Ha profil betöltődött, lekérjük a kedvencek film adatait (max 10-et fogunk megjeleníteni)
   useEffect(() => {
     if (!profile) return;
     let mounted = true;
     (async () => {
       try {
-        // normalize favorites (may be JSON string, comma string, or array)
+        
         const favsRaw = profile.favorites ?? [];
         console.log('Profile favorites raw:', favsRaw, 'type:', typeof favsRaw);
         let favIds = [];
@@ -157,7 +159,7 @@ export default function ProfilePage() {
         canvas.height = h;
         const ctx = canvas.getContext("2d");
         ctx.drawImage(img, 0, 0, w, h);
-        const base64 = canvas.toDataURL("image/jpeg", 0.7);
+        const base64 = canvas.toDataURL("image/jpeg", 0.7 );
         setEditData({ ...editData, avatar_url: base64 });
       };
       img.src = event.target.result;
@@ -271,7 +273,7 @@ export default function ProfilePage() {
       <div className="profile-header">
         <img
           className="avatar"
-          src={profile?.avatar_url || "https://placehold.co/80x80"}
+          src={profile?.avatar_url || defaultAvatar}
           alt="avatar"
         />
         <div className="header-content">

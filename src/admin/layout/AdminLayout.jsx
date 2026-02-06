@@ -12,6 +12,8 @@ export default function AdminLayout({ children }) {
           <Link to="/admin/users">Felhasználók</Link>
           <Link to="/admin/movies">Filmek</Link>
           <Link to="/admin/settings">Beállítások</Link>
+          <Link to="/admin/logs">Logok</Link>
+
         </nav>
       </aside>
 

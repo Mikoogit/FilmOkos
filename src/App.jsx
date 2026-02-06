@@ -23,7 +23,7 @@ import ProtectedRoute from "./auth/ProtectedRoute.jsx";
 import AdminRoute from "./auth/AdminRoute.jsx";
 
 // ADMIN OLDALAK
-import AdminDashboard from "./pages/admin/AdminDashboard.jsx";
+import AdminDashboard from "./pages/admin/AdminDashBoard.jsx";
 import AdminUsers from "./pages/admin/AdminUsers.jsx";
 import AdminMovies from "./pages/admin/AdminMovies.jsx";
 import AdminSettings from "./pages/admin/AdminSettings.jsx";

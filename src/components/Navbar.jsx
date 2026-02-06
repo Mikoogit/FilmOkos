@@ -129,6 +129,7 @@ export default function Navbar() {
             {/* ADMIN ONLY */}
             {role === "admin" && (
               <>
+              <hr />
                 <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>
                 <MakeAdmin />
               </>

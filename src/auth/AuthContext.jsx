@@ -35,7 +35,7 @@ export function AuthProvider({ children }) {
     return () => listener.subscription.unsubscribe();
   }, []);
 
-  // 🔥 Szerepkör betöltése a profiles táblából
+  // Szerepkör betöltése a profiles táblából
   const loadRole = async (userId) => {
     const { data } = await supabase
       .from("profiles")
@@ -77,7 +77,7 @@ export function AuthProvider({ children }) {
       value={{
         user,
         role,
-        setRole,   // 🔥 EZ KELL A ROLE VÁLTÁSHOZ
+        setRole,  
         isAuthenticated: !!user,
         login,
         logout,

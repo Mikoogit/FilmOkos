@@ -4,7 +4,7 @@ import AdminLayout from "../../admin/layout/AdminLayout";
 import { useAuth } from "../../auth/AuthContext";
 
 export default function AdminUsers() {
-  const { user } = useAuth(); // saját user azonosításához (tiltás ellen)
+  const { user } = useAuth(); // saját user azonosításához (a tiltás ellen)
   const [users, setUsers] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -161,7 +161,10 @@ export default function AdminUsers() {
                   <th>Megnézendő</th>
                   <th>Bio</th>
                   <th>Szerepkör</th>
-                  <th colSpan={2}>Műveletek</th>
+                  <th colSpan={3} style={{ textAlign: "center" }}>
+                    Műveletek
+                  </th>
+
                 </tr>
               </thead>
 
@@ -264,6 +267,7 @@ export default function AdminUsers() {
                           background: "#d32f2f",
                           color: "white",
                           cursor: "pointer",
+                          hover: { background: "#b71c1c" },
                         }}
                       >
                         {updating === u.id ? "Törlés..." : "Törlés"}
