@@ -208,7 +208,7 @@ export default function AdminDashboard() {
             <div className="quick-links">
               <Link className="quick-link" to="/admin/users">Felhasználók kezelése</Link>
               <Link className="quick-link" to="/admin/movies">Filmek kezelése</Link>
-              <Link className="quick-link" to="/admin/dashboard">Dashboard frissítése</Link>
+              <Link className="quick-link" to="/admin">Dashboard frissítése</Link>
             </div>
           </>
         )}

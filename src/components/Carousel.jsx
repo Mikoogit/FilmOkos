@@ -48,7 +48,7 @@ export default function Carousel({ title, movies }) {
 
   return (
     <section className="carousel-section">
-      <h2 className="section-title">{title}</h2>
+      <h2 className="section-cim">{title}</h2>
 
       <div className="carousel-container">
         <button className="arrow left" onClick={scrollLeft}>◀</button>
