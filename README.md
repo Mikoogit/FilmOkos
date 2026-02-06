@@ -51,3 +51,13 @@ TMDB API Key:
 * https://letterboxd.com/
 * https://backloggd.com/
 * https://anilist.co/
+
+## Start:
+
+Egy fájl a FilmOkos mappába: .env.local
+Ezeket a sorokat bele:
+VITE_SUPABASE_URL=https://utlomkycjicxjqmmswqj.supabase.co
+VITE_SUPABASE_ANON_KEY=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InV0bG9ta3ljamljeGpxbW1zd3FqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg3MzU3ODIsImV4cCI6MjA4NDMxMTc4Mn0.DmBW5QOK9YCn7nz6nTTt9-en2DqFNkWdEaRzJDn5Zzw
+
+FilmOkos mappa: npm run dev
+backend mappa: npm start
