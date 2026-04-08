@@ -98,6 +98,13 @@ button.small {
   flex-direction: column;
   gap: 1.2rem;
 }
+.review-list-page{
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 1.2rem;
+}
 
 .review-item {
   background: #2a2a2a;
@@ -105,6 +112,8 @@ button.small {
   border-radius: 10px;
   border-left: 4px solid #f59e0b;
   position: relative;
+  width: 90%;
+  max-width: 500px;
 }
 
 .review-main strong {

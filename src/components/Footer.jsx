@@ -24,7 +24,7 @@ export default function Footer() {
           <p>+36 20 676 9420</p>
           <p>gitfej@gmail.com</p>
             <p>
-          <Link to="https://www.instagram.com/">
+          <Link to="https://www.instagram.com/film_okos/">
             <img src={insta} alt="Insta logo" />
           </Link>
             </p>

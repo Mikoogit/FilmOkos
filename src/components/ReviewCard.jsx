@@ -1,9 +1,14 @@
 import "../styles//ReviewCard.css";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import ReviewModal from "./ReviewModal";
 
 export default function ReviewCard({ movieId, poster, backdrop, rating, text, reviewerName, reviewerAvatar, reviewerId }) {
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const navigate = useNavigate();
+
+  const isReviewLong = text && text.length > 50;
+  const previewText = isReviewLong ? `${text.slice(0, 50).trim()}...` : text;
 
   return (
     <div className="review-card">
@@ -17,7 +22,20 @@ export default function ReviewCard({ movieId, poster, backdrop, rating, text, re
             {"★".repeat(rating)}
             {"☆".repeat(5 - rating)}
           </div>
-          <p className="review-text">{text}</p>
+          <div className="review-text-container">
+            <p className="review-text">{previewText}</p>
+            {isReviewLong && (
+              <button
+                className="review-more-button"
+                onClick={(e) => {
+                  e.stopPropagation();
+                  setIsModalOpen(true);
+                }}
+              >
+                Tovább...
+              </button>
+            )}
+          </div>
           {reviewerName && (
             <div className="reviewer-info">
               {reviewerAvatar && (
@@ -37,6 +55,15 @@ export default function ReviewCard({ movieId, poster, backdrop, rating, text, re
           )}
         </div>
       </div>
+
+      {isModalOpen && (
+        <ReviewModal
+          text={text}
+          rating={rating}
+          reviewerName={reviewerName}
+          onClose={() => setIsModalOpen(false)}
+        />
+      )}
 
       {/* Kattintható poszter */}
       <div

@@ -170,25 +170,13 @@ export function ReviewList({ isAdmin }) {
       {reviews.length === 0 ? (
         <p>Még nincs értékelés. Légy te az első!</p>
       ) : (
-        <div className="review-list">
+        <div className="review-list-page">
           {reviews.map((review) => {
             const movie = movies[review.film_api_id];
             if (!movie) return null;
 
             return (
               <div key={review.id} className="review-item">
-                <div className="reviewer-profile" style={{ display: "flex", alignItems: "center", marginBottom: 8 }}>
-                  <img
-                    src={review.avatar || "../src/assets/profile.png"}
-                    alt={review.reviewerName || "Profilkép"}
-                    style={{ width: 40, height: 40, borderRadius: "50%", marginRight: 10, objectFit: "cover" }}
-                    onError={(e) => { e.target.src = "../src/assets/profile.png"; }}
-                  />
-                  <span style={{ fontWeight: "bold" }}>
-                    {review.reviewerName || "Ismeretlen felhasználó"}
-                  </span>
-                </div>
-
                 <ReviewCard
                   movieId={review.film_api_id}
                   poster={`https://image.tmdb.org/t/p/w300${movie.poster_path}`}
