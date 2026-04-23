@@ -5,6 +5,9 @@
   left: 0;
   right: 0;
   width: 100%;
+  max-width: 100%;
+  padding: 0 16px;
+  box-sizing: border-box;
   height: var(--navbar-height, 70px);
   background: #0f0f0f;
   color: white;
@@ -32,8 +35,8 @@
 .navbar-logo img {
   
   margin-top: 0.5rem;
-  margin-left: 10vw; /* responsive */
-  height: clamp(25px, 4vw, 40px);
+  margin-left: 0;
+  height: 40px;
   width: auto;
   object-fit: contain;
   cursor: pointer;
@@ -42,7 +45,7 @@
 
 /* RIGHT SIDE */
 .navbar-right {
-  margin-right: 190px;
+  margin-right: 0;
   display: flex;
   align-items: center;
   gap: 1rem;
@@ -133,6 +136,21 @@
   z-index: 9999; 
   
 }
+.mobile-menu-btn {
+  width: 100%;
+  padding: 10px 0;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+  text-align: left;
+  cursor: pointer;
+}
+
+.mobile-menu-btn:hover {
+  color: #DBC77E;
+}
+
 .mobile-search{
   background: black;
 
@@ -203,8 +221,10 @@
   }
 
   .navbar-logo img {
-    height: 40px;
-    max-height: 40px;
+    height: 28px;
+  }
+  .navbar-right {
+    margin-right: 0;
   }
 
   .mobile-menu {
@@ -272,3 +292,45 @@ h2{
   background: red;
   color: white;
 }
+@media (max-width: 768px) {
+
+  .navbar-right {
+    margin-right: 0;
+    gap: 0.5rem;
+  }
+  .login-btn,
+  .profile-img,
+  .nav-btn{
+    display: none;
+  }
+}
+@media (max-width: 768px) {
+  .hamburger {
+    display: flex;
+  }
+}
+.desktop-only {
+  display: inline-block;
+}
+
+@media (max-width: 768px) {
+  .desktop-only {
+    display: none;
+  }
+}
+.mobile-only {
+  display: none;
+}
+@media (max-width: 768px) {
+  .mobile-only {
+    display: inline-block;
+  }
+}
+@media (max-width: 768px) {
+  .navbar-logo img {
+    height: 32px;
+  }
+}
+
+
+

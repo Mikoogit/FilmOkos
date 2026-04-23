@@ -106,5 +106,317 @@
   background: none;
   -webkit-text-fill-color: #fff;
 }
+/* ============================
+   📱 Mobil (max 600px)
+============================ */
+@media (max-width: 600px) {
+
+  .admin-dashboard {
+    padding: 15px;
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .stat-card {
+    padding: 15px;
+  }
+
+  .stat-card h3 {
+    font-size: 1rem;
+  }
+
+  .stat-card p {
+    font-size: 1.6rem;
+  }
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-top: 30px;
+  }
+
+  /* Táblázat mobilon scrollozható */
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  .table th, .table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+  .table tr:last-child td {
+  border-bottom: none;
+}
+
+
+  /* Quick links mobilon egymás alatt */
+  .quick-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quick-link {
+    text-align: center;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ============================
+   📱 Tablet (600px – 900px)
+============================ */
+@media (min-width: 600px) and (max-width: 900px) {
+
+  .admin-dashboard {
+    padding: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .stat-card p {
+    font-size: 1.8rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  /* Táblázat tableten is scrollozható, ha kell */
+  .table {
+    display: block;
+    overflow-x: auto;
+  }
+
+  /* Quick links tableten két oszlop */
+  .quick-links {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .quick-link {
+    flex: 1 1 calc(50% - 15px);
+    text-align: center;
+    padding: 14px 18px;
+  }
+}
+/* ============================
+   📱 Mobil (max 600px)
+============================ */
+@media (max-width: 600px) {
+
+  /* Layout */
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .sidebar a {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  .admin-dashboard {
+    padding: 15px;
+  }
+
+  /* Stat kártyák */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .stat-card {
+    padding: 15px;
+  }
+
+  .stat-card h3 {
+    font-size: 1rem;
+  }
+
+  .stat-card p {
+    font-size: 1.6rem;
+  }
+
+  /* Section címek */
+  .section-title {
+    font-size: 1.2rem;
+    margin-top: 25px;
+  }
+
+  /* Táblázat */
+  .table th, .table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  /* Quick links */
+  .quick-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quick-link {
+    text-align: center;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ============================
+   📱 Mobil (max 600px)
+============================ */
+@media (max-width: 600px) {
+
+  /* Layout */
+  .admin-layout {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    width: 100%;
+    padding: 15px;
+    text-align: center;
+  }
+
+  .sidebar a {
+    font-size: 1rem;
+    padding: 10px 0;
+  }
+
+  .admin-dashboard {
+    padding: 15px;
+  }
+
+  /* Stat kártyák */
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .stat-card {
+    padding: 15px;
+  }
+
+  .stat-card h3 {
+    font-size: 1rem;
+  }
+
+  .stat-card p {
+    font-size: 1.6rem;
+  }
+
+  /* Section címek */
+  .section-title {
+    font-size: 1.2rem;
+    margin-top: 25px;
+  }
+
+  /* Táblázat */
+  .table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+    border-bottom: 1px solid #333; /* lezárás */
+  }
+
+  .table th, .table td {
+    padding: 10px;
+    font-size: 0.9rem;
+  }
+
+  .table tr:last-child td {
+    border-bottom: none; /* nincs üres csík */
+  }
+
+  /* Quick links */
+  .quick-links {
+    flex-direction: column;
+    gap: 12px;
+  }
+
+  .quick-link {
+    text-align: center;
+    padding: 12px 15px;
+    font-size: 0.95rem;
+  }
+}
+
+/* ============================
+   Tablet (600px – 900px)
+============================ */
+@media (min-width: 600px) and (max-width: 900px) {
+
+  .admin-layout {
+    flex-direction: row;
+  }
+
+  .sidebar {
+    width: 180px;
+  }
+
+  .admin-dashboard {
+    padding: 20px;
+  }
+
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+
+  .stat-card {
+    padding: 18px;
+  }
+
+  .stat-card p {
+    font-size: 1.8rem;
+  }
+
+  .section-title {
+    font-size: 1.3rem;
+  }
+
+  /* Táblázat */
+  .table {
+    display: block;
+    overflow-x: auto;
+    border-bottom: 1px solid #333;
+  }
+
+  .table tr:last-child td {
+    border-bottom: none;
+  }
+
+  /* Quick links */
+  .quick-links {
+    flex-wrap: wrap;
+    gap: 15px;
+  }
+
+  .quick-link {
+    flex: 1 1 calc(50% - 15px);
+    text-align: center;
+    padding: 14px 18px;
+  }
+}
+
+
 
   

@@ -39,6 +39,7 @@
   padding: 10px 0;
   white-space: nowrap;
   scrollbar-width: none;
+  padding-left: 16px; /* bal oldali padding a scrollbar miatt */
 }
 
 .carousel-slider::-webkit-scrollbar {
@@ -132,3 +133,58 @@
 .arrow:hover {
   background: #ffea7a;
 }
+@media (max-width: 768px) {
+  .arrow.left {
+    left: 10px;
+  }
+
+  .arrow.right {
+    right: 10px;
+  }
+}
+@media (max-width: 480px) {
+  .arrow{
+    padding: 6px 10px;
+    font-size: 16px;
+  }
+  .arrow.left {
+    left: 5px;
+  }
+
+  .arrow.right {
+    right: 5px;
+  }
+}
+@media (max-width: 480px) {
+  .movie-card {
+    flex: 0 0 calc((100% - 1 * 12px) / 2); /* 2 kártya, 12px gap */
+    max-width: calc((100% - 1 * 12px) / 2);
+    height: 240px; /* kisebb magasság mobilon */
+  }
+
+  .movie-card img {
+    height: 200px;
+  }
+
+  .carousel-slider {
+    gap: 12px;
+    padding-left: 10px;
+  }
+}
+@media (max-width: 768px) {
+  .movie-card {
+    flex: 0 0 calc((100% - 2 * 16px) / 3); /* 3 kártya, 16px gap */
+    max-width: calc((100% - 2 * 16px) / 3);
+    height: 280px;
+  }
+
+  .movie-card img {
+    height: 240px;
+  }
+
+  .carousel-slider {
+    gap: 16px;
+    padding-left: 12px;
+  }
+}
+

@@ -9,11 +9,11 @@ import MakeAdmin from "./MakeMeAdmin";
 export default function Navbar() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [search, setSearch] = useState("");
-  const [showNavbar, setShowNavbar] = useState(true); // Scroll animáció
+  const [showNavbar, setShowNavbar] = useState(true);
   const navigate = useNavigate();
   const { role, isAuthenticated, logout } = useAuth();
 
-  // Scroll logika
+  // Scroll hide/show logic
   useEffect(() => {
     let lastScrollY = 0;
 
@@ -21,10 +21,8 @@ export default function Navbar() {
       const currentScrollY = window.scrollY;
 
       if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Lefelé scroll -> navbar eltűnik
         setShowNavbar(false);
       } else {
-        // Felfelé scroll -> navbar visszajön
         setShowNavbar(true);
       }
 
@@ -32,12 +30,11 @@ export default function Navbar() {
     };
 
     window.addEventListener("scroll", handleScroll);
-
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const navbarStyle = {
-    top: showNavbar ? "0" : "-80px", // navbar magassága + buffer
+    top: showNavbar ? "0" : "-80px",
     transition: "top 0.3s ease"
   };
 
@@ -47,12 +44,13 @@ export default function Navbar() {
     if (!normalized) return;
 
     navigate(`/search?q=${encodeURIComponent(normalized)}`);
-    setMenuOpen(false); // mobil menü bezárása
+    setMenuOpen(false);
   };
 
   return (
     <>
       <nav className="navbar" style={navbarStyle}>
+
         {/* LOGO */}
         <div className="navbar-logo">
           <Link to="/">
@@ -60,8 +58,9 @@ export default function Navbar() {
           </Link>
         </div>
 
-        {/* RIGHT SIDE (SEARCH + LOGIN/LOGOUT + HAMBURGER) */}
+        {/* RIGHT SIDE */}
         <div className="navbar-right">
+
           {/* SEARCH */}
           <form className="navbar-search" onSubmit={handleSearchSubmit}>
             <input
@@ -72,9 +71,7 @@ export default function Navbar() {
             />
           </form>
 
-
-
-          {/* LOGIN / LOGOUT BUTTON (DESKTOP ONLY) */}
+          {/* LOGIN / LOGOUT (DESKTOP ONLY) */}
           {!isAuthenticated && (
             <Link className="nav-btn login-btn desktop-only" to="/bejelentkezes">
               Bejelentkezés
@@ -87,7 +84,7 @@ export default function Navbar() {
             </button>
           )}
 
-          {/* HAMBURGER MENU BUTTON */}
+          {/* HAMBURGER */}
           <div
             className={`hamburger ${menuOpen ? "open" : ""}`}
             onClick={() => setMenuOpen(!menuOpen)}
@@ -101,6 +98,7 @@ export default function Navbar() {
         {/* MOBILE MENU */}
         {menuOpen && (
           <div className="mobile-menu">
+
             {/* MOBILE SEARCH */}
             <form className="mobile-search" onSubmit={handleSearchSubmit}>
               <input
@@ -120,8 +118,8 @@ export default function Navbar() {
                 <Link to="/filmek" onClick={() => setMenuOpen(false)}>Filmek</Link>
                 <hr />
                 <Link to="/profil" onClick={() => setMenuOpen(false)}>Profil</Link>
-                <Link to="/megnezendo" onClick={() => setMenuOpen(false)}>Megnézendő</Link>
                 <Link to="/megnezve" onClick={() => setMenuOpen(false)}>Megnézve</Link>
+                <Link to="/megnezendo" onClick={() => setMenuOpen(false)}>Megnézendő</Link>
                 <Link to="/ertekelesek" onClick={() => setMenuOpen(false)}>Értékelések</Link>
               </>
             )}
@@ -129,30 +127,41 @@ export default function Navbar() {
             {/* ADMIN ONLY */}
             {role === "admin" && (
               <>
-              <hr />
+                <hr />
                 <Link to="/admin" onClick={() => setMenuOpen(false)}>Admin</Link>
                 <MakeAdmin />
               </>
             )}
 
-
             {/* GUEST ONLY */}
             {!isAuthenticated && (
               <>
                 <Link to="/filmek" onClick={() => setMenuOpen(false)}>Filmek</Link>
-                <Link className="nav-btn" to="/bejelentkezes" onClick={() => setMenuOpen(false)}>
+
+                {/* MOBILE LOGIN BUTTON */}
+                <Link
+                  className="mobile-menu-btn"
+                  to="/bejelentkezes"
+                  onClick={() => setMenuOpen(false)}
+                >
                   Bejelentkezés
                 </Link>
-                <Link className="nav-btn" to="/regisztracio" onClick={() => setMenuOpen(false)}>
+
+                {/* MOBILE REGISTER BUTTON */}
+                <Link
+                  className="mobile-menu-btn"
+                  to="/regisztracio"
+                  onClick={() => setMenuOpen(false)}
+                >
                   Regisztráció
                 </Link>
               </>
             )}
 
-            {/* LOGGED IN ONLY */}
+            {/* LOGGED IN ONLY — MOBILE LOGOUT */}
             {isAuthenticated && (
               <button
-                className="nav-btn logout-btn"
+                className="mobile-menu-btn"
                 onClick={() => {
                   logout();
                   setMenuOpen(false);
@@ -161,6 +170,7 @@ export default function Navbar() {
                 Kijelentkezés
               </button>
             )}
+
           </div>
         )}
       </nav>

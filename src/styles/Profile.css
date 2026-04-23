@@ -150,11 +150,20 @@
   transform: scale(1.05);
 }
 
-/* Stats */
+/* Stats – alap */
 .stats {
   display: flex;
-  gap: 80px;
+  justify-content: center;
+  align-items: center;
+  gap: 60px;
   margin-top: 20px;
+  text-align: center;
+}
+
+.stats > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .stats h1 {
@@ -443,4 +452,41 @@
 .cancel-btn:hover {
   background: #555;
 }
+@media (max-width: 800px) {
+  .stats {
+    gap: 40px;
+  }
+
+  .stats h1 {
+    font-size: 40px;
+  }
+}
+
+@media (max-width: 600px) {
+  .stats {
+    gap: 30px;
+    flex-wrap: wrap;
+  }
+
+  .stats h1 {
+    font-size: 32px;
+  }
+
+  .stats p {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 400px) {
+  .stats {
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+  }
+
+  .stats h1 {
+    font-size: 28px;
+  }
+}
+
 

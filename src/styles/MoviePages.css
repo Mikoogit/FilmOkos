@@ -1,6 +1,5 @@
 /* MoviePages.css
    Complete styles for movies grid, filter bar, dropdowns, pagination.
-   Make sure this file is imported in MoviesPage.jsx.
 */
 
 /* Page wrapper */
@@ -94,7 +93,6 @@
   will-change: opacity, transform;
 }
 
-/* Visible state: add "open" class or set aria-hidden="false" */
 .filter-menu-wrapper .filter-dropdown.open,
 .filter-dropdown[aria-hidden="false"] {
   opacity: 1;
@@ -225,6 +223,7 @@
 
 .movie-card {
   width: 180px;
+  max-width: 180px;
   cursor: pointer;
   outline: none;
 }
@@ -344,7 +343,6 @@
    Misc & fixes
    ---------------------- */
 
-/* If another stylesheet overrides colors, prefer current ones */
 .movie-grid-wrapper,
 .filter-bar,
 .filter-dropdown,
@@ -354,8 +352,7 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Add fallback class to .poster if browser doesn't support aspect-ratio
-   (Your React code adds .fallback; keep this rule) */
+
 .poster.fallback img {
   height: 100%;
   object-fit: cover;
@@ -378,6 +375,113 @@
   background: rgba(224,201,123,0.18);
   border-radius: 6px;
 }
+/* Tablet – 3 oszlop, rugalmas szélességgel */
+@media (max-width: 800px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 14px;
+  }
 
-/* Debugging helper: quickly show layout in development */
-/* .filter-bar { outline: 1px dashed rgba(255,0,0,0.08); } */
+  .movie-card {
+    max-width: none;
+  }
+}
+
+/* TABLET – 3 oszlop, középre igazítva */
+@media (max-width: 800px) {
+  .movie-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 16px;
+    justify-items: center;
+  }
+
+  .movie-card {
+    width: 100%;
+    max-width: 160px;
+  }
+}
+
+/* MOBIL – 2 oszlop, középre igazítva */
+@media (max-width: 600px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    justify-items: center;
+  }
+
+  .movie-card {
+    width: 100%;
+    max-width: 150px;
+  }
+}
+
+/* KIS MOBIL – 2 oszlop, szorosabb layout */
+@media (max-width: 420px) {
+  .movie-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    justify-items: center;
+  }
+
+  .movie-card {
+    max-width: 140px;
+  }
+
+  .movie-title {
+    font-size: 12px;
+  }
+}
+/* TABLET – kisebb gombok, szorosabb layout */
+@media (max-width: 800px) {
+  .pagination {
+    gap: 8px;
+    margin-top: 22px;
+  }
+
+  .pagination button {
+    padding: 6px 12px;
+    font-size: 14px;
+    border-radius: 10px;
+  }
+}
+
+/* MOBIL – kompakt, középre húzott, szép */
+@media (max-width: 600px) {
+  .pagination {
+    gap: 6px;
+    margin-top: 18px;
+  }
+
+  .pagination button {
+    padding: 5px 10px;
+    font-size: 13px;
+    border-radius: 8px;
+  }
+
+  .pagination .dots {
+    font-size: 14px;
+    padding: 0 4px;
+  }
+}
+
+/* KIS MOBIL – extra kompakt */
+@media (max-width: 420px) {
+  .pagination {
+    gap: 4px;
+    margin-top: 16px;
+  }
+
+  .pagination button {
+    padding: 4px 8px;
+    font-size: 12px;
+  }
+
+  .pagination .dots {
+    font-size: 12px;
+  }
+}
+
+
+
+
+

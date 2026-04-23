@@ -138,3 +138,97 @@ input[type="password"]::-webkit-credentials-auto-fill-button {
 input[type="password"]::-webkit-password-toggle-button {
   display: none !important; 
 }
+/* ============================
+   Mobil (max 600px)
+============================ */
+@media (max-width: 600px) {
+
+  .register-page {
+    min-height: auto;
+    padding: 20px 0;
+    justify-content: flex-start;
+  }
+
+  .register-logo {
+    width: 130px;
+    margin-bottom: 20px;
+  }
+
+  .register-card {
+    flex-direction: column;
+    width: 90%;
+    height: auto;
+    border-radius: 12px;
+  }
+
+  .register-left {
+    width: 100%;
+    min-height: 160px;
+    padding: 25px 20px;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+  }
+
+  .login-btn {
+    padding: 8px 22px;
+    font-size: 0.9rem;
+  }
+
+  .register-right {
+    width: 100%;
+    padding: 25px 20px;
+  }
+
+  .register-right h2 {
+    margin-bottom: 25px;
+    font-size: 22px;
+    text-align: center;
+  }
+
+  .input-group input {
+    font-size: 0.9rem;
+    padding: 10px 38px 10px 10px;
+  }
+
+  .toggle-password-reg {
+    right: 15px;
+    top: 58%;
+    font-size: 1.1rem;
+  }
+
+  .register-btn {
+    padding: 10px 26px;
+    font-size: 0.9rem;
+  }
+}
+
+/* ============================
+   Tablet (600px – 900px)
+============================ */
+@media (min-width: 600px) and (max-width: 900px) {
+
+  .register-card {
+    flex-direction: column;
+    width: 80%;
+    height: auto;
+  }
+
+  .register-left {
+    min-height: 180px;
+    padding: 30px 25px;
+  }
+
+  .register-right {
+    padding: 35px 30px;
+  }
+
+  .register-right h2 {
+    font-size: 26px;
+    margin-bottom: 35px;
+  }
+
+  .input-group input {
+    font-size: 1rem;
+  }
+}

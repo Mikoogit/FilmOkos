@@ -1,11 +1,12 @@
 .hero {
   width: 100%;
-  height: 750px; 
+  height: 520px; 
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  padding-top: 0px;
 }
 
 .ugrasgomb{
@@ -32,7 +33,7 @@
 /* SZÖVEG A KÉP FELETT */
 .home-hero-content {
   position: absolute;
-  top: 35%; 
+  top: 40%; 
   transform: translateY(-50%);
   text-align: center;
   color: white;
@@ -67,21 +68,25 @@
 }
 
 /* Udvozlo Effectek */
-/* Udvozlo Effectek */
 .udvozlo-szoveg {
-  overflow: hidden;
-  border-right: .15em solid white;
-  white-space: nowrap;
   margin: 0 auto;
-  cursor: pointer;
-  display: inline-block;
+  display: block; /* inline-block helyett */
+  white-space: normal; /* nowrap helyett */
+  overflow: visible; /* fontos */
+  border-right: none; /* ezt átrakjuk az animációs osztályba */
 }
+
 
 /* Animation */
 .anim-typewriter {
+  overflow: hidden;
+  border-right: .15em solid white;
+  white-space: nowrap;
+  display: inline-block;
   animation: typewriter 10s steps(44) infinite,
              blinkTextCursor 500ms steps(44) infinite;
 }
+
 
 /* Typewriter: 4s gépelés + 4s látható + 2s reset = 10s */
 @keyframes typewriter {
@@ -116,3 +121,78 @@
       text-shadow: 0 0 10px #ff0000, 0 0 20px #ff0000, 0 0 40px #ff0000, 0 0 80px #ff0000, 0 0 160px #ff0000;
   }
 } 
+/* ============================
+   TABLET (max-width: 768px)
+   ============================ */
+@media (max-width: 768px) {
+
+  /* HERO */
+  .hero {
+    height: auto;
+    padding: 40px 0 80px;
+  }
+
+  .home-hero-content {
+    top: 32%;
+    transform: translateY(-50%);
+    padding: 0 20px;
+  }
+
+  /* FŐCÍM */
+  .udvozlo-szoveg {
+    font-size: 1.5rem !important;
+    white-space: normal !important; 
+  }
+
+  /* TYPEWRITER ANIMÁCIÓ – mobilon is aktív */
+  .anim-typewriter {
+    animation: typewriter 10s steps(44) infinite,
+               blinkTextCursor 500ms steps(44) infinite !important;
+    border-right: .15em solid white !important;
+    white-space: nowrap !important; /* az animáció miatt kell */
+  }
+
+  /* MÁSODIK SOR */
+  .udvozlo-leiras {
+    font-size: 1.2rem !important;
+  }
+}
+
+
+/* ============================
+   SMALL MOBILE (max-width: 480px)
+   ============================ */
+@media (max-width: 480px) {
+
+  .home-hero-content {
+    top: 50%;
+  }
+
+  /* FŐCÍM */
+  .udvozlo-szoveg {
+    font-size: 1.2rem !important;
+    white-space: normal !important;
+  }
+
+  /* TYPEWRITER – mobilon is működik */
+  .anim-typewriter {
+    animation: typewriter 10s steps(44) infinite,
+               blinkTextCursor 500ms steps(44) infinite !important;
+    border-right: .15em solid white !important;
+    white-space: nowrap !important;
+  }
+
+  /* MÁSODIK SOR */
+  .udvozlo-leiras {
+    font-size: 0.9rem !important;
+  }
+}
+
+
+
+
+
+
+
+
+

@@ -137,7 +137,6 @@ export default function MoviesPage() {
     };
 
     fetchMovies();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentPage, activeFilters, genres]);
 
   const toggleMenu = (type) => {
@@ -214,7 +213,7 @@ export default function MoviesPage() {
               ? "genre"
               : key === "sortBy"
                 ? "sort"
-                : key === "ratings" //ITT VAGYOOK NÉZZ ENGEM ITT VALAMI BAJ LEEEESZ. TUTIIII.!
+                : key === "ratings" 
                   ? "rating"
                   : "year";
           const isOpen = openMenus[typeKey];

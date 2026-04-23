@@ -206,8 +206,8 @@ export default function AdminDashboard() {
             {/* GYORS LINKEK */}
             <h2 className="section-title">Gyors műveletek</h2>
             <div className="quick-links">
-              <Link className="quick-link" to="/admin/users">Felhasználók kezelése</Link>
-              <Link className="quick-link" to="/admin/movies">Filmek kezelése</Link>
+              {/* <Link className="quick-link" to="/admin/users">Felhasználók kezelése</Link> */}
+              {/* <Link className="quick-link" to="/admin/movies">Filmek kezelése</Link> */}
               <Link className="quick-link" to="/admin">Dashboard frissítése</Link>
             </div>
           </>
