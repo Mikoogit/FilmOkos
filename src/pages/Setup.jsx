@@ -11,6 +11,8 @@ export default function Setup() {
   const token = state?.token;
   const user = state?.user;
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // Ha a backend visszaadott tokennel érkeztünk ide, állítsuk be a kliens session-t
   useEffect(() => {
     if (!token) return;
@@ -94,7 +96,7 @@ export default function Setup() {
     setIsLoading(true);
 
     try {
-      const res = await fetch(`http://localhost:3000/api/profile/${user.id}`, {
+      const res = await fetch(`${API_URL}/api/profile/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

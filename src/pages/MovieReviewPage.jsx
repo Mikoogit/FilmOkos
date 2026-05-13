@@ -22,6 +22,8 @@ export default function MovieReview({ filmId }) {
   const [loadError, setLoadError] = useState(null);
   const [deleteError, setDeleteError] = useState(null);
 
+  const API_URL = import.meta.env.VITE_API_URL;
+
   // -----------------------------
   // VALIDÁCIÓ
   // -----------------------------
@@ -168,7 +170,7 @@ export default function MovieReview({ filmId }) {
     let mounted = true;
     (async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+        const res = await fetch(`${API_URL}/api/profile/${user.id}`);
         if (!res.ok) return;
         const json = await res.json();
         if (!mounted) return;

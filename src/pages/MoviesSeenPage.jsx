@@ -40,7 +40,7 @@ useEffect(() => {
   }
 };
 
-  
+const API_URL = import.meta.env.VITE_API_URL;
 
 useEffect(() => {
   if (!viewUserId) return;
@@ -50,7 +50,7 @@ useEffect(() => {
   (async () => {
     try {
       const res = await fetch(
-        `http://localhost:3000/api/profile/${viewUserId}`
+        `${API_URL}/api/profile/${viewUserId}`
       );
       const json = await res.json();
       if (!mounted) return;

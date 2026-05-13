@@ -6,6 +6,8 @@ import { useAuth } from "../auth/AuthContext";
 import { getMovieById } from "../api/moviesApi";
 import { supabase } from "../db/supaBaseClient";
 
+const API_URL = import.meta.env.VITE_API_URL;
+
 
 export default function ProfilePage() {
   const navigate = useNavigate();
@@ -60,7 +62,7 @@ export default function ProfilePage() {
     let mounted = true;
     (async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/profile/${targetId}`);
+        const res = await fetch(`${API_URL}/api/profile/${targetId}`);
         if (!res.ok) {
           console.error("GET profile failed");
           return;
@@ -175,7 +177,7 @@ export default function ProfilePage() {
       const session = await supabase.auth.getSession();
       const token = session?.data?.session?.access_token;
       
-      const response = await fetch(`http://localhost:3000/api/profile/${user.id}`, {
+      const response = await fetch(`${API_URL}/api/profile/${user.id}`, {
         method: "PUT",
         headers: {
           "Content-Type": "application/json",

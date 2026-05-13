@@ -12,13 +12,15 @@ const Profil = () => {
   const [profile, setProfile] = useState(null);
   const [error, setError] = useState("");
 
+  const API_URL = import.meta.env.VITE_API_URL
+
   useEffect(() => {
     if (!user || !token) {
       navigate("/login");
       return;
     }
 
-    fetch(`http://localhost:3000/api/profile/${user.id}`, {
+    fetch(`${API_URL}/api/profile/${user.id}`, {
       headers: {
         Authorization: `Bearer ${token}`
       }

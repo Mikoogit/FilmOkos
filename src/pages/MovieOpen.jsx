@@ -15,7 +15,7 @@ import heartIcon from "../assets/heart.png";
 import bookmark from "../assets/bookmark.png";
 import check from "../assets/check-circle.png";
 
-
+const API_URL = import.meta.env.VITE_API_URL;
 
 
 const MovieOpen = () => {
@@ -57,7 +57,7 @@ const MovieOpen = () => {
     let mounted = true;
     (async () => {
       try {
-        const res = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+        const res = await fetch(`${API_URL}/api/profile/${user.id}`);
         if (!res.ok) return;
         const json = await res.json();
         if (!mounted) return;
@@ -110,7 +110,7 @@ const MovieOpen = () => {
       const { data: sessData } = await supabase.auth.getSession();
       console.log('Client session data:', sessData);
 
-      const res = await fetch(`http://localhost:3000/api/profile/${user.id}/list`, {
+      const res = await fetch(`${API_URL}/api/profile/${user.id}/list`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -143,7 +143,7 @@ const MovieOpen = () => {
       alert('Profil lista sikeresen frissítve');
       
       // Refresh profile data from server to ensure we have latest
-      const refreshRes = await fetch(`http://localhost:3000/api/profile/${user.id}`);
+      const refreshRes = await fetch(`${API_URL}/api/profile/${user.id}`);
       if (refreshRes.ok) {
         const refreshJson = await refreshRes.json();
         const freshProfile = refreshJson.data || updated;
