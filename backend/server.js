@@ -16,17 +16,12 @@ app.use(cors({
     "http://localhost:3000"
   ],
   credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+   allowedHeaders: ["Content-Type", "Authorization"]
 }));
 
 app.options("*", cors());
-app.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://filmokos.hu");
-  res.header("Access-Control-Allow-Credentials", "true");
-  res.header("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
-  next();
-});
+
 
 
 app.use(express.json({ limit: "10mb" }));
@@ -291,6 +286,13 @@ app.post("/api/profile/:userId/list", async (req, res) => {
 // ---------------------------------------------------------
 // SERVER START
 // ---------------------------------------------------------
-app.listen(3000, () => {
-  console.log("Backend running on port 3000");
+
+app.get("/", (req, res) => {
+  res.send("FilmOkos backend működik");
+});
+
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+  console.log(`Backend running on port ${PORT}`);
 });
