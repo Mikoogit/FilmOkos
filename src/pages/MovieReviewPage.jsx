@@ -388,7 +388,7 @@ export default function MovieReview({ filmId }) {
                   <>
                     <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                       <img
-                        src={review.avatar || "https://placehold.co/48x48"}
+                        src={review.avatar || "../profile.png"}
                         alt={review.reviewerName || review.name}
                         style={{ width: 48, height: 48, borderRadius: 24, cursor: "pointer", objectFit: "cover" }}
                         onClick={() => navigate(`/user/${review.user_id}`)}

@@ -207,7 +207,11 @@ const MovieOpen = () => {
                 <span>{movie.genres.map((g) => g.name).join(", ")}</span>
               </div>
 
-              <div className="rating">⭐⭐⭐⭐⭐</div>
+              <div className="rating">
+                {Array.from({ length: Math.round(movie.vote_average / 2) }).map((_, i) => (
+                <span key={i}>⭐</span>
+              ))}
+              </div>
 
               <p className="overview-szoveg">{movie.overview}</p>
 
